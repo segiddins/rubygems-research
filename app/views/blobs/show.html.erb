@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @blob %>
+
+<div>
+  <%= link_to "Edit this blob", edit_blob_path(@blob) %> |
+  <%= link_to "Back to blobs", blobs_path %>
+
+  <%= button_to "Destroy this blob", @blob, method: :delete %>
+</div>

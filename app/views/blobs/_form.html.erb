@@ -1,0 +1,37 @@
+<%= form_with(model: blob) do |form| %>
+  <% if blob.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(blob.errors.count, "error") %> prohibited this blob from being saved:</h2>
+
+      <ul>
+        <% blob.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :sha256, style: "display: block" %>
+    <%= form.text_field :sha256 %>
+  </div>
+
+  <div>
+    <%= form.label :contents, style: "display: block" %>
+    <%= form.text_field :contents %>
+  </div>
+
+  <div>
+    <%= form.label :size, style: "display: block" %>
+    <%= form.number_field :size %>
+  </div>
+
+  <div>
+    <%= form.label :compression, style: "display: block" %>
+    <%= form.text_field :compression %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

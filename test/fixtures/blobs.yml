@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sha256: MyString
+  contents: 
+  size: 1
+  compression: MyString
+
+two:
+  sha256: MyString
+  contents: 
+  size: 1
+  compression: MyString

@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Rubygems</h1>
+
+<div id="rubygems">
+  <% @rubygems.each do |rubygem| %>
+    <%= render rubygem %>
+    <p>
+      <%= link_to "Show this rubygem", rubygem %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New rubygem", new_rubygem_path %>

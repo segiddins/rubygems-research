@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @rubygem %>
+
+<div>
+  <%= link_to "Edit this rubygem", edit_rubygem_path(@rubygem) %> |
+  <%= link_to "Back to rubygems", rubygems_path %>
+
+  <%= button_to "Destroy this rubygem", @rubygem, method: :delete %>
+</div>
