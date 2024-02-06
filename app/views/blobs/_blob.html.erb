@@ -3,20 +3,20 @@
     <strong>Sha256:</strong>
     <%= blob.sha256 %>
   </p>
-
   <p>
-    <strong>Contents:</strong>
-    <%= blob.contents %>
+    <strong>Contents?:</strong>
+    <%= blob.contents.present? %>
   </p>
-
   <p>
     <strong>Size:</strong>
-    <%= blob.size %>
+    <%= number_to_human_size blob.size %>
   </p>
-
+  <p>
+    <strong>Versions:</strong>
+    <%= blob.version_data_entries.count %>
+  </p>
   <p>
     <strong>Compression:</strong>
     <%= blob.compression %>
   </p>
-
 </div>

@@ -56,3 +56,23 @@ end
 
 
 gem "litestack", "~> 0.4.2"
+
+gem "pagy", "~> 6.4"
+
+gem "maintenance_tasks", "~> 2.5"
+
+gem "rails_semantic_logger", "~> 4.14"
+gem "faraday", "~> 2.9"
+
+gem "phlex-rails", "~> 1.1"
+
+gem "literal", "~> 0.1.0"
+
+gem "diff-lcs", "~> 1.5"
+gem "rack", "~> 2.2" # litestack's liteboard depends on hanami-router which does not currently support rack 3.x as of Dec 2023
+
+gem "activerecord-import", "~> 1.5"
+
+gem "parallel", "~> 1.24"
+
+gem "ruby-progressbar", "~> 1.13"

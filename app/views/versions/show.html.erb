@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @version %>
+
+<div>
+  <%= link_to "Edit this version", edit_version_path(@version) %> |
+  <%= link_to "Back to versions", versions_path %>
+
+  <%= button_to "Destroy this version", @version, method: :delete %>
+</div>

@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Versions</h1>
+
+<div id="versions">
+  <% @versions.each do |version| %>
+    <%= render version %>
+    <p>
+      <%= link_to "Show this version", version %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New version", new_version_path %>

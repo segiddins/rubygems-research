@@ -1,6 +1,22 @@
 Rails.application.routes.draw do
-  resources :blobs
-  resources :rubygems
+  resources :data_summary, only: [:index]
+
+  resources :versions, only: [:show, :index]
+  special_characters    = ".-_".freeze
+  allowed_characters    = "[A-Za-z0-9#{Regexp.escape(special_characters)}]+".freeze
+  route_pattern          = /#{allowed_characters}/
+  mount MaintenanceTasks::Engine => "/maintenance_tasks"
+  resources :versions
+  resources :blobs, param: :sha256 do
+    member do
+      get :raw
+    end
+  end
+  resources :rubygems, param: :name, constraints: { id: route_pattern } do
+    resource :file_history, only: [:show], param: :path, constraints: { id: /.+/} do
+      get :diff
+    end
+  end
   resources :servers
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

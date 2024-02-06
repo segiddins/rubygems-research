@@ -1,14 +1,12 @@
 <p style="color: green"><%= notice %></p>
-
 <h1>Blobs</h1>
-
 <div id="blobs">
   <% @blobs.each do |blob| %>
     <%= render blob %>
     <p>
-      <%= link_to "Show this blob", blob %>
+      <%= link_to "Show this blob", blob_path(blob.sha256) %>
     </p>
   <% end %>
 </div>
-
+<%== pagy_nav(@pagy) if @pagy.pages > 1 %>
 <%= link_to "New blob", new_blob_path %>

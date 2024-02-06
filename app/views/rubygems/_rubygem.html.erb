@@ -1,12 +1,6 @@
 <div id="<%= dom_id rubygem %>">
   <p>
-    <strong>Server:</strong>
-    <%= rubygem.server_id %>
-  </p>
-
-  <p>
     <strong>Name:</strong>
-    <%= rubygem.name %>
+    <%= link_to_unless_current rubygem.name, rubygem_path(rubygem.name) %>
   </p>
-
 </div>

@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  rubygem: one
+  number: MyString
+  platform: MyString
+  spec_sha256: MyString
+  sha256: MyString
+  metadata: 
+
+two:
+  rubygem: two
+  number: MyString
+  platform: MyString
+  spec_sha256: MyString
+  sha256: MyString
+  metadata: 

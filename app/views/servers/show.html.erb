@@ -1,10 +1,14 @@
 <p style="color: green"><%= notice %></p>
-
 <%= render @server %>
-
+<p>Rubygems: <%= @server.rubygems.count.to_fs(:delimited) %></p>
+<p>Versions: <%= @server.versions.count.to_fs(:delimited) %></p>
+<% if @rubygems.any? %>
+  <h2>Rubygems</h2>
+  <%= render @rubygems %>
+  <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+<% end %>
 <div>
   <%= link_to "Edit this server", edit_server_path(@server) %> |
   <%= link_to "Back to servers", servers_path %>
-
   <%= button_to "Destroy this server", @server, method: :delete %>
 </div>

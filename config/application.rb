@@ -20,6 +20,9 @@ Bundler.require(*Rails.groups)
 
 module RubygemsResearch
   class Application < Rails::Application
+    config.autoload_paths << "#{root}/app/views"
+    config.autoload_paths << "#{root}/app/views/layouts"
+    config.autoload_paths << "#{root}/app/views/components"
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.1
 
@@ -35,6 +38,8 @@ module RubygemsResearch
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    config.active_job.queue_adapter = :litejob
 
     # Don't generate system test files.
     config.generators.system_tests = nil

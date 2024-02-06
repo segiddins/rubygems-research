@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  version: one
+  blob: one
+  full_name: MyString
+  name: MyString
+  mode: 1
+  uid: 1
+  gid: 1
+  mtime: 2024-02-01 18:15:07
+  linkname: MyString
+
+two:
+  version: two
+  blob: two
+  full_name: MyString
+  name: MyString
+  mode: 1
+  uid: 1
+  gid: 1
+  mtime: 2024-02-01 18:15:07
+  linkname: MyString
