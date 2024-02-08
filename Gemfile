@@ -76,3 +76,5 @@ gem "activerecord-import", "~> 1.5"
 gem "parallel", "~> 1.24"
 
 gem "ruby-progressbar", "~> 1.13"
+
+gem "hairtrigger", "~> 1.1"

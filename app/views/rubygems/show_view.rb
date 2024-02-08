@@ -2,6 +2,7 @@
 
 class Rubygems::ShowView < ApplicationView
 include Phlex::Rails::Helpers::LinkTo
+include Phlex::Rails::Helpers::NumberToHumanSize
   extend Literal::Attributes
   attribute :rubygem, Rubygem
   attribute :versions, Object
@@ -16,6 +17,8 @@ include Phlex::Rails::Helpers::LinkTo
           th {  }
           th { "Version" }
           th { "Platform" }
+          th { "Size" }
+          th { "Uploaded" }
         end
       end
       tbody do
@@ -24,6 +27,8 @@ include Phlex::Rails::Helpers::LinkTo
             td { link_to version.full_name, version }
             td { version.number }
             td { version.platform }
+            td { number_to_human_size version.package_blob&.size }
+            td { version.uploaded_at.to_fs }
           end
         end
       end

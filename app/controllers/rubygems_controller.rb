@@ -9,7 +9,7 @@ class RubygemsController < ApplicationController
 
   # GET /rubygems/1 or /rubygems/1.json
   def show
-    @pagy, @versions = pagy(@rubygem.versions.by_position)
+    @pagy, @versions = pagy(@rubygem.versions.order(uploaded_at: :desc))
     render Rubygems::ShowView.new(rubygem: @rubygem, versions: @versions, pagy: @pagy)
   end
 

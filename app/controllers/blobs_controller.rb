@@ -8,7 +8,7 @@ class BlobsController < ApplicationController
 
   # GET /blobs/1 or /blobs/1.json
   def show
-    @version_data_entries_pagy, @version_data_entries = pagy(@blob.version_data_entries.includes(:version, :version => :rubygem))
+    @version_data_entries_pagy, @version_data_entries = pagy(@blob.version_data_entries.includes(:version, :version => :rubygem).order("versions.uploaded_at DESC"))
   end
 
   def raw

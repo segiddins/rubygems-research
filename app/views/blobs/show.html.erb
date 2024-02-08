@@ -5,6 +5,11 @@
     <%= number_to_human_size @blob.contents.size %>
   </p>
 <% end %>
+<% if @blob.contents.present? %>
+  <p><b>Stored size:</b>
+    <%= number_to_human_size @blob.contents.bytesize %>
+  </p>
+<% end %>
 <% if @blob.size < 2.kilobytes %>
   <h2>Contents</h2>
   <pre><%= @blob.decompressed_contents %></pre>
@@ -24,26 +29,24 @@
   <h2>Package Spec version</h2>
   <p><%= link_to @blob.package_spec_version.full_name, @blob.package_spec_version %></p>
 <% end %>
-<h2>Version data entries</h2>
-<table>
-  <thead>
-    <tr>
-      <th>Version</th>
-      <th>Path</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @version_data_entries.each do |entry| %>
+<% if @version_data_entries.any? %>
+  <h2>Version data entries</h2>
+  <p><%= @version_data_entries_pagy.count.to_fs(:delimited) %> entries across <%= @blob.data_entry_versions.count.to_fs(:delimited) %> versions &amp; <%= @blob.data_entry_rubygems.count.to_fs(:delimited) %> rubygems</p>
+  <table>
+    <thead>
       <tr>
-        <td><%= link_to entry.version.full_name, entry.version %></td>
-        <td><%= link_to entry.full_name, rubygem_file_history_path(entry.version.rubygem.name, path: entry.full_name) %></td>
+        <th>Version</th>
+        <th>Path</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
-<%== pagy_nav(@version_data_entries_pagy) if @version_data_entries_pagy.pages > 1 %>
-<div>
-  <%= link_to "Edit this blob", edit_blob_path(@blob) %> |
-  <%= link_to "Back to blobs", blobs_path %>
-  <%= button_to "Destroy this blob", @blob, method: :delete %>
-</div>
+    </thead>
+    <tbody>
+      <% @version_data_entries.each do |entry| %>
+        <tr>
+          <td><%= link_to entry.version.full_name, entry.version %></td>
+          <td><%= link_to entry.full_name, rubygem_file_history_path(entry.version.rubygem.name, path: entry.full_name) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%== pagy_nav(@version_data_entries_pagy) if @version_data_entries_pagy.pages > 1 %>
+<% end %>

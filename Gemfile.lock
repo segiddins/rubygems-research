@@ -103,6 +103,10 @@ GEM
       net-http
     globalid (1.2.1)
       activesupport (>= 6.1)
+    hairtrigger (1.1.1)
+      activerecord (>= 6.0, < 8)
+      ruby2ruby (~> 2.4)
+      ruby_parser (~> 3.10)
     hanami-router (2.0.2)
       mustermann (~> 3.0)
       mustermann-contrib (~> 3.0)
@@ -245,8 +249,15 @@ GEM
       io-console (~> 0.5)
     ruby-progressbar (1.13.0)
     ruby2_keywords (0.0.5)
+    ruby2ruby (2.5.0)
+      ruby_parser (~> 3.1)
+      sexp_processor (~> 4.6)
+    ruby_parser (3.21.0)
+      racc (~> 1.5)
+      sexp_processor (~> 4.16)
     semantic_logger (4.15.0)
       concurrent-ruby (~> 1.0)
+    sexp_processor (4.17.1)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -298,6 +309,7 @@ DEPENDENCIES
   debug
   diff-lcs (~> 1.5)
   faraday (~> 2.9)
+  hairtrigger (~> 1.1)
   importmap-rails
   jbuilder
   literal (~> 0.1.0)

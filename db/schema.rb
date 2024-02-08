@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_03_182049) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_06_210347) do
   create_table "blobs", force: :cascade do |t|
     t.string "sha256", null: false
     t.binary "contents"
@@ -70,9 +70,30 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_03_182049) do
     t.string "linkname"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "sha256"
     t.index ["blob_id"], name: "index_version_data_entries_on_blob_id"
     t.index ["full_name", "version_id"], name: "index_version_data_entries_on_full_name_and_version_id", unique: true
+    t.index ["sha256"], name: "index_version_data_entries_on_sha256"
     t.index ["version_id"], name: "index_version_data_entries_on_version_id"
+  end
+
+  create_table "version_gemspecs", force: :cascade do |t|
+    t.integer "version_id", null: false
+    t.string "sha256"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["sha256"], name: "index_version_gemspecs_on_sha256"
+    t.index ["version_id"], name: "index_version_gemspecs_on_version_id"
+  end
+
+  create_table "version_packages", force: :cascade do |t|
+    t.integer "version_id", null: false
+    t.string "sha256"
+    t.datetime "source_date_epoch"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["sha256"], name: "index_version_packages_on_sha256"
+    t.index ["version_id"], name: "index_version_packages_on_version_id"
   end
 
   create_table "versions", force: :cascade do |t|
@@ -86,16 +107,27 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_03_182049) do
     t.datetime "updated_at", null: false
     t.integer "metadata_blob_id"
     t.integer "position"
+    t.integer "version_data_entries_count", default: 0
+    t.datetime "uploaded_at"
     t.index ["metadata_blob_id"], name: "index_versions_on_metadata_blob_id"
     t.index ["rubygem_id", "number", "platform"], name: "index_versions_on_rubygem_id_and_number_and_platform", unique: true
     t.index ["rubygem_id"], name: "index_versions_on_rubygem_id"
     t.index ["sha256"], name: "index_versions_on_sha256"
     t.index ["spec_sha256"], name: "index_versions_on_spec_sha256"
+    t.index ["uploaded_at"], name: "index_versions_on_uploaded_at"
   end
 
   add_foreign_key "rubygems", "servers"
   add_foreign_key "version_data_entries", "blobs"
   add_foreign_key "version_data_entries", "versions"
+  add_foreign_key "version_gemspecs", "versions"
+  add_foreign_key "version_packages", "versions"
   add_foreign_key "versions", "blobs", column: "metadata_blob_id"
   add_foreign_key "versions", "rubygems"
+  create_trigger("version_data_entries_after_insert_row_tr", :generated => true, :compatibility => 1).
+      on("version_data_entries").
+      after(:insert) do
+    "UPDATE versions SET version_data_entries_count = version_data_entries_count + 1, updated_at = CURRENT_TIMESTAMP WHERE id = NEW.version_id;"
+  end
+
 end

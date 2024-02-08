@@ -15,9 +15,11 @@ class Versions::ShowView < ApplicationView
     @version.attributes.each do |key, value|
       p { "#{key}: #{value}" }
     end
+    p { "Gem size: #{number_to_human_size @version.package_blob.size}" }
 
     h2 { "Version Data Entries" }
     p { "Total: #{@version.version_data_entries.count.to_fs(:delimited)}" }
+    p { "Unpacked size: #{number_to_human_size @version.data_blobs.sum(:size)}" }
     table do
       thead do
         tr do
@@ -34,11 +36,13 @@ class Versions::ShowView < ApplicationView
       tbody do
         @version.version_data_entries.includes(:blob).find_each do |entry|
           tr do
-            td { if entry.blob
-            link_to entry.full_name, blob_path(entry.blob.sha256)
-            else
-            entry.full_name
-            end  }
+            td do
+              if entry.blob
+                link_to entry.full_name, blob_path(entry.blob.sha256)
+              else
+                entry.full_name
+              end
+            end
             td { entry.mode.to_s(8) }
             td { entry.uid.to_s(8) }
             td { entry.gid.to_s(8) }

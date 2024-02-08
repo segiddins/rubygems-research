@@ -5,6 +5,7 @@ class Version < ApplicationRecord
   has_one :package_blob, class_name: "Blob", dependent: :destroy, inverse_of: :package_version, foreign_key: "sha256", primary_key: "sha256"
   has_one :quick_spec_blob, class_name: "Blob", dependent: :destroy, inverse_of: :quick_spec_version, foreign_key: "sha256", primary_key: "spec_sha256"
   has_many :version_data_entries
+  has_many :data_blobs, through: :version_data_entries, source: :blob
   validates :number, presence: true, uniqueness: { scope: %i[rubygem_id platform] }
   validates :platform, presence: true
 

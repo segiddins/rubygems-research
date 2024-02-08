@@ -1,9 +1,10 @@
 require 'rubygems/package'
 
 class Blob < ApplicationRecord
-  has_many :version_data_entries, dependent: :restrict_with_exception
+  has_many :version_data_entries, dependent: :restrict_with_exception, inverse_of: :blob
 
-  has_many :data_entry_versions, through: :version_data_entries
+  has_many :data_entry_versions, -> {distinct}, through: :version_data_entries, source: :version
+  has_many :data_entry_rubygems, -> {distinct}, through: :data_entry_versions, source: :rubygem
   has_one :package_version, class_name: "Version", foreign_key: "sha256", primary_key: "sha256"
   has_one :quick_spec_version, class_name: "Version", foreign_key: "spec_sha256", primary_key: "sha256"
   has_one :package_spec_version, class_name: "Version", inverse_of: :metadata_blob
@@ -39,7 +40,16 @@ class Blob < ApplicationRecord
     elsif quick_spec_version
       raise "No contents for blob #{sha256} (.gemspec.rz for #{quick_spec_version.full_name})"
     elsif package_spec_version
-      raise "No contents for blob #{sha256} (.gemspec for #{package_spec_version.full_name})"
+      gem = package_spec_version.package_blob.decompressed_contents
+      package = Gem::Package.new StringIO.new gem
+      contents = package.gem.with_read_io do |io|
+        Zlib.gunzip Gem::Package::TarReader.new(io).seek("metadata.gz", &:read)
+      end
+      raise "No contents for blob #{sha256} (.gemspec for #{package_spec_version.full_name})" unless contents
+      if Digest::SHA256.hexdigest(contents) != sha256
+        raise "SHA256 mismatch for #{package_spec_version.full_name}: expected #{sha256}, got #{Digest::SHA256.hexdigest(contents)}"
+      end
+      return contents
     elsif version_data_entries.any?
       entry = version_data_entries.first
       package = Gem::Package.new StringIO.new entry.version.package_blob.decompressed_contents
