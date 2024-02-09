@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   special_characters    = ".-_".freeze
   allowed_characters    = "[A-Za-z0-9#{Regexp.escape(special_characters)}]+".freeze
   route_pattern          = /#{allowed_characters}/
-  mount MaintenanceTasks::Engine => "/maintenance_tasks"
+
   resources :versions
   resources :blobs, param: :sha256 do
     member do
@@ -26,4 +26,8 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "servers#index"
+
+  constraints ->(request) { request.local? || request.remote_ip == "100.86.251.32" } do
+    mount MaintenanceTasks::Engine => "/maintenance_tasks"
+  end
 end

@@ -50,8 +50,7 @@ class Blob < ApplicationRecord
         raise "SHA256 mismatch for #{package_spec_version.full_name}: expected #{sha256}, got #{Digest::SHA256.hexdigest(contents)}"
       end
       return contents
-    elsif version_data_entries.any?
-      entry = version_data_entries.first
+    elsif (entry = version_data_entries.includes(version: :package_blob).strict_loading.first)
       package = Gem::Package.new StringIO.new entry.version.package_blob.decompressed_contents
       contents = GemPackageEnumerator.new(package).filter_map do |e|
         e.read if e.full_name == entry.full_name

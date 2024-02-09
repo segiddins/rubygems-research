@@ -4,11 +4,13 @@ class DataSummary::IndexView < ApplicationView
 include Phlex::Rails::Helpers::LinkTo
 include Phlex::Rails::Helpers::NumberToHumanSize
 
-def limit = 10
+  def limit = 10
+
   def template
     Server.find_each do |s|
       h2 { link_to s.url, s }
     end
+
     table do
       thead do
         th {"Table"}
@@ -27,19 +29,15 @@ def limit = 10
       end
     end
 
-    h3 { "Indexed versions" }
-
-    plain Version.where.associated(:metadata_blob).count.to_fs(:delimited)
-
     h3 { "Blob storage" }
 
-    render TableComponent.new(contents: Blob.connection.execute('select count(*), sum(length(contents)), sum(size), compression, contents is null from blobs group by 4, 5')) do |table|
+    render TableComponent.new(contents: Blob.connection.execute('select count(id), sum(length(contents)), sum(size), compression, contents is null from blobs group by 4, 5')) do |table|
       table.column("Count") { |row| plain row[0].to_fs(:delimited) }
       table.column("Stored size") { |row| plain number_to_human_size row[1] }
       table.column("Size") { |row| plain number_to_human_size row[2] }
       table.column("Compression") { |row| plain row[3] }
       table.column("Contents is null") { |row| plain row[4] }
-    end if false || true
+    end if false
 
     h3 { "Biggest gems" }
 
