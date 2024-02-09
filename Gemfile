@@ -78,3 +78,5 @@ gem "parallel", "~> 1.24"
 gem "ruby-progressbar", "~> 1.13"
 
 gem "hairtrigger", "~> 1.1"
+
+gem "annotate", "~> 3.2"
