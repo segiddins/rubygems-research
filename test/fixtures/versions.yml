@@ -3,6 +3,7 @@
 # Table name: versions
 #
 #  id                         :integer          not null, primary key
+#  indexed                    :boolean          default(TRUE)
 #  metadata                   :json
 #  number                     :string
 #  platform                   :string

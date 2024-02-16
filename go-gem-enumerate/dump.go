@@ -17,7 +17,7 @@ type DumpVersion struct {
 	Sha256      string         `db:"sha256"`
 	SpecSha256  sql.NullString `db:"spec_sha256"`
 	UploadedAt  time.Time      `db:"uploaded_at"`
-	Metadata    any
+	Indexed     bool
 }
 
 func DumpVersions() (versions []*DumpVersion, err error) {
@@ -25,7 +25,6 @@ func DumpVersions() (versions []*DumpVersion, err error) {
 		`SELECT rubygems.name AS rubygem_name, versions.number, versions.platform, versions.sha256, versions.spec_sha256, versions.created_at as uploaded_at , versions.metadata
 FROM versions
 	JOIN rubygems ON versions.rubygem_id = rubygems.id
-WHERE versions.indexed = true
 ORDER BY versions.full_name ASC
 	;`,
 	)

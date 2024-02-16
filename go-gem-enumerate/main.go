@@ -427,6 +427,8 @@ type Version struct {
 	MetadataBlobId sql.NullInt64 `db:"metadata_blob_id"`
 	// Position       sql.
 
+	Indexed bool
+
 	VersionDataEntriesCount int64 `db:"version_data_entries_count"`
 }
 
@@ -678,8 +680,8 @@ func insertSingleVersionInfo(ctx context.Context, version *Version, r *ResultLin
 
 }
 
-func insertVersionInfo(versionsByBasename map[string]*Version) func(ctx context.Context, r *ResultLine) (insertVersionInfoResults, error) {
-	return func(ctx context.Context, r *ResultLine) (res insertVersionInfoResults, err error) {
+func insertVersionInfo(ctx context.Context, versionsByBasename map[string]*Version) func(r *ResultLine) (insertVersionInfoResults, error) {
+	return func(r *ResultLine) (res insertVersionInfoResults, err error) {
 		res.skips = map[string][]string{}
 		res.total += 1
 
@@ -760,6 +762,7 @@ func main() {
 
 	db.SetMaxOpenConns(4)
 
+	ctx := context.Background()
 	versions, err := InsertRubygemsAndVersionsFromDump()
 	if err != nil {
 		panic(err)
@@ -797,7 +800,7 @@ func main() {
 	start := time.Now()
 	last := start
 
-	insertions := pipes.Map(packagesPipe, insertVersionInfo(versionsByBasename))
+	insertions := pipes.Map(packagesPipe, insertVersionInfo(ctx, versionsByBasename))
 	chunked := pipes.Chunk(insertions, chunkSize)
 
 	result, err := pipes.Reduce(chunked, func(acc insertVersionInfoResults, results []insertVersionInfoResults) (insertVersionInfoResults, error) {

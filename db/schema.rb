@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_06_210347) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_16_055153) do
   create_table "blobs", force: :cascade do |t|
     t.string "sha256", null: false
     t.binary "contents"
@@ -109,6 +109,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_06_210347) do
     t.integer "position"
     t.integer "version_data_entries_count", default: 0
     t.datetime "uploaded_at"
+    t.boolean "indexed", default: true
     t.index ["metadata_blob_id"], name: "index_versions_on_metadata_blob_id"
     t.index ["rubygem_id", "number", "platform"], name: "index_versions_on_rubygem_id_and_number_and_platform", unique: true
     t.index ["rubygem_id"], name: "index_versions_on_rubygem_id"

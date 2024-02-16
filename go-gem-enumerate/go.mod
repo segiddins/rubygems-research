@@ -43,7 +43,6 @@ require (
 	github.com/klauspost/compress v1.17.6
 	github.com/lib/pq v1.10.2
 	github.com/mattn/go-sqlite3 v1.14.16
-	github.com/simukti/sqldb-logger v0.0.0-20230108155151-646c1a075551
 	go.uber.org/zap v1.26.0
 	golang.org/x/sync v0.6.0
 	gopkg.in/DataDog/dd-trace-go.v1 v1.60.3

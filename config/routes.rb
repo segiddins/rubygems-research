@@ -1,5 +1,9 @@
 # == Route Map
 #
+# I, [2024-02-16T05:52:13.444417 #2378719]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - PROFILING - {"profiling_enabled":false}
+# I, [2024-02-16T05:52:13.444689 #2378719]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - CORE - {"date":"2024-02-16T05:52:13+00:00","os_name":"x86_64-pc-linux","version":"1.20.0","lang":"ruby","lang_version":"3.3.0","env":null,"service":"node","dd_version":null,"debug":false,"tags":"_dd.injection.mode:host","runtime_metrics_enabled":true,"vm":"ruby-3.3.0","health_metrics_enabled":false}
+# I, [2024-02-16T05:52:14.975628 #2378799]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - PROFILING - {"profiling_enabled":false}
+# I, [2024-02-16T05:52:14.975906 #2378799]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - CORE - {"date":"2024-02-16T05:52:14+00:00","os_name":"x86_64-pc-linux","version":"1.20.0","lang":"ruby","lang_version":"3.3.0","env":null,"service":"node","dd_version":null,"debug":false,"tags":"_dd.injection.mode:host","runtime_metrics_enabled":true,"vm":"ruby-3.3.0","health_metrics_enabled":false}
 #                            Prefix Verb URI Pattern                                         Controller#Action
 #                data_summary_index GET  /data_summary(.:format)                             data_summary#index
 #                          versions GET  /versions(.:format)                                 versions#index

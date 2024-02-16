@@ -32,6 +32,7 @@ include Phlex::Rails::Helpers::NumberToHumanSize
           th { "Platform" }
           th { "Size" }
           th { "Uploaded" }
+          th { "Indexed" }
         end
       end
       tbody do
@@ -42,6 +43,7 @@ include Phlex::Rails::Helpers::NumberToHumanSize
             td { version.platform }
             td { number_to_human_size version.package_blob&.size }
             td { version.uploaded_at.to_fs }
+            td { version.indexed.inspect }
           end
         end
       end

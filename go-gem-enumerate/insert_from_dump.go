@@ -117,15 +117,16 @@ func InsertRubygemsAndVersionsFromDump() (versions []*Version, err error) {
 			Sha256:      sql.NullString{String: sha256, Valid: true},
 			SpecSha256:  sql.NullString{String: spec_sha256, Valid: true},
 			UploadedAt:  sql.NullTime{Time: v.UploadedAt, Valid: true},
+			Indexed:     v.Indexed,
 			// Metadata:    v.Metadata,
 		})
 	}
 
-	err = EachSlice(versions, (1<<15)/6-2, func(slice []*Version) error {
+	err = EachSlice(versions, (1<<15)/7-2, func(slice []*Version) error {
 		_, err := tx.NamedExec(
-			`INSERT INTO versions (rubygem_id, number, platform, sha256, spec_sha256, uploaded_at, created_at, updated_at)
-			VALUES (:rubygem_id, :number, :platform, :sha256, :spec_sha256, :uploaded_at, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
-			ON CONFLICT DO NOTHING`, slice)
+			`INSERT INTO versions (rubygem_id, number, platform, sha256, spec_sha256, uploaded_at, indexed, created_at, updated_at)
+			VALUES (:rubygem_id, :number, :platform, :sha256, :spec_sha256, :uploaded_at, :indexed, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+			ON CONFLICT do update set indexed = excluded.indexed`, slice)
 		if err != nil {
 			return fmt.Errorf("error inserting versions from dump: %w", err)
 		}
@@ -134,7 +135,7 @@ func InsertRubygemsAndVersionsFromDump() (versions []*Version, err error) {
 	})
 
 	err = tx.Select(&versions,
-		`SELECT versions.id, rubygem_id, number, platform, sha256, spec_sha256, uploaded_at, rubygems.name
+		`SELECT versions.id, rubygem_id, number, platform, sha256, spec_sha256, uploaded_at, rubygems.name, indexed
 		FROM versions JOIN rubygems ON versions.rubygem_id = rubygems.id 
 		WHERE rubygems.server_id = ?`, server.Id)
 	if err != nil {
