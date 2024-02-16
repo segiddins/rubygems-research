@@ -2,5 +2,10 @@
   <p>
     <strong>Name:</strong>
     <%= link_to_unless_current rubygem.name, rubygem_path(rubygem.name) %>
+    <br>
+    <strong>Versions:</strong> <%= rubygem.versions.count.to_fs(:delimited) %>
+    <br>
+    <strong>Total size:</strong> <%= number_to_human_size rubygem.package_blobs.sum(:size) %>
+    <br>
   </p>
 </div>

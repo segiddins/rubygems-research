@@ -9,8 +9,11 @@ class RubygemsController < ApplicationController
 
   # GET /rubygems/1 or /rubygems/1.json
   def show
-    @pagy, @versions = pagy(@rubygem.versions.order(uploaded_at: :desc).includes(:package_blob).strict_loading)
-    render Rubygems::ShowView.new(rubygem: @rubygem, versions: @versions, pagy: @pagy)
+    platform = params.permit(:platform).fetch(:platform, nil)
+    versions = @rubygem.versions.order(uploaded_at: :desc).includes(:package_blob).strict_loading
+    versions = versions.where(platform:) if platform
+    @pagy, @versions = pagy(versions)
+    render Rubygems::ShowView.new(rubygem: @rubygem, versions: @versions, platform:, pagy: @pagy)
   end
 
 

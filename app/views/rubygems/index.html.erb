@@ -4,7 +4,7 @@
   <% @rubygems.each do |rubygem| %>
     <%= render rubygem %>
     <p>
-      <%= link_to "Show this rubygem", rubygem.name %> |
+      <%= link_to "Show this rubygem", rubygem_path(rubygem.name) %> |
     </p>
   <% end %>
 </div>

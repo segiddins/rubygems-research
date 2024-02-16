@@ -21,6 +21,7 @@ class Rubygem < ApplicationRecord
   belongs_to :server
   has_many :versions, -> { by_position }
   has_many :version_data_entries, through: :versions
+  has_many :package_blobs, through: :versions
   validates :name, presence: true, uniqueness: { scope: :server_id }
 
   def bulk_reorder_versions
@@ -31,7 +32,5 @@ class Rubygem < ApplicationRecord
         version.update_column :position, numbers.index(version.number)
       end
     end
-
-
   end
 end

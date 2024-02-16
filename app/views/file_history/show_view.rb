@@ -48,8 +48,9 @@ class FileHistory::ShowView < ApplicationView
   end
 
   def grouped_entries
+    entries = @entries.to_h { [_1.version_id, _1] }
     @rubygem.versions.sort.each_with_object([]) do |version, acc|
-      entry = @entries.find { _1.version_id == version.id }
+      entry = entries[version.id]
       if acc.none? || entry&.blob_id != acc.last.first&.id
         acc << [entry&.blob_excluding_contents, [version]]
       else

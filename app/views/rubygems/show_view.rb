@@ -7,10 +7,23 @@ include Phlex::Rails::Helpers::NumberToHumanSize
   attribute :rubygem, Rubygem
   attribute :versions, Object
   attribute :pagy, Pagy
+  attribute :platform, Object
   def template
     p(style: "color: green") { helpers.notice }
     h1 { @rubygem.name }
+    h2 { @platform } if @platform
     unsafe_raw helpers.render @rubygem
+
+    platforms = @rubygem.versions.distinct.pluck(:platform)
+    unless platforms == ["ruby"]
+      div do
+        p { "Platforms" }
+        ul do
+          platforms.each { |pl| li { link_to pl, {platform: pl} } }
+        end
+      end
+    end
+
     table do
       thead do
         tr do

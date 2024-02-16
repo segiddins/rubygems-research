@@ -27,7 +27,6 @@ class Blob < ApplicationRecord
 
   validates :size, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_nil: false
 
-
   scope :excluding_contents, -> { select(column_names - ["contents"]) }
 
   def decompressed_contents
