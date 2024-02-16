@@ -34,11 +34,11 @@ class Versions::ShowView < ApplicationView
       end
 
       tbody do
-        @version.version_data_entries.includes(:blob).find_each do |entry|
+        @version.version_data_entries.includes(:blob_excluding_contents).find_each do |entry|
           tr do
             td do
-              if entry.blob
-                link_to entry.full_name, blob_path(entry.blob.sha256)
+              if entry.blob_excluding_contents
+                link_to entry.full_name, blob_path(entry.blob_excluding_contents.sha256)
               else
                 entry.full_name
               end
@@ -48,7 +48,7 @@ class Versions::ShowView < ApplicationView
             td { entry.gid.to_s(8) }
             td { entry.mtime }
             td { entry.linkname }
-            td { number_to_human_size entry.blob&.size }
+            td { number_to_human_size entry.blob_excluding_contents&.size }
           end
         end
       end
