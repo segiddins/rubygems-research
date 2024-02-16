@@ -80,15 +80,4 @@ gem "ruby-progressbar", "~> 1.13"
 gem "hairtrigger", "~> 1.1"
 
 gem "annotate", "~> 3.2"
-
-gem "ffi", "= 1.16.3"
-
-gem "debase-ruby_core_source", "= 3.3.1"
-
-gem "libdatadog", "= 5.0.0.1.0"
-
-gem "libddwaf", "= 1.14.0.0.0"
-
-gem "datadog-ci", "= 0.7.0"
-
-gem "ddtrace", "= 1.20.0", :require => "ddtrace/auto_instrument"
+gem "ddtrace", "~> 1.20", require: "ddtrace/auto_instrument"

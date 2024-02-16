@@ -132,7 +132,7 @@ GEM
       activesupport (>= 6.0.0)
       railties (>= 6.0.0)
     io-console (0.7.2)
-    irb (1.11.1)
+    irb (1.11.2)
       rdoc
       reline (>= 0.4.2)
     jbuilder (2.11.5)
@@ -154,7 +154,7 @@ GEM
     libddwaf (1.14.0.0.0-x86_64-linux)
       ffi (~> 1.0)
     literal (0.1.0)
-    litestack (0.4.2)
+    litestack (0.4.3)
       erubi
       hanami-router
       oj
@@ -169,7 +169,7 @@ GEM
       net-imap
       net-pop
       net-smtp
-    maintenance_tasks (2.5.0)
+    maintenance_tasks (2.6.0)
       actionpack (>= 6.0)
       activejob (>= 6.0)
       activerecord (>= 6.0)
@@ -178,7 +178,7 @@ GEM
       zeitwerk (>= 2.6.2)
     marcel (1.0.2)
     mini_mime (1.1.5)
-    minitest (5.21.2)
+    minitest (5.22.2)
     msgpack (1.7.2)
     mustermann (3.0.0)
       ruby2_keywords (~> 0.0.1)
@@ -188,7 +188,7 @@ GEM
     mutex_m (0.2.0)
     net-http (0.4.1)
       uri
-    net-imap (0.4.9.1)
+    net-imap (0.4.10)
       date
       net-protocol
     net-pop (0.1.2)
@@ -198,21 +198,21 @@ GEM
     net-smtp (0.4.0.1)
       net-protocol
     nio4r (2.7.0)
-    nokogiri (1.16.0-aarch64-linux)
+    nokogiri (1.16.2-aarch64-linux)
       racc (~> 1.4)
-    nokogiri (1.16.0-arm-linux)
+    nokogiri (1.16.2-arm-linux)
       racc (~> 1.4)
-    nokogiri (1.16.0-arm64-darwin)
+    nokogiri (1.16.2-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.16.0-x86-linux)
+    nokogiri (1.16.2-x86-linux)
       racc (~> 1.4)
-    nokogiri (1.16.0-x86_64-darwin)
+    nokogiri (1.16.2-x86_64-darwin)
       racc (~> 1.4)
-    nokogiri (1.16.0-x86_64-linux)
+    nokogiri (1.16.2-x86_64-linux)
       racc (~> 1.4)
     oj (3.16.3)
       bigdecimal (>= 3.0)
-    pagy (6.4.3)
+    pagy (6.5.0)
     parallel (1.24.0)
     phlex (1.9.0)
       concurrent-ruby (~> 1.2)
@@ -228,7 +228,7 @@ GEM
       nio4r (~> 2.0)
     racc (1.7.3)
     rack (2.2.8)
-    rack-mini-profiler (3.3.0)
+    rack-mini-profiler (3.3.1)
       rack (>= 1.2.0)
     rack-session (1.0.2)
       rack (< 3)
@@ -305,7 +305,7 @@ GEM
     thor (1.3.0)
     tilt (2.3.0)
     timeout (0.4.1)
-    turbo-rails (1.5.0)
+    turbo-rails (2.0.2)
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
       railties (>= 6.0.0)
@@ -321,7 +321,7 @@ GEM
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    zeitwerk (2.6.12)
+    zeitwerk (2.6.13)
 
 PLATFORMS
   aarch64-linux
@@ -335,18 +335,13 @@ DEPENDENCIES
   activerecord-import (~> 1.5)
   annotate (~> 3.2)
   bootsnap
-  datadog-ci (= 0.7.0)
-  ddtrace (= 1.20.0)
-  debase-ruby_core_source (= 3.3.1)
+  ddtrace (~> 1.20)
   debug
   diff-lcs (~> 1.5)
   faraday (~> 2.9)
-  ffi (= 1.16.3)
   hairtrigger (~> 1.1)
   importmap-rails
   jbuilder
-  libdatadog (= 5.0.0.1.0)
-  libddwaf (= 1.14.0.0.0)
   literal (~> 0.1.0)
   litestack (~> 0.4.2)
   maintenance_tasks (~> 2.5)
