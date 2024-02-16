@@ -18,7 +18,7 @@ class FileHistory::ShowView < ApplicationView
 
 
     p { "#{grouped_entries.size} total files" }
-    grouped_entries.each do |blob, versions|
+    grouped_entries.each_with_index do |(blob, versions), idx|
       div do
         first = versions.first
         last = versions.drop(1).last
@@ -36,6 +36,10 @@ class FileHistory::ShowView < ApplicationView
         end
         if blob
           link_to "Download", raw_blob_path(blob.sha256)
+          if idx > 0 && (prev = grouped_entries[idx - 1]) && prev.first
+            br
+            link_to "Diff with previous", diff_rubygem_file_history_path(path: @path, v1: prev.last.last.slug, v2: versions.first.slug)
+          end
         else
           plain "Not present"
         end
@@ -47,7 +51,7 @@ class FileHistory::ShowView < ApplicationView
     @rubygem.versions.sort.each_with_object([]) do |version, acc|
       entry = @entries.find { _1.version_id == version.id }
       if acc.none? || entry&.blob_id != acc.last.first&.id
-        acc << [entry&.blob, [version]]
+        acc << [entry&.blob_excluding_contents, [version]]
       else
         acc.last.last << version
       end

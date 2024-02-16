@@ -1,6 +1,6 @@
 class RubygemsController < ApplicationController
   before_action :set_server
-  before_action :set_rubygem, only: %i[ show edit update destroy ]
+  before_action :set_rubygem, only: %i[ show ]
 
   # GET /rubygems or /rubygems.json
   def index

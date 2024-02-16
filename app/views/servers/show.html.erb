@@ -8,7 +8,5 @@
   <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
 <% end %>
 <div>
-  <%= link_to "Edit this server", edit_server_path(@server) %> |
   <%= link_to "Back to servers", servers_path %>
-  <%= button_to "Destroy this server", @server, method: :delete %>
 </div>

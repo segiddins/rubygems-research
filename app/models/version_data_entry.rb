@@ -31,6 +31,7 @@
 class VersionDataEntry < ApplicationRecord
   belongs_to :version
   belongs_to :blob, optional: true
+  belongs_to :blob_excluding_contents, optional: true, foreign_key: :blob_id, class_name: "Blob"
 
   trigger.after(:insert) do
     "UPDATE versions SET version_data_entries_count = version_data_entries_count + 1, updated_at = CURRENT_TIMESTAMP WHERE id = NEW.version_id;"

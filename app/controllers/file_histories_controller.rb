@@ -9,7 +9,7 @@ class FileHistoriesController < ApplicationController
     if path.nil?
       render plain: rubygem.version_data_entries.distinct.pluck(:full_name).sort.join("\n")
     else
-      entries = rubygem.version_data_entries.where(full_name: params[:path]).includes(:version, :blob).strict_loading
+      entries = rubygem.version_data_entries.where(full_name: params[:path]).includes(:version, :blob_excluding_contents).strict_loading
       render FileHistory::ShowView.new(path:, entries:, rubygem: rubygem)
     end
   end

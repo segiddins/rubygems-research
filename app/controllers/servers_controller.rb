@@ -1,5 +1,5 @@
 class ServersController < ApplicationController
-  before_action :set_server, only: %i[ show edit update destroy ]
+  before_action :set_server, only: %i[ show ]
 
   # GET /servers or /servers.json
   def index

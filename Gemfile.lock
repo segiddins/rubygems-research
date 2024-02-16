@@ -90,7 +90,16 @@ GEM
     concurrent-ruby (1.2.3)
     connection_pool (2.4.1)
     crass (1.0.6)
+    datadog-ci (0.7.0)
+      msgpack
     date (3.3.4)
+    ddtrace (1.20.0)
+      datadog-ci (~> 0.7.0)
+      debase-ruby_core_source (= 3.3.1)
+      libdatadog (~> 5.0.0.1.0)
+      libddwaf (~> 1.14.0.0.0)
+      msgpack
+    debase-ruby_core_source (3.3.1)
     debug (1.9.1)
       irb (~> 1.10)
       reline (>= 0.3.8)
@@ -104,6 +113,7 @@ GEM
       faraday-net_http (>= 2.0, < 3.2)
     faraday-net_http (3.1.0)
       net-http
+    ffi (1.16.3)
     globalid (1.2.1)
       activesupport (>= 6.1)
     hairtrigger (1.1.1)
@@ -130,6 +140,19 @@ GEM
       activesupport (>= 5.0.0)
     job-iteration (1.4.1)
       activejob (>= 5.2)
+    libdatadog (5.0.0.1.0)
+    libdatadog (5.0.0.1.0-aarch64-linux)
+    libdatadog (5.0.0.1.0-x86_64-linux)
+    libddwaf (1.14.0.0.0)
+      ffi (~> 1.0)
+    libddwaf (1.14.0.0.0-aarch64-linux)
+      ffi (~> 1.0)
+    libddwaf (1.14.0.0.0-arm64-darwin)
+      ffi (~> 1.0)
+    libddwaf (1.14.0.0.0-x86_64-darwin)
+      ffi (~> 1.0)
+    libddwaf (1.14.0.0.0-x86_64-linux)
+      ffi (~> 1.0)
     literal (0.1.0)
     litestack (0.4.2)
       erubi
@@ -312,12 +335,18 @@ DEPENDENCIES
   activerecord-import (~> 1.5)
   annotate (~> 3.2)
   bootsnap
+  datadog-ci (= 0.7.0)
+  ddtrace (= 1.20.0)
+  debase-ruby_core_source (= 3.3.1)
   debug
   diff-lcs (~> 1.5)
   faraday (~> 2.9)
+  ffi (= 1.16.3)
   hairtrigger (~> 1.1)
   importmap-rails
   jbuilder
+  libdatadog (= 5.0.0.1.0)
+  libddwaf (= 1.14.0.0.0)
   literal (~> 0.1.0)
   litestack (~> 0.4.2)
   maintenance_tasks (~> 2.5)

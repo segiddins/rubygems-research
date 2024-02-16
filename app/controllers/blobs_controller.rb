@@ -1,5 +1,5 @@
 class BlobsController < ApplicationController
-  before_action :set_blob, only: %i[ show edit update destroy raw ]
+  before_action :set_blob, only: %i[ show raw ]
 
   # GET /blobs or /blobs.json
   def index
