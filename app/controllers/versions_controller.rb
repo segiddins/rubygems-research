@@ -4,7 +4,7 @@ class VersionsController < ApplicationController
   layout -> { ApplicationLayout }
 
   def show
-    version = Version.includes(:rubygem, :server, :version_data_entries, :metadata_blob, :package_blob).strict_loading.find(params[:id])
+    version = Version.includes(:rubygem, :server, :version_data_entries, :metadata_blob, :package_blob, :version_import_error).strict_loading.find(params[:id])
     render Versions::ShowView.new(version:)
   end
 

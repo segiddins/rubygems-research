@@ -9,14 +9,21 @@ class Versions::ShowView < ApplicationView
     h1 { @version.full_name }
     p { @version.server.url }
     p { link_to @version.rubygem.name, rubygem_path(@version.rubygem.name)}
-    p { link_to "quick gemspec", blob_path(@version.spec_sha256) } if @version.spec_sha256
+    p { link_to "quick gemspec", blob_path(@version.spec_sha256) } if @version.spec_sha256.present?
     p { link_to ".gem", blob_path(@version.sha256) } if @version.sha256
     p { link_to ".gem metadata (gemspec)", blob_path(@version.metadata_blob.sha256) } if @version.metadata_blob
+    if @version.version_import_error
+      p do
+        plain "Import error:"
+        br
+        code { @version.version_import_error.error }
+      end
+    end
     @version.attributes.each do |key, value|
       next if key.end_with?("_id")
       p { "#{key}: #{value}" }
     end
-    p { "Gem size: #{number_to_human_size @version.package_blob.size}" }
+    p { "Gem size: #{number_to_human_size @version.package_blob.size}" } if @version.package_blob
 
     h2 { "Version Data Entries" }
     p { "Total: #{@version.version_data_entries.count.to_fs(:delimited)}" }

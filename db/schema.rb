@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_16_055153) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_18_061037) do
   create_table "blobs", force: :cascade do |t|
     t.string "sha256", null: false
     t.binary "contents"
@@ -86,6 +86,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_16_055153) do
     t.index ["version_id"], name: "index_version_gemspecs_on_version_id"
   end
 
+  create_table "version_import_errors", force: :cascade do |t|
+    t.integer "version_id", null: false
+    t.string "error"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["error"], name: "index_version_import_errors_on_error"
+    t.index ["version_id"], name: "index_version_import_errors_on_version_id", unique: true
+  end
+
   create_table "version_packages", force: :cascade do |t|
     t.integer "version_id", null: false
     t.string "sha256"
@@ -122,6 +131,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_16_055153) do
   add_foreign_key "version_data_entries", "blobs"
   add_foreign_key "version_data_entries", "versions"
   add_foreign_key "version_gemspecs", "versions"
+  add_foreign_key "version_import_errors", "versions"
   add_foreign_key "version_packages", "versions"
   add_foreign_key "versions", "blobs", column: "metadata_blob_id"
   add_foreign_key "versions", "rubygems"

@@ -126,7 +126,7 @@ func InsertRubygemsAndVersionsFromDump() (versions []*Version, err error) {
 		_, err := tx.NamedExec(
 			`INSERT INTO versions (rubygem_id, number, platform, sha256, spec_sha256, uploaded_at, indexed, created_at, updated_at)
 			VALUES (:rubygem_id, :number, :platform, :sha256, :spec_sha256, :uploaded_at, :indexed, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
-			ON CONFLICT do update set indexed = excluded.indexed`, slice)
+			ON CONFLICT do update set indexed = excluded.indexed, updated_at = excluded.updated_at where indexed != excluded.indexed`, slice)
 		if err != nil {
 			return fmt.Errorf("error inserting versions from dump: %w", err)
 		}

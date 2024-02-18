@@ -22,9 +22,10 @@ type DumpVersion struct {
 
 func DumpVersions() (versions []*DumpVersion, err error) {
 	err = dumpDB.Select(&versions,
-		`SELECT rubygems.name AS rubygem_name, versions.number, versions.platform, versions.sha256, versions.spec_sha256, versions.created_at as uploaded_at , versions.metadata
+		`SELECT rubygems.name AS rubygem_name, versions.number, versions.platform, versions.sha256, versions.spec_sha256, versions.created_at as uploaded_at, versions.indexed as indexed
 FROM versions
 	JOIN rubygems ON versions.rubygem_id = rubygems.id
+WHERE sha256 is not null
 ORDER BY versions.full_name ASC
 	;`,
 	)

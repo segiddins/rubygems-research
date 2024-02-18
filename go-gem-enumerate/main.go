@@ -662,18 +662,20 @@ func insertSingleVersionInfo(ctx context.Context, version *Version, r *ResultLin
 		return err
 	}
 
-	var result sql.Result
-	result, err = tx.Exec("UPDATE versions SET metadata_blob_id = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?", metadataBlobId, version.Id)
-	if err != nil {
-		return err
-	}
-	var rowsAffected int64
-	rowsAffected, err = result.RowsAffected()
-	if err != nil {
-		return err
-	}
-	if rowsAffected != 1 {
-		return fmt.Errorf("expected to update 1 row, but updated %d", err)
+	if !version.MetadataBlobId.Valid || version.MetadataBlobId.Int64 != metadataBlobId.Int64 {
+		var result sql.Result
+		result, err = tx.Exec("UPDATE versions SET metadata_blob_id = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?", metadataBlobId, version.Id)
+		if err != nil {
+			return err
+		}
+		var rowsAffected int64
+		rowsAffected, err = result.RowsAffected()
+		if err != nil {
+			return err
+		}
+		if rowsAffected != 1 {
+			return fmt.Errorf("expected to update 1 row, but updated %d", err)
+		}
 	}
 
 	return tx.Commit()
@@ -682,20 +684,41 @@ func insertSingleVersionInfo(ctx context.Context, version *Version, r *ResultLin
 
 func insertVersionInfo(ctx context.Context, versionsByBasename map[string]*Version) func(r *ResultLine) (insertVersionInfoResults, error) {
 	return func(r *ResultLine) (res insertVersionInfoResults, err error) {
+		var version *Version
+		defer func() {
+			if r.Err != "" && version != nil {
+				res, err := db.Exec(
+					`insert into version_import_errors (version_id, error, created_at, updated_at) 
+					values (?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) 
+					on conflict(version_id) do update set error = excluded.error, updated_at = excluded.updated_at 
+					where error != excluded.error
+					`, version.Id, r.Err)
+				if err != nil {
+					logger.Error("failed to insert version import errors", zap.Error(err))
+					panic(err)
+				}
+				if _, err := res.RowsAffected(); err != nil {
+					logger.Error("failed to insert version import errors", zap.Error(err))
+					panic(err)
+				}
+			}
+		}()
 		res.skips = map[string][]string{}
 		res.total += 1
+
+		version = versionsByBasename[path.Base(r.Path)]
+		if version == nil {
+			res.skips["no version"] = append(res.skips["no version"], r.Path)
+			res.skipCount += 1
+			return
+		}
 
 		if len(r.Err) != 0 {
 			res.skips[r.Err] = append(res.skips[r.Err], r.Path)
 			res.skipCount += 1
 			return
 		}
-		version := versionsByBasename[path.Base(r.Path)]
-		if version == nil {
-			res.skips["no version"] = append(res.skips["no version"], r.Path)
-			res.skipCount += 1
-			return
-		}
+
 		if !version.Sha256.Valid || len(version.Sha256.String) == 0 {
 			res.skips["no SHA256"] = append(res.skips["no SHA256"], fmt.Sprintf("%s (version %d)", r.Path, version.Id))
 			res.skipCount += 1
@@ -781,7 +804,7 @@ func main() {
 		}
 	})
 	chunkSize := 10000
-	concurrency := 1
+	concurrency := 200
 	if s, ok := os.LookupEnv("CONCURRENCY"); ok {
 		i, err := strconv.ParseInt(s, 10, 16)
 		if err != nil {

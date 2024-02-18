@@ -1,0 +1,26 @@
+# == Schema Information
+#
+# Table name: version_import_errors
+#
+#  id         :integer          not null, primary key
+#  error      :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  version_id :integer          not null
+#
+# Indexes
+#
+#  index_version_import_errors_on_error       (error)
+#  index_version_import_errors_on_version_id  (version_id) UNIQUE
+#
+# Foreign Keys
+#
+#  version_id  (version_id => versions.id)
+#
+require "test_helper"
+
+class VersionImportErrorTest < ActiveSupport::TestCase
+  # test "the truth" do
+  #   assert true
+  # end
+end

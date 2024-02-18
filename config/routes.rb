@@ -1,9 +1,9 @@
 # == Route Map
 #
-# I, [2024-02-18T05:25:13.326223 #3205347]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - PROFILING - {"profiling_enabled":false}
-# I, [2024-02-18T05:25:13.326502 #3205347]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - CORE - {"date":"2024-02-18T05:25:13+00:00","os_name":"x86_64-pc-linux","version":"1.20.0","lang":"ruby","lang_version":"3.3.0","env":null,"service":"node","dd_version":null,"debug":false,"tags":"_dd.injection.mode:host","runtime_metrics_enabled":true,"vm":"ruby-3.3.0","health_metrics_enabled":false}
-# I, [2024-02-18T05:25:14.234807 #3205381]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - PROFILING - {"profiling_enabled":false}
-# I, [2024-02-18T05:25:14.235074 #3205381]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - CORE - {"date":"2024-02-18T05:25:14+00:00","os_name":"x86_64-pc-linux","version":"1.20.0","lang":"ruby","lang_version":"3.3.0","env":null,"service":"node","dd_version":null,"debug":false,"tags":"_dd.injection.mode:host","runtime_metrics_enabled":true,"vm":"ruby-3.3.0","health_metrics_enabled":false}
+# I, [2024-02-18T06:20:35.642618 #36244]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - PROFILING - {"profiling_enabled":false}
+# I, [2024-02-18T06:20:35.642881 #36244]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - CORE - {"date":"2024-02-18T06:20:35+00:00","os_name":"x86_64-pc-linux","version":"1.20.0","lang":"ruby","lang_version":"3.3.0","env":null,"service":"rake","dd_version":null,"debug":false,"tags":null,"runtime_metrics_enabled":false,"vm":"ruby-3.3.0","health_metrics_enabled":false}
+# I, [2024-02-18T06:20:36.918939 #36290]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - PROFILING - {"profiling_enabled":false}
+# I, [2024-02-18T06:20:36.919246 #36290]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - CORE - {"date":"2024-02-18T06:20:36+00:00","os_name":"x86_64-pc-linux","version":"1.20.0","lang":"ruby","lang_version":"3.3.0","env":null,"service":"rails","dd_version":null,"debug":false,"tags":null,"runtime_metrics_enabled":false,"vm":"ruby-3.3.0","health_metrics_enabled":false}
 #                            Prefix Verb URI Pattern                                         Controller#Action
 #                data_summary_index GET  /data_summary(.:format)                             data_summary#index
 #                          versions GET  /versions(.:format)                                 versions#index
@@ -35,6 +35,7 @@
 #            root GET  /                               maintenance_tasks/tasks#index
 
 Rails.application.routes.draw do
+  resources :version_import_errors, only: [:index]
   resources :data_summary, only: [:index]
 
   resources :versions, only: [:show, :index]
