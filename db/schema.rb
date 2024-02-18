@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_18_061037) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_18_073626) do
   create_table "blobs", force: :cascade do |t|
     t.string "sha256", null: false
     t.binary "contents"
@@ -19,6 +19,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_18_061037) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["sha256"], name: "index_blobs_on_sha256", unique: true
+  end
+
+  create_table "compact_index_entries", force: :cascade do |t|
+    t.integer "server_id", null: false
+    t.string "path"
+    t.binary "contents"
+    t.datetime "last_modified"
+    t.string "etag"
+    t.string "sha256"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["path", "server_id"], name: "index_compact_index_entries_on_path_and_server_id", unique: true
+    t.index ["server_id"], name: "index_compact_index_entries_on_server_id"
   end
 
   create_table "maintenance_tasks_runs", force: :cascade do |t|
@@ -127,6 +140,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_18_061037) do
     t.index ["uploaded_at"], name: "index_versions_on_uploaded_at"
   end
 
+  add_foreign_key "compact_index_entries", "servers"
   add_foreign_key "rubygems", "servers"
   add_foreign_key "version_data_entries", "blobs"
   add_foreign_key "version_data_entries", "versions"

@@ -29,29 +29,15 @@ import (
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
 	_ "github.com/mattn/go-sqlite3"
+	"github.com/segiddins/go-gem-enumerate/common"
+	"github.com/segiddins/go-gem-enumerate/db"
 	"github.com/segiddins/go-gem-enumerate/pipes"
 	"go.uber.org/zap"
-	"go.uber.org/zap/zapcore"
-	sqlxtrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/jmoiron/sqlx"
-	httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
+
 	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
-	"gopkg.in/natefinch/lumberjack.v2"
 )
 
 // var base = "/Users/segiddins/Development/github.com/akr/gem-codesearch/mirror/gems/"
-var db *sqlx.DB
-
-var logger *zap.Logger
-
-var transport http.RoundTripper = &http.Transport{
-	MaxIdleConns:       50,
-	IdleConnTimeout:    5 * time.Second,
-	MaxConnsPerHost:    50,
-	DisableCompression: true,
-}
-var client *http.Client = httptrace.WrapClient(&http.Client{
-	Transport: transport,
-})
 
 var gzWriterPool = sync.Pool{
 	New: func() interface{} {
@@ -276,7 +262,7 @@ func readDataTarGz(r io.Reader) ([]Entry, error) {
 }
 
 func findContent(sha string) (content []byte) {
-	row := db.QueryRow("select contents from blobs where sha256 = ? and contents is not null and compression is null", sha)
+	row := db.DB.QueryRow("select contents from blobs where sha256 = ? and contents is not null and compression is null", sha)
 
 	if row.Scan(&content) != nil {
 		content = nil
@@ -295,7 +281,7 @@ func readPackage(v *Version) (*ResultLine, error) {
 		task: task,
 	}
 	defer func() {
-		logger.Debug("finished reading package",
+		common.Logger.Debug("finished reading package",
 			zap.String("path", r.Path), zap.String("sha256", r.Package.SHA256), zap.Duration("duration", r.Duration),
 			zap.String("err", r.Err), zap.Int("entries", len(r.Entries)), zap.Time("source_date_epoch", r.SourceDateEpoch.Time),
 		)
@@ -307,12 +293,12 @@ func readPackage(v *Version) (*ResultLine, error) {
 	var buffer *bytes.Buffer
 
 	if content := findContent(v.Sha256.String); content != nil && v.Sha256.Valid {
-		logger.Debug("found content for gem in db", zap.Any("version", v))
+		common.Logger.Debug("found content for gem in db", zap.Any("version", v))
 		buffer = bytes.NewBuffer(content)
 	} else if strings.HasPrefix(path, "https://") {
-		logger.Debug("falling back to downloading gem", zap.Any("version", v))
+		common.Logger.Debug("falling back to downloading gem", zap.Any("version", v))
 		region := trace.StartRegion(ctx, "download")
-		resp, err := client.Get(path)
+		resp, err := common.Client.Get(path)
 		if err != nil {
 			r.Err = fmt.Sprintf("error downloading .gem: %v", err)
 			region.End()
@@ -586,7 +572,7 @@ func insertEntries(tx *sqlx.Tx, version *Version, entries []Entry, blobs *Blobs)
 		rep := ",(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)"
 		query := fmt.Sprintf("INSERT INTO version_data_entries (version_id, blob_id, full_name, name, mode, uid, gid, mtime, linkname, sha256, created_at, updated_at) VALUES %s ON CONFLICT(full_name, version_id) DO NOTHING", strings.Repeat(rep, len(entries))[1:])
 
-		statement, err = db.Preparex(query)
+		statement, err = db.DB.Preparex(query)
 		if err != nil {
 			return err
 		}
@@ -639,10 +625,10 @@ func insertSingleVersionInfo(ctx context.Context, version *Version, r *ResultLin
 		blobs.Add(content)
 	}
 
-	tx := db.MustBeginTx(ctx, nil)
+	tx := db.DB.MustBeginTx(ctx, nil)
 	defer tx.Rollback()
 
-	err := insertBlobs(db, tx, blobs)
+	err := insertBlobs(db.DB, tx, blobs)
 	if err != nil {
 		return err
 	}
@@ -687,18 +673,18 @@ func insertVersionInfo(ctx context.Context, versionsByBasename map[string]*Versi
 		var version *Version
 		defer func() {
 			if r.Err != "" && version != nil {
-				res, err := db.Exec(
+				res, err := db.DB.Exec(
 					`insert into version_import_errors (version_id, error, created_at, updated_at) 
 					values (?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) 
 					on conflict(version_id) do update set error = excluded.error, updated_at = excluded.updated_at 
 					where error != excluded.error
 					`, version.Id, r.Err)
 				if err != nil {
-					logger.Error("failed to insert version import errors", zap.Error(err))
+					common.Logger.Error("failed to insert version import errors", zap.Error(err))
 					panic(err)
 				}
 				if _, err := res.RowsAffected(); err != nil {
-					logger.Error("failed to insert version import errors", zap.Error(err))
+					common.Logger.Error("failed to insert version import errors", zap.Error(err))
 					panic(err)
 				}
 			}
@@ -745,28 +731,9 @@ func main() {
 	)
 	defer tracer.Stop()
 
-	w := zapcore.AddSync(&lumberjack.Logger{
-		Filename:   "/var/log/go-gem-enumerate/go-gem-enumerate.log",
-		MaxSize:    500, // megabytes
-		MaxBackups: 3,
-		MaxAge:     28, // days
-	})
-	filecore := zapcore.NewCore(
-		zapcore.NewJSONEncoder(zap.NewProductionEncoderConfig()),
-		w,
-		zap.DebugLevel,
-	)
-	stdoutcore := zapcore.NewCore(
-		zapcore.NewConsoleEncoder(zap.NewDevelopmentEncoderConfig()),
-		zapcore.AddSync(os.Stdout),
-		zap.InfoLevel,
-	)
-
-	logger = zap.New(zapcore.NewTee(filecore, stdoutcore))
-
 	go func() {
 		err := http.ListenAndServe("localhost:6060", nil)
-		logger.Info("Debug handler exited", zap.Error(err))
+		common.Logger.Info("Debug handler exited", zap.Error(err))
 	}()
 	// logf, err := os.Create("/tmp/go-gem-enumerate.log.jsonl")
 	// if err != nil {
@@ -780,10 +747,6 @@ func main() {
 	// var lg sqldblogger.Logger = &dblogger{}
 	// sqldb := sqldblogger.OpenDriver("/root/Development/github.com/segiddins/rubygems-research/db/development/data.sqlite3", &sqlite3.SQLiteDriver{}, lg)
 	// db = sqlx.NewDb(sqldb, "sqlite3")
-	db = sqlxtrace.MustConnect("sqlite3", "/root/Development/github.com/segiddins/rubygems-research/db/development/data.sqlite3")
-	defer db.Close()
-
-	db.SetMaxOpenConns(4)
 
 	ctx := context.Background()
 	versions, err := InsertRubygemsAndVersionsFromDump()
@@ -808,7 +771,7 @@ func main() {
 	if s, ok := os.LookupEnv("CONCURRENCY"); ok {
 		i, err := strconv.ParseInt(s, 10, 16)
 		if err != nil {
-			logger.Panic("invalid value for CONCURRENCY", zap.Error(err), zap.String("concurrency", s))
+			common.Logger.Panic("invalid value for CONCURRENCY", zap.Error(err), zap.String("concurrency", s))
 		}
 		concurrency = int(i)
 	}
@@ -841,7 +804,7 @@ func main() {
 		perS = math.Round(perS*100) / 100
 
 		eta := time.Duration(float64(len(versions)-acc.total)/time.Nanosecond.Seconds()/perS) * time.Nanosecond
-		logger.Info(
+		common.Logger.Info(
 			"Chunk completed", zap.Duration("elapsed", dur), zap.Int("completed", acc.total), zap.Int("total", len(versions)), zap.Float64("rate", perS),
 			zap.Int("skips", acc.skipCount), zap.Duration("eta", eta),
 		)
@@ -854,14 +817,14 @@ func main() {
 	}).Collect()
 
 	if err != nil {
-		logger.Error("top-level error", zap.Error(err))
+		common.Logger.Error("top-level error", zap.Error(err))
 	}
 
 	if len(result) != 1 {
-		logger.Sugar().Panicf("expected to reduce to 1 result, got %v", result)
+		common.Logger.Sugar().Panicf("expected to reduce to 1 result, got %v", result)
 	}
 
-	logger.Sugar().Infof("Inserted %d/%d versions skips=%d\n", result[0].total, len(versions), result[0].skipCount)
+	common.Logger.Sugar().Infof("Inserted %d/%d versions skips=%d\n", result[0].total, len(versions), result[0].skipCount)
 
 	f, err := os.Create("/tmp/go-gem-skips.json")
 	if err != nil {

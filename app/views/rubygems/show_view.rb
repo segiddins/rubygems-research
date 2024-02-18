@@ -14,6 +14,11 @@ include Phlex::Rails::Helpers::NumberToHumanSize
     h2 { @platform } if @platform
     unsafe_raw helpers.render @rubygem
 
+    # p {
+    #   plain "Info file"
+    #   pre {@rubygem.server.compact_index_entries.find_by(path: "info/#{@rubygem.name}").pretty_inspect}
+    # }
+
     platforms = @rubygem.versions.distinct.pluck(:platform)
     unless platforms == ["ruby"]
       div do

@@ -6,12 +6,9 @@ import (
 	"encoding/hex"
 	"fmt"
 	"log"
-)
 
-type Server struct {
-	Id  int64  `db:"id"`
-	Url string `db:"url"`
-}
+	"github.com/segiddins/go-gem-enumerate/db"
+)
 
 type Rubygem struct {
 	Id       int64  `db:"id"`
@@ -47,20 +44,8 @@ func InsertRubygemsAndVersionsFromDump() (versions []*Version, err error) {
 
 	log.Println("Dumped versions:", len(dumpedVersions))
 
-	tx := db.MustBegin()
+	tx := db.DB.MustBegin()
 	defer tx.Rollback()
-
-	row := tx.QueryRowx("SELECT id, url FROM servers WHERE url = ?", "https://rubygems.org")
-	if err = row.Err(); err != nil {
-		return
-	}
-	var server Server
-	err = row.StructScan(&server)
-	if err != nil {
-		return
-	}
-
-	log.Printf("Server: %v\n", server)
 
 	rubygems := []*Rubygem{}
 	versions = make([]*Version, 0, len(dumpedVersions))
@@ -68,7 +53,7 @@ func InsertRubygemsAndVersionsFromDump() (versions []*Version, err error) {
 	for _, v := range dumpedVersions {
 		if _, ok := names[v.RubygemName]; !ok {
 			names[v.RubygemName] = true
-			rubygems = append(rubygems, &Rubygem{Name: v.RubygemName, ServerId: server.Id})
+			rubygems = append(rubygems, &Rubygem{Name: v.RubygemName, ServerId: db.Server.Id})
 		}
 	}
 
@@ -81,7 +66,7 @@ func InsertRubygemsAndVersionsFromDump() (versions []*Version, err error) {
 		return nil
 	})
 
-	err = tx.Select(&rubygems, "SELECT id, name, server_id FROM rubygems WHERE server_id = ?", server.Id)
+	err = tx.Select(&rubygems, "SELECT id, name, server_id FROM rubygems WHERE server_id = ?", db.Server.Id)
 	if err != nil {
 		return
 	}
@@ -137,7 +122,7 @@ func InsertRubygemsAndVersionsFromDump() (versions []*Version, err error) {
 	err = tx.Select(&versions,
 		`SELECT versions.id, rubygem_id, number, platform, sha256, spec_sha256, uploaded_at, rubygems.name, indexed
 		FROM versions JOIN rubygems ON versions.rubygem_id = rubygems.id 
-		WHERE rubygems.server_id = ?`, server.Id)
+		WHERE rubygems.server_id = ?`, db.Server.Id)
 	if err != nil {
 		err = fmt.Errorf("error selecting from versions: %w", err)
 		return

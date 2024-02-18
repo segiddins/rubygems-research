@@ -5,9 +5,10 @@ import (
 	"time"
 
 	"github.com/jmoiron/sqlx"
+	sqlxtrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/jmoiron/sqlx"
 )
 
-var dumpDB *sqlx.DB = sqlx.MustConnect("postgres", "host=/var/run/postgresql/ user=postgres dbname=rubygems_production sslmode=disable")
+var dumpDB *sqlx.DB = sqlxtrace.MustConnect("postgres", "host=/var/run/postgresql/ user=postgres dbname=rubygems_production sslmode=disable")
 
 type DumpVersion struct {
 	Id          int64
