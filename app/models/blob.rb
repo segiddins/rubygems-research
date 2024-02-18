@@ -30,7 +30,7 @@ class Blob < ApplicationRecord
   scope :excluding_contents, -> { select(column_names - ["contents"]) }
 
   def decompressed_contents
-    if contents?
+    unless contents.nil?
       return \
         case compression
         when nil

@@ -1,6 +1,6 @@
 class RubygemsController < ApplicationController
   before_action :set_server
-  before_action :set_rubygem, only: %i[ show ]
+  before_action :set_rubygem, only: %i[ show diff ]
 
   # GET /rubygems or /rubygems.json
   def index
@@ -14,6 +14,13 @@ class RubygemsController < ApplicationController
     versions = versions.where(platform:) if platform
     @pagy, @versions = pagy(versions)
     render Rubygems::ShowView.new(rubygem: @rubygem, versions: @versions, platform:, pagy: @pagy)
+  end
+
+  def diff
+    v1 = @rubygem.versions.includes(:metadata_blob, version_data_entries: :blob).find_by!(number: params[:v1])
+    v2 = @rubygem.versions.includes(:metadata_blob, version_data_entries: :blob).find_by!(number: params[:v2])
+
+    render Rubygems::DiffView.new(rubygem: @rubygem, v1:, v2:)
   end
 
 

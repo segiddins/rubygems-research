@@ -1,9 +1,9 @@
 # == Route Map
 #
-# I, [2024-02-16T05:52:13.444417 #2378719]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - PROFILING - {"profiling_enabled":false}
-# I, [2024-02-16T05:52:13.444689 #2378719]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - CORE - {"date":"2024-02-16T05:52:13+00:00","os_name":"x86_64-pc-linux","version":"1.20.0","lang":"ruby","lang_version":"3.3.0","env":null,"service":"node","dd_version":null,"debug":false,"tags":"_dd.injection.mode:host","runtime_metrics_enabled":true,"vm":"ruby-3.3.0","health_metrics_enabled":false}
-# I, [2024-02-16T05:52:14.975628 #2378799]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - PROFILING - {"profiling_enabled":false}
-# I, [2024-02-16T05:52:14.975906 #2378799]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - CORE - {"date":"2024-02-16T05:52:14+00:00","os_name":"x86_64-pc-linux","version":"1.20.0","lang":"ruby","lang_version":"3.3.0","env":null,"service":"node","dd_version":null,"debug":false,"tags":"_dd.injection.mode:host","runtime_metrics_enabled":true,"vm":"ruby-3.3.0","health_metrics_enabled":false}
+# I, [2024-02-18T05:25:13.326223 #3205347]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - PROFILING - {"profiling_enabled":false}
+# I, [2024-02-18T05:25:13.326502 #3205347]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - CORE - {"date":"2024-02-18T05:25:13+00:00","os_name":"x86_64-pc-linux","version":"1.20.0","lang":"ruby","lang_version":"3.3.0","env":null,"service":"node","dd_version":null,"debug":false,"tags":"_dd.injection.mode:host","runtime_metrics_enabled":true,"vm":"ruby-3.3.0","health_metrics_enabled":false}
+# I, [2024-02-18T05:25:14.234807 #3205381]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - PROFILING - {"profiling_enabled":false}
+# I, [2024-02-18T05:25:14.235074 #3205381]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - CORE - {"date":"2024-02-18T05:25:14+00:00","os_name":"x86_64-pc-linux","version":"1.20.0","lang":"ruby","lang_version":"3.3.0","env":null,"service":"node","dd_version":null,"debug":false,"tags":"_dd.injection.mode:host","runtime_metrics_enabled":true,"vm":"ruby-3.3.0","health_metrics_enabled":false}
 #                            Prefix Verb URI Pattern                                         Controller#Action
 #                data_summary_index GET  /data_summary(.:format)                             data_summary#index
 #                          versions GET  /versions(.:format)                                 versions#index
@@ -11,6 +11,7 @@
 #                          raw_blob GET  /blobs/:sha256/raw(.:format)                        blobs#raw
 #                             blobs GET  /blobs(.:format)                                    blobs#index
 #                              blob GET  /blobs/:sha256(.:format)                            blobs#show
+#                      diff_rubygem GET  /rubygems/:name/diff(.:format)                      rubygems#diff
 #         diff_rubygem_file_history GET  /rubygems/:rubygem_name/file_history/diff(.:format) file_histories#diff
 #              rubygem_file_history GET  /rubygems/:rubygem_name/file_history(.:format)      file_histories#show
 #                          rubygems GET  /rubygems(.:format)                                 rubygems#index
@@ -47,6 +48,7 @@ Rails.application.routes.draw do
     end
   end
   resources :rubygems, only: %i[show index], param: :name, constraints: { id: route_pattern } do
+    get :diff, on: :member
     resource :file_history, only: [:show], param: :path, constraints: { id: /.+/} do
       get :diff
     end

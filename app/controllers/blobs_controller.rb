@@ -16,13 +16,7 @@ class BlobsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_blob
       @blob = Blob.find_by!(sha256: params[:sha256])
-    end
-
-    # Only allow a list of trusted parameters through.
-    def blob_params
-      params.require(:blob).permit(:sha256, :contents, :size, :compression)
     end
 end

@@ -13,6 +13,7 @@ class Versions::ShowView < ApplicationView
     p { link_to ".gem", blob_path(@version.sha256) } if @version.sha256
     p { link_to ".gem metadata (gemspec)", blob_path(@version.metadata_blob.sha256) } if @version.metadata_blob
     @version.attributes.each do |key, value|
+      next if key.end_with?("_id")
       p { "#{key}: #{value}" }
     end
     p { "Gem size: #{number_to_human_size @version.package_blob.size}" }
@@ -30,25 +31,21 @@ class Versions::ShowView < ApplicationView
           th { "Mtime" }
           th { "Linkname" }
           th { "Size" }
+          th { "SHA" }
         end
       end
 
       tbody do
         @version.version_data_entries.includes(:blob_excluding_contents).find_each do |entry|
           tr do
-            td do
-              if entry.blob_excluding_contents
-                link_to entry.full_name, blob_path(entry.blob_excluding_contents.sha256)
-              else
-                entry.full_name
-              end
-            end
+            td { link_to entry.full_name, rubygem_file_history_path(@version.rubygem.name, path: entry.full_name) }
             td { entry.mode.to_s(8) }
             td { entry.uid.to_s(8) }
             td { entry.gid.to_s(8) }
             td { entry.mtime }
             td { entry.linkname }
             td { number_to_human_size entry.blob_excluding_contents&.size }
+            td { link_to entry.blob_excluding_contents.sha256, blob_path(entry.blob_excluding_contents.sha256) if entry.blob_excluding_contents }
           end
         end
       end

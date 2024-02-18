@@ -9,6 +9,7 @@ class VersionsController < ApplicationController
   end
 
   def index
-    render Versions::IndexView.new
+    pagy, versions = pagy(Version.includes(:rubygem).strict_loading.order(uploaded_at: :desc))
+    render Versions::IndexView.new(pagy:, versions:)
   end
 end

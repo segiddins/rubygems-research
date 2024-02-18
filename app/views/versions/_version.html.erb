@@ -1,7 +1,6 @@
 <div id="<%= dom_id version %>">
   <p>
-    <strong>Rubygem:</strong>
-    <%= version.rubygem_id %>
+    <%= link_to version.rubygem.name, rubygem_path(version.rubygem.name) %>
   </p>
 
   <p>
@@ -23,10 +22,9 @@
     <strong>Sha256:</strong>
     <%= version.sha256 %>
   </p>
-
   <p>
-    <strong>Metadata:</strong>
-    <%= version.metadata %>
+    <strong>Uploaded at:</strong>
+    <%= time_tag version.uploaded_at %>
   </p>
 
 </div>
