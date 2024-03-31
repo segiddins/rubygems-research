@@ -30,6 +30,7 @@
 #
 class VersionDataEntry < ApplicationRecord
   belongs_to :version
+  has_one :rubygem, through: :version
   belongs_to :blob, optional: true, strict_loading: true
   belongs_to :blob_excluding_contents, -> { excluding_contents }, optional: true, foreign_key: :blob_id, class_name: "Blob"
 
