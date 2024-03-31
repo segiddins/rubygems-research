@@ -1,24 +1,10 @@
-# README
+# rubygems-research
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a rails app intended to make research into the rubygems.org ecosystem easier.
 
-Things you may want to cover:
+It is publicly accessible at [research.rubygems.info](https://research.rubygems.info/).
+The service is hosted on a bare metal hetzner server with 2x 3TB NVMe SSDs, 32 physical cores, and 128GB of RAM.
 
-* Ruby version
+The goal is to have an index of every single published rubygem and its content, that can be queried in a single place.
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+I have used this project both to investigate patterns across the ecosystem, as well as assessing the security impact of cross-ecosystem CVEs.
