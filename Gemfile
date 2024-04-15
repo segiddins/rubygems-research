@@ -52,6 +52,11 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+
+  # Support for jupyter notebooks
+  gem 'jupyter_on_rails'
+  gem 'ffi-rzmq'
+  gem 'matrix'
 end
 
 

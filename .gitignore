@@ -37,3 +37,7 @@
 # Ignore default Litestack SQLite databases.
 /db/**/*.sqlite3
 /db/**/*.sqlite3-*
+
+# Ignore jupyter files
+/.ipython/
+/.ipynb_checkpoints/
