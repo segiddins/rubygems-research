@@ -9,8 +9,6 @@ module Maintenance
     end
 
     def process(server)
-
-
       Faraday.get("#{server.url}/names").body.lines(chomp: true).each do |name|
         Rubygem.find_or_create_by!(name: name, server: server)
       end

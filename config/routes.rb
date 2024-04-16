@@ -1,9 +1,9 @@
 # == Route Map
 #
-# I, [2024-02-18T07:42:47.626873 #101078]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - PROFILING - {"profiling_enabled":false}
-# I, [2024-02-18T07:42:47.627154 #101078]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - CORE - {"date":"2024-02-18T07:42:47+00:00","os_name":"x86_64-pc-linux","version":"1.20.0","lang":"ruby","lang_version":"3.3.0","env":null,"service":"rake","dd_version":null,"debug":false,"tags":null,"runtime_metrics_enabled":false,"vm":"ruby-3.3.0","health_metrics_enabled":false}
-# I, [2024-02-18T07:42:48.870209 #101108]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - PROFILING - {"profiling_enabled":false}
-# I, [2024-02-18T07:42:48.870465 #101108]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - CORE - {"date":"2024-02-18T07:42:48+00:00","os_name":"x86_64-pc-linux","version":"1.20.0","lang":"ruby","lang_version":"3.3.0","env":null,"service":"rails","dd_version":null,"debug":false,"tags":null,"runtime_metrics_enabled":false,"vm":"ruby-3.3.0","health_metrics_enabled":false}
+# I, [2024-04-15T17:42:55.336961 #60969]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - PROFILING - {"profiling_enabled":false}
+# I, [2024-04-15T17:42:55.337167 #60969]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - CORE - {"date":"2024-04-15T17:42:55-07:00","os_name":"arm64-apple-darwin23","version":"1.20.0","lang":"ruby","lang_version":"3.3.0","env":null,"service":"rake","dd_version":null,"debug":false,"tags":null,"runtime_metrics_enabled":false,"vm":"ruby-3.3.0","health_metrics_enabled":false}
+# I, [2024-04-15T17:42:56.205863 #61003]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - PROFILING - {"profiling_enabled":false}
+# I, [2024-04-15T17:42:56.206061 #61003]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - CORE - {"date":"2024-04-15T17:42:56-07:00","os_name":"arm64-apple-darwin23","version":"1.20.0","lang":"ruby","lang_version":"3.3.0","env":null,"service":"rails","dd_version":null,"debug":false,"tags":null,"runtime_metrics_enabled":false,"vm":"ruby-3.3.0","health_metrics_enabled":false}
 #                            Prefix Verb URI Pattern                                         Controller#Action
 #             version_import_errors GET  /version_import_errors(.:format)                    version_import_errors#index
 #                data_summary_index GET  /data_summary(.:format)                             data_summary#index

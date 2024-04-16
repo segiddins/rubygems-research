@@ -108,7 +108,7 @@ class Maintenance::ImportGemFileTask < MaintenanceTasks::Task
     when nil
       compressed = contents
     when "gzip"
-      if size < 100 || !include_contents # if the file is less than 100 bytes, don't bother compressing
+      if size < 2048 || !include_contents # if the file is less than 2k bytes, don't bother compressing
         compressed = contents
         compression = nil
       else
