@@ -86,3 +86,4 @@ gem "hairtrigger", "~> 1.1"
 
 gem "annotate", "~> 3.2"
 gem "ddtrace", "~> 1.20", require: "ddtrace/auto_instrument"
+gem "pg", "~> 1.5"
