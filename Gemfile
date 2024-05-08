@@ -86,4 +86,7 @@ gem "hairtrigger", "~> 1.1"
 
 gem "annotate", "~> 3.2"
 gem "ddtrace", "~> 1.20", require: "ddtrace/auto_instrument"
+
+gem "dockerfile-rails", ">= 1.6", :group => :development
+
 gem "pg", "~> 1.5"
