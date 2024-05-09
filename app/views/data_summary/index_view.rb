@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class DataSummary::IndexView < ApplicationView
-include Phlex::Rails::Helpers::LinkTo
-include Phlex::Rails::Helpers::NumberToHumanSize
+  include Phlex::Rails::Helpers::LinkTo
+  include Phlex::Rails::Helpers::NumberToHumanSize
 
   def limit = 10
 
@@ -18,12 +18,16 @@ include Phlex::Rails::Helpers::NumberToHumanSize
         th {"Size"}
       end
       tbody do
-        [Rubygem, Version, VersionDataEntry, Blob].each do |model|
+        [Rubygem, Version, VersionDataEntry, Blob, CompactIndexEntry, VersionImportError].each do |model|
           tr do
             td { model.table_name }
             td { model.count.to_fs(:delimited) }
-            # td { model.connection.select_value('SELECT SUM("pgsize") FROM "dbstat" WHERE name= ?;', model.table_name) }
-            td
+            td { model.connection.select_value(<<~SQL.squish) }
+              select
+                pg_size_pretty(pg_total_relation_size(quote_ident(table_name)))
+              from information_schema.tables
+              where table_schema = 'public' and table_name = #{model.connection.quote(model.table_name)}
+            SQL
           end
         end
       end
@@ -31,17 +35,17 @@ include Phlex::Rails::Helpers::NumberToHumanSize
 
     h3 { "Blob storage" }
 
-    render TableComponent.new(contents: Blob.connection.execute('select count(id), sum(length(contents)), sum(size), compression, contents is null from blobs group by 4, 5')) do |table|
-      table.column("Count") { |row| plain row[0].to_fs(:delimited) }
-      table.column("Stored size") { |row| plain number_to_human_size row[1] }
-      table.column("Size") { |row| plain number_to_human_size row[2] }
-      table.column("Compression") { |row| plain row[3] }
-      table.column("Contents is null") { |row| plain row[4] }
-    end if false
+    render TableComponent.new(contents: Blob.connection.execute('select count(id) as count, sum(length(contents)) as stored_size, sum(size) as decompressed_size, compression, contents is null as missing from blobs group by 4, 5')) do |table|
+      table.column("Count") { |row| plain row["count"].to_fs(:delimited) }
+      table.column("Stored size") { |row| plain number_to_human_size row["stored_size"] }
+      table.column("Decompressed size") { |row| plain number_to_human_size row["decompressed_size"] }
+      table.column("Compression") { |row| plain row["compression"] }
+      table.column("Contents is null") { |row| plain row["missing"].to_s }
+    end # if false
 
     h3 { "Biggest gems" }
 
-    render TableComponent.new(contents: Blob.excluding_contents.where.associated(:package_version).select("length(blobs.contents) as length").order('size desc').includes(package_version: :rubygem).limit(limit)) do |table|
+    render TableComponent.new(contents: Blob.excluding_contents.where.associated(:package_version).select("length(blobs.contents) as length").order('size desc, sha256 asc').includes(package_version: :rubygem).limit(limit)) do |table|
       table.column("SHA256") { |b| link_to b.sha256, blob_path(b.sha256) }
       table.column("Length") { |b| number_to_human_size b.length }
       table.column("Size") { |b| number_to_human_size b.size }

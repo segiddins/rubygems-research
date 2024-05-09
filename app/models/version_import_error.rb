@@ -2,11 +2,11 @@
 #
 # Table name: version_import_errors
 #
-#  id         :integer          not null, primary key
+#  id         :bigint           not null, primary key
 #  error      :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  version_id :integer          not null
+#  version_id :bigint           not null
 #
 # Indexes
 #
@@ -15,7 +15,7 @@
 #
 # Foreign Keys
 #
-#  version_id  (version_id => versions.id)
+#  fk_rails_...  (version_id => versions.id)
 #
 class VersionImportError < ApplicationRecord
   belongs_to :version

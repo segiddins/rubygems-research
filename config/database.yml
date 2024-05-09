@@ -1,36 +1,22 @@
-# SQLite. Versions 3.8.0 and up are supported.
-#   gem install sqlite3
-#
-#   Ensure the SQLite 3 gem is defined in your Gemfile
-#   gem "sqlite3"
-#
-# `Litesupport.root.join("data.sqlite3")` stores
-# application data in the path `./db/#{Rails.env}/data.sqlite3`
-#
-# `Litesupport.root(env).join(path)` stores
-# application data in the path `./db/#{env}/#{path}`
-#
-# idle_timeout should be set to zero, to avoid recycling sqlite connections
-# and losing the page cache
-#
 primary: &primary
-  adapter: litedb
+  adapter: postgresql
+  encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  idle_timeout: 0
-  metrics: false
+  timeout: 5000
+  prepared_statements: true
 
 dump: &dump
   adapter: postgresql
   encoding: utf8
   username: postgres
-  prepared_statements: false
+  prepared_statements: true
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   database_tasks: false
 
 development:
   primary:
     <<: *primary
-    database: <%= Litesupport.root("development").join("data.sqlite3") %>
+    database: rubygems_research_development
   dump:
     <<: *dump
     database: rubygems_production
@@ -42,14 +28,11 @@ development:
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  <<: *primary
-  database: <%= Litesupport.root("test").join("data.sqlite3") %>
+  primary:
+    <<: *primary
+    database: rubygems_research_test
 
-# Warning: Make sure your production database path is on a persistent
-# volume, otherwise your application data could be deleted between deploys.
-#
-# You may also set the Litesupport.root in production via the
-# `LITESTACK_DATA_PATH` environment variable.
 production:
-  <<: *primary
-  database: <%= Litesupport.root("production").join("data.sqlite3") %>
+  primary:
+    <<: *primary
+    database: rubygems_research_production

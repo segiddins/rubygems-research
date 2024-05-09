@@ -1,2 +1,0 @@
-workers: 5 # how many threads/fibers to spawn for queue processing
-metrics: true # whether to enable the metrics server

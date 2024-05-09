@@ -1,0 +1,40 @@
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+spec:
+  global:
+    clusterName: rubygems-research
+    credentials:
+      apiSecret:
+        secretName: datadog-secret
+        keyName: api-key
+    kubelet:
+      tlsVerify: false
+  features:
+    apm:
+      instrumentation:
+        enabled: true
+    liveContainerCollection:
+      enabled: true
+    logCollection:
+      enabled: true
+      containerCollectAll: true
+    usm:
+      enabled: true
+    npm:
+      enabled: true
+  override:
+    clusterAgent:
+      image:
+        name: gcr.io/datadoghq/cluster-agent:latest
+    nodeAgent:
+      image:
+        name: gcr.io/datadoghq/agent:latest
+      tolerations:
+        - key: node-role.kubernetes.io/controlplane
+          operator: Exists
+          effect: NoSchedule
+        - key: node-role.kubernetes.io/etcd
+          operator: Exists
+          effect: NoExecute

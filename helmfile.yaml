@@ -1,0 +1,27 @@
+repositories:
+  - name: datadog
+    url: https://helm.datadoghq.com
+  - name: bitnamicharts
+    url: https://charts.bitnami.com/bitnami
+
+releases:
+  - name: datadog-operator
+    namespace: default
+    chart: datadog/datadog-operator
+  - name: rubygems-research-db
+    namespace: rubygems-research-production
+    chart: bitnamicharts/postgresql
+    set:
+      - name: auth.database
+        value: rubygems_research_production
+      - name: primary.persistence.size
+        value: 1Ti
+  - name: rubygems-db
+    namespace: rubygems-research-production
+    chart: bitnamicharts/postgresql
+    set:
+      - name: auth.database
+        value: rubygems_production
+  - name: cache
+    namespace: rubygems-research-production
+    chart: bitnamicharts/memcached

@@ -19,7 +19,7 @@ include Phlex::Rails::Helpers::NumberToHumanSize
     #   pre {@rubygem.server.compact_index_entries.find_by(path: "info/#{@rubygem.name}").pretty_inspect}
     # }
 
-    platforms = @rubygem.versions.distinct.pluck(:platform)
+    platforms = @rubygem.versions.distinct.unscope(:order).pluck(:platform)
     unless platforms == ["ruby"]
       div do
         p { "Platforms" }

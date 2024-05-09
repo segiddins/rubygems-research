@@ -2,6 +2,7 @@
 <%= render @server %>
 <p>Rubygems: <%= @server.rubygems.count.to_fs(:delimited) %></p>
 <p>Versions: <%= @server.versions.count.to_fs(:delimited) %></p>
+<p>Indexed versions: <%= @server.versions.where(indexed: true).count.to_fs(:delimited) %></p>
 <% if @rubygems.any? %>
   <h2>Rubygems</h2>
   <%= render @rubygems %>

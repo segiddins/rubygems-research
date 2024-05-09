@@ -2,7 +2,7 @@
 #
 # Table name: compact_index_entries
 #
-#  id            :integer          not null, primary key
+#  id            :bigint           not null, primary key
 #  contents      :binary
 #  etag          :string
 #  last_modified :datetime
@@ -10,7 +10,7 @@
 #  sha256        :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
-#  server_id     :integer          not null
+#  server_id     :bigint           not null
 #
 # Indexes
 #
@@ -19,7 +19,7 @@
 #
 # Foreign Keys
 #
-#  server_id  (server_id => servers.id)
+#  fk_rails_...  (server_id => servers.id)
 #
 require "test_helper"
 

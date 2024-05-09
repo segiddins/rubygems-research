@@ -19,8 +19,14 @@ class Versions::ShowView < ApplicationView
         code { @version.version_import_error.error }
       end
     end
+    dl do
+      @version.metadata.each do |key, value|
+        dt { key }
+        dd { value }
+      end
+    end if @version.metadata.present?
     @version.attributes.each do |key, value|
-      next if key.end_with?("_id")
+      next if key.end_with?("_id") || key == "metadata"
       p { "#{key}: #{value}" }
     end
     p { "Gem size: #{number_to_human_size @version.package_blob.size}" } if @version.package_blob

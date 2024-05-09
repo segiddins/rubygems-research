@@ -8,7 +8,7 @@ class ServersController < ApplicationController
 
   # GET /servers/1 or /servers/1.json
   def show
-    @pagy, @rubygems = pagy(@server.rubygems.strict_loading)
+    @pagy, @rubygems = pagy(@server.rubygems.order(name: :asc).strict_loading)
   end
 
   private

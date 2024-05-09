@@ -5,13 +5,14 @@ module Maintenance
     include SemanticLogger::Loggable
 
     def collection
-      Dump::Rubygem.all.order(id: :asc).in_batches(of: 1000)
+      Dump::Rubygem.all.in_batches
     end
 
     def process(batch)
       @server ||= Server.sole
-      Rubygem.where(server: @server).import(
-        batch.map { |dump_rubygem| {name: dump_rubygem.name} }
+      Rubygem.where(server: @server).import!(
+        batch.map { |dump_rubygem| {name: dump_rubygem.name} },
+        on_duplicate_key_ignore: { conflict_target: %i[server_id name] }
       )
     rescue => e
       logger.error "Failed to process #{element.inspect}: #{e}", error: e

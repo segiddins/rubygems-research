@@ -1,15 +1,12 @@
 source "https://rubygems.org"
 
-ruby "3.3.0"
+ruby file: ".ruby-version"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.3"
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
-
-# Use sqlite3 as the database for Active Record
-gem "sqlite3", "~> 1.4"
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
@@ -33,14 +30,14 @@ gem "jbuilder"
 # gem "bcrypt", "~> 3.1.7"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: %i[ windows jruby ]
+gem "tzinfo-data", platforms: %i[windows jruby]
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[ mri windows ]
+  gem "debug", platforms: %i[mri windows]
 end
 
 group :development do
@@ -54,39 +51,29 @@ group :development do
   # gem "spring"
 
   # Support for jupyter notebooks
-  gem 'jupyter_on_rails'
   gem 'ffi-rzmq'
+  gem 'jupyter_on_rails'
   gem 'matrix'
 end
 
-
-gem "litestack", "~> 0.4.2"
-
-gem "pagy", "~> 6.4"
-
-gem "maintenance_tasks", "~> 2.5"
-
-gem "rails_semantic_logger", "~> 4.14"
-gem "faraday", "~> 2.9"
-
-gem "phlex-rails", "~> 1.1"
-
-gem "literal", "~> 0.1.0"
-
-gem "diff-lcs", "~> 1.5"
-gem "rack", "~> 2.2" # litestack's liteboard depends on hanami-router which does not currently support rack 3.x as of Dec 2023
-
 gem "activerecord-import", "~> 1.5"
-
-gem "parallel", "~> 1.24"
-
-gem "ruby-progressbar", "~> 1.13"
-
-gem "hairtrigger", "~> 1.1"
-
 gem "annotate", "~> 3.2"
 gem "ddtrace", "~> 1.20", require: "ddtrace/auto_instrument"
-
-gem "dockerfile-rails", ">= 1.6", :group => :development
-
+gem "diff-lcs", "~> 1.5"
+gem "dockerfile-rails", "~> 1.6", group: :development
+gem "dotenv-rails", "~> 3.1"
+gem "faraday", "~> 2.9"
+gem "good_job", "~> 3.27"
+gem "hairtrigger", "~> 1.1"
+gem "literal", "~> 0.1.0"
+gem "maintenance_tasks", "~> 2.5"
+gem "meilisearch-rails", "~> 0.12.0"
+gem "pagy", "~> 6.4"
+gem "parallel", "~> 1.24"
+gem "pg_query", "~> 5.1"
 gem "pg", "~> 1.5"
+gem "pghero", "~> 3.4"
+gem "phlex-rails", "~> 1.1"
+gem "prosopite", "~> 1.4"
+gem "rails_semantic_logger", "~> 4.14"
+gem "ruby-progressbar", "~> 1.13"

@@ -2,7 +2,7 @@
 #
 # Table name: version_data_entries
 #
-#  id         :integer          not null, primary key
+#  id         :bigint           not null, primary key
 #  full_name  :string
 #  gid        :integer
 #  linkname   :string
@@ -13,8 +13,8 @@
 #  uid        :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  blob_id    :integer
-#  version_id :integer          not null
+#  blob_id    :bigint
+#  version_id :bigint           not null
 #
 # Indexes
 #
@@ -25,8 +25,8 @@
 #
 # Foreign Keys
 #
-#  blob_id     (blob_id => blobs.id)
-#  version_id  (version_id => versions.id)
+#  fk_rails_...  (blob_id => blobs.id)
+#  fk_rails_...  (version_id => versions.id)
 #
 require "test_helper"
 

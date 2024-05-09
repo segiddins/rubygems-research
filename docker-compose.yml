@@ -1,0 +1,109 @@
+#https://docs.docker.com/compose/compose-file/deploy/
+
+services:
+  db:
+    image: postgres:15
+    restart: always
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+  cache:
+    image: memcached:1.4.24
+    restart: always
+  # search:
+  #   image: opensearchproject/opensearch:1.3.7
+  #   environment:
+  #     - http.host=0.0.0.0
+  #     - transport.host=127.0.0.1
+  #     - plugins.security.disabled=true
+  #   ports:
+  #     - "9200:9200"
+  caddy:
+    image: caddy:2.7.6
+    restart: always
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - $PWD/Caddyfile:/etc/caddy/Caddyfile
+      - $PWD/site:/srv
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - app
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - APP_VERSION=build
+    depends_on:
+      - db
+      - cache
+    environment:
+      - DATABASE_URL=postgresql://postgres@db:5432
+      - MEMCACHED_URL=memcached://cache:11211
+      - APP_VERSION=main
+      - SECRET_KEY_BASE=secret
+    restart: always
+    deploy:
+      mode: replicated
+      replicas: 2
+    develop:
+      watch:
+        # rebuild image and recreate service
+        - path: ./app
+          action: sync
+          target: /rails/app
+        - path: ./config
+          action: sync+restart
+          target: /rails/config
+        - path: ./bin
+          action: sync+restart
+          target: /rails/bin
+        - path: ./Dockerfile
+          action: rebuild
+        - path: ./Gemfile.lock
+          action: rebuild
+  zoekt-index-gem:
+    build:
+      context: ./zoekt-index-gem
+      # dockerfile: ./zoekt-index-gem/Dockerfile
+    environment: []
+    user: nonroot
+    command: ["-index", "/data/index", "-require_ctags"]
+    restart: always
+    volumes:
+      - zoekt_index:/data:z
+    depends_on:
+      fix-named-volumes-permissions:
+        condition: service_completed_successfully
+  zoekt-webserver:
+    image: sourcegraph/zoekt-webserver:latest
+    volumes:
+      - zoekt_index:/data
+    ports:
+      - "6070:6070"
+    depends_on:
+      fix-named-volumes-permissions:
+        condition: service_completed_successfully
+  fix-named-volumes-permissions:
+    image: debian
+    user: root
+    command:
+      [
+        "/bin/sh",
+        "-c",
+        "chmod 777 /data && mkdir -p /data/index && chmod 777 /data/index && ls -alh /data",
+      ]
+    volumes:
+      - zoekt_index:/data
+    restart: "no"
+
+volumes:
+  caddy_data:
+    external: true
+  caddy_config:
+  zoekt_index:

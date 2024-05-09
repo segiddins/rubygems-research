@@ -2,7 +2,7 @@
 #
 # Table name: servers
 #
-#  id         :integer          not null, primary key
+#  id         :bigint           not null, primary key
 #  url        :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null

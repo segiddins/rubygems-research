@@ -2,7 +2,7 @@
 #
 # Table name: blobs
 #
-#  id          :integer          not null, primary key
+#  id          :bigint           not null, primary key
 #  compression :string
 #  contents    :binary
 #  sha256      :string           not null
