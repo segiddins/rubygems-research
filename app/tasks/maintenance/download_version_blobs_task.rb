@@ -13,9 +13,11 @@ class Maintenance::DownloadVersionBlobsTask < MaintenanceTasks::Task
   class SHA256Mismatch < StandardError; end
 
   def collection
+    where = { indexed: true }
+    where[:rubygem] = { name: gem_name } if gem_name.present?
     Version.joins(:rubygem)
       .where.not(sha256: nil)
-      .where(indexed: true, rubygem: { name: gem_name })
+      .where(**where)
       .includes(:package_blob_with_contents)
   end
 
