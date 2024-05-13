@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
         - name: rubygems-research
-          image: ghcr.io/segiddins/rubygems-research:pr-14
+          image: ghcr.io/segiddins/rubygems-research:main
           command:
             [
               "bundle",
@@ -139,3 +139,79 @@ spec:
               memory: "256Mi"
               cpu: "100m"
       restartPolicy: Never
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jobs
+  annotations:
+    shipit.shopify.io/restart: "true"
+spec:
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 50%
+  selector:
+    matchLabels:
+      name: jobs
+  template:
+    metadata:
+      annotations:
+        ad.datadoghq.com/good-job.logs: '[{"source":"rails","service":"research.rubygems.info"]'
+      labels:
+        name: jobs
+        app: rubygems-research
+    spec:
+      containers:
+        - name: good-job
+          image: ghcr.io/segiddins/rubygems-research:main
+          args: ["bundle", "exec", "good_job", "start"]
+          resources:
+            requests:
+              cpu: 500m
+              memory: 1Gi
+            limits:
+              cpu: "1.5"
+              memory: 3.0Gi
+          ports:
+            - name: probe-port
+              containerPort: 7001
+          startupProbe:
+            httpGet:
+              path: "/status/started"
+              port: probe-port
+            failureThreshold: 30
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: "/status/connected"
+              port: probe-port
+            failureThreshold: 1
+            periodSeconds: 10
+          env:
+            - name: RAILS_ENV
+              value: production
+            - name: RAILS_LOG_TO_STDOUT
+              value: "true"
+            - name: RAILS_MAX_THREADS
+              value: "5"
+            - name: DD_AGENT_HOST
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+                  apiVersion: v1
+            - name: STATSD_IMPLEMENTATION
+              value: datadog
+            - name: DATABASE_URL
+              value: postgresql://postgres:iZLNkfG3P1@rubygems-research-db-postgresql.rubygems-research-production.svc.cluster.local:5432/rubygems_research_production
+            - name: DUMP_DATABASE_URL
+              value: postgresql://postgres:8GUkAIeDm2@rubygems-db-postgresql.rubygems-research-production.svc.cluster.local:5432/rubygems_production
+            - name: SECRET_KEY_BASE
+              valueFrom:
+                secretKeyRef:
+                  name: app
+                  key: SECRET_KEY_BASE
+          securityContext:
+            privileged: false
