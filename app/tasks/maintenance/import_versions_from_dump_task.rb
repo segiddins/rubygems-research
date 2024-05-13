@@ -28,7 +28,7 @@ module Maintenance
         on_duplicate_key_update: {
           conflict_target: [:rubygem_id, :number, :platform],
           columns: [:indexed, :uploaded_at, :metadata, :sha256, :spec_sha256],
-          index_predicate: "versions.indexed != excluded.indexed"
+          # index_predicate: "versions.indexed != excluded.indexed"
         },
         # on_duplicate_key_ignore: {
         #   conflict_target: [:rubygem_id, :number, :platform]
