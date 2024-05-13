@@ -130,7 +130,7 @@ GEM
       raabro (~> 1.4)
     globalid (1.2.1)
       activesupport (>= 6.1)
-    good_job (3.28.1)
+    good_job (3.28.2)
       activejob (>= 6.0.0)
       activerecord (>= 6.0.0)
       concurrent-ruby (>= 1.0.2)
@@ -377,7 +377,7 @@ DEPENDENCIES
   dotenv-rails (~> 3.1)
   faraday (~> 2.9)
   ffi-rzmq
-  good_job (~> 3.27)
+  good_job (~> 3.28)
   hairtrigger (~> 1.1)
   importmap-rails
   jbuilder
