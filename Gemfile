@@ -63,7 +63,7 @@ gem "diff-lcs", "~> 1.5"
 gem "dockerfile-rails", "~> 1.6", group: :development
 gem "dotenv-rails", "~> 3.1"
 gem "faraday", "~> 2.9"
-gem "good_job", "~> 3.27"
+gem "good_job", "~> 3.28"
 gem "hairtrigger", "~> 1.1"
 gem "literal", "~> 0.1.0"
 gem "maintenance_tasks", "~> 2.5"
