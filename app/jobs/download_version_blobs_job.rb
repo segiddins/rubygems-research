@@ -35,7 +35,7 @@ class DownloadVersionBlobsJob < ApplicationJob
       }
     )
 
-    version.metadata_blob = metadata_blob
+    version.metadata_blob = metadata_blob.tap(&:save!)
 
     unless version.quick_spec_blob.present?
       resp = Faraday.get("#{version.server.url}/quick/Marshal.4.8/#{version.full_name}.gemspec.rz", nil, { "Accept" => "application/octet-stream" })
