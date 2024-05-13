@@ -1,0 +1,31 @@
+apiVersion: helm.cattle.io/v1
+kind: HelmChartConfig
+metadata:
+  name: traefik
+  namespace: kube-system
+spec:
+  valuesContent: |-
+    image:
+      name: traefik
+      tag: 2.9.10
+    globalArguments:
+      - "--global.checknewversion=false"
+      - "--global.sendanonymoususage=false"
+      - "--api.insecure=true"
+      - "--certificatesresolvers.le-staging.acme.tlschallenge"
+      - "--certificatesresolvers.le-staging.acme.httpchallenge=true"
+      - "--certificatesresolvers.le-staging.acme.httpchallenge.entrypoint=web"
+      - "--certificatesresolvers.le-staging.acme.email=segiddins@segiddins.me"
+      - "--certificatesresolvers.le-staging.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
+      - "--certificatesresolvers.le-staging.acme.storage=/data/acme.json"
+      - "--certificatesresolvers.le-prod.acme.tlschallenge"
+      - "--certificatesresolvers.le-prod.acme.httpchallenge=true"
+      - "--certificatesresolvers.le-prod.acme.httpchallenge.entrypoint=web"
+      - "--certificatesresolvers.le-prod.acme.email=segiddins@segiddins.me"
+      - "--certificatesresolvers.le-prod.acme.caserver=https://acme-v02.api.letsencrypt.org/directory"
+      - "--certificatesresolvers.le-prod.acme.storage=/data/acme.json"
+    ports:
+      web:
+        forwardedHeaders:
+          trustedIPs:
+            - 10.0.0.0/8

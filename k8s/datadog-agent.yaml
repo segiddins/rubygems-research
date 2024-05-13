@@ -2,6 +2,7 @@ apiVersion: datadoghq.com/v2alpha1
 kind: DatadogAgent
 metadata:
   name: datadog
+  namespace: default
 spec:
   global:
     clusterName: rubygems-research

@@ -36,3 +36,6 @@ production:
   primary:
     <<: *primary
     database: rubygems_research_production
+  dump:
+    <<: *dump
+    database: rubygems_production

@@ -16,12 +16,16 @@ releases:
         value: rubygems_research_production
       - name: primary.persistence.size
         value: 1Ti
+      - name: primary.resourcesPreset
+        value: 2xlarge
   - name: rubygems-db
     namespace: rubygems-research-production
     chart: bitnamicharts/postgresql
     set:
       - name: auth.database
         value: rubygems_production
+      - name: primary.resourcesPreset
+        value: large
   - name: cache
     namespace: rubygems-research-production
     chart: bitnamicharts/memcached
