@@ -110,7 +110,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`research.rubygems.info`) || ClientIP(`100.86.251.32`)
+      match: Host(`research.rubygems.info`) || Host(`rubygems-research-1.folk-dinosaur.ts.net`)
       services:
         - namespace: rubygems-research-production
           name: app

@@ -46,7 +46,7 @@ class DownloadVersionBlobsJob < ApplicationJob
       contents = resp.body
       sha256 = Digest::SHA256.hexdigest(contents)
       raise "Checksum mismatch, expected: #{version.spec_sha256} got: #{sha256}" unless sha256 == version.spec_sha256
-      quick_spec_blob = Blob.create!(contents:, sha256:, size: contents.size)
+      _quick_spec_blob = Blob.create!(contents:, sha256:, size: contents.size)
     end
 
     {
