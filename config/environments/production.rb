@@ -45,11 +45,6 @@ Rails.application.configure do
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # config.force_ssl = true
 
-  # Log to STDOUT by default
-  config.logger = ActiveSupport::Logger.new(STDOUT)
-    .tap  { |logger| logger.formatter = ::Logger::Formatter.new }
-    .then { |logger| ActiveSupport::TaggedLogging.new(logger) }
-
   # Prepend all log lines with the following tags.
   config.log_tags = [ :request_id ]
 
@@ -57,6 +52,10 @@ Rails.application.configure do
   # information to avoid inadvertent exposure of personally identifiable information (PII). If you
   # want to log everything, set the level to "debug".
   config.log_level = ENV.fetch("RAILS_LOG_LEVEL", "info")
+  config.rails_semantic_logger.format = :json
+  config.rails_semantic_logger.semantic = true
+  config.rails_semantic_logger.add_file_appender = false
+  SemanticLogger.add_appender(io: $stdout, formatter: :json)
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
   # config.active_job.queue_adapter = :resque
