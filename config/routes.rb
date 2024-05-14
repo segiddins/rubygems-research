@@ -125,7 +125,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "servers#index"
 
-  constraints ->(request) { request.local? || request.remote_ip == "100.86.251.32" } do
+  constraints ->(request) { request.local? || request.remote_ip == "100.86.251.32" || request.host == "rubygems-research-1.folk-dinosaur.ts.net" } do
     mount GoodJob::Engine, at: '/good_job'
     mount MaintenanceTasks::Engine, at: "/maintenance_tasks"
     mount PgHero::Engine, at: "/pghero"
