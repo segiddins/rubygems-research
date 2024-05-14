@@ -2,6 +2,7 @@ class DownloadVersionBlobsJob < ApplicationJob
   queue_as :default
 
   def perform(version:)
+    logger.info "Downloading blobs for #{version.full_name} (#{version.id})"
     if version.sha256.nil?
       raise "Version #{version.id} has no sha256"
     end
@@ -26,6 +27,7 @@ class DownloadVersionBlobsJob < ApplicationJob
       end
 
     source_date_epoch, metadata_blob, entries = read_package(version, gem_blob)
+    logger.info "Downloaded blobs for #{version.full_name} (#{version.id})", source_date_epoch: source_date_epoch
 
     import_blobs(entries.map(&:blob).uniq)
     VersionDataEntry.import!(
@@ -103,7 +105,7 @@ class DownloadVersionBlobsJob < ApplicationJob
         entry_to_blob(version, entry)
       end
     end.tap do |entries|
-      raise "no entries in data.tar.gz" if entries.empty?
+      raise "no entries in data.tar.gz in #{version.id} #{version.pretty_inspect}" if entries.empty?
       # dedup blobs
       blobs = entries.map(&:blob).to_h { |blob| [blob.sha256, blob] }
       entries.each do |entry|
