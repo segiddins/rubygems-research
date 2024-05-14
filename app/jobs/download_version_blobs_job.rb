@@ -107,7 +107,6 @@ class DownloadVersionBlobsJob < ApplicationJob
     end.tap do |entries|
       if entries.empty?
         logger.warn "no entries in data.tar.gz in #{version.id} #{version.pretty_inspect}"
-        return
       end
       # dedup blobs
       blobs = entries.map(&:blob).to_h { |blob| [blob.sha256, blob] }
