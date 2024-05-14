@@ -16,11 +16,15 @@ spec:
       app: rubygems-research
   template:
     metadata:
+      annotations:
+        admission.datadoghq.com/ruby-lib.version: v1.23.0
+        ad.datadoghq.com/rubygems-research.logs: '[{"source":"rails","service":"rubygems-research","env":"production"}]'
       labels:
         name: app
         app: rubygems-research
         tags.datadoghq.com/env: production
         tags.datadoghq.com/service: rubygems-research
+        admission.datadoghq.com/enabled: "true"
     spec:
       containers:
         - name: rubygems-research
@@ -161,10 +165,14 @@ spec:
   template:
     metadata:
       annotations:
+        admission.datadoghq.com/ruby-lib.version: v1.23.0
         ad.datadoghq.com/good-job.logs: '[{"source":"rails","service":"research.rubygems.info"]'
       labels:
         name: jobs
         app: rubygems-research
+        tags.datadoghq.com/env: production
+        tags.datadoghq.com/service: rubygems-research
+        admission.datadoghq.com/enabled: "true"
     spec:
       containers:
         - name: good-job

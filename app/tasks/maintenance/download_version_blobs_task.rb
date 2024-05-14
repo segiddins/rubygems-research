@@ -16,7 +16,10 @@ class Maintenance::DownloadVersionBlobsTask < MaintenanceTasks::Task
     where = { indexed: true }
     where[:rubygem] = { name: gem_name } if gem_name.present?
     Version.joins(:rubygem)
-      .where.not(sha256: nil)
+      .where
+      .not(sha256: nil)
+      .where
+      .not(spec_sha256: nil)
       .where(**where)
       .includes(:package_blob_with_contents)
   end

@@ -14,6 +14,7 @@ spec:
       tlsVerify: false
   features:
     apm:
+      enabled: true
       instrumentation:
         enabled: true
     liveContainerCollection:
@@ -25,17 +26,7 @@ spec:
       enabled: true
     npm:
       enabled: true
-  override:
-    clusterAgent:
-      image:
-        name: gcr.io/datadoghq/cluster-agent:latest
-    nodeAgent:
-      image:
-        name: gcr.io/datadoghq/agent:latest
-      tolerations:
-        - key: node-role.kubernetes.io/controlplane
-          operator: Exists
-          effect: NoSchedule
-        - key: node-role.kubernetes.io/etcd
-          operator: Exists
-          effect: NoExecute
+    eventCollection:
+      collectKubernetesEvents: true
+    liveProcessCollection:
+      enabled: true

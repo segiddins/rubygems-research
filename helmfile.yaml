@@ -25,7 +25,7 @@ releases:
       - name: auth.database
         value: rubygems_production
       - name: primary.resourcesPreset
-        value: large
+        value: xlarge
   - name: cache
     namespace: rubygems-research-production
     chart: bitnamicharts/memcached
