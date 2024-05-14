@@ -171,6 +171,8 @@ class DownloadVersionBlobsJob < ApplicationJob
         index_predicate: "blobs.contents is null"
       },
     )
+
+    blobs
   end
 
   def compress_if_needed(blob)
