@@ -23,7 +23,7 @@ class DownloadVersionBlobsJob < ApplicationJob
         contents = resp.body
         sha256 = Digest::SHA256.hexdigest(contents)
         raise "Checksum mismatch, expected: #{version.sha256} got: #{sha256}" unless sha256 == version.sha256
-        Blob.create!(contents:, sha256:, size: contents.size)
+        import_blobs([Blob.new(contents:, sha256:, size: contents.size)]).sole
       end
 
     source_date_epoch, metadata_blob, entries = read_package(version, gem_blob)
@@ -124,7 +124,7 @@ class DownloadVersionBlobsJob < ApplicationJob
     sha256 = Digest::SHA256.hexdigest(contents)
     size = contents.size
 
-    Blob.new(contents:, compression: "gzip", sha256:, size:)
+    Blob.new(contents: gzipped, compression: "gzip", sha256:, size:)
   end
 
   def entry_to_blob(version, entry)
