@@ -22,16 +22,3 @@
 #  fk_rails_...  (version_id => versions.id)
 #
 
-one:
-  rubygem: one
-  version: one
-  server: one
-  count: 
-  as_of: 2024-04-16 16:58:46
-
-two:
-  rubygem: two
-  version: two
-  server: two
-  count: 
-  as_of: 2024-04-16 16:58:46

@@ -30,6 +30,12 @@ module Maintenance
       url << "?platform=#{version.platform}" if version.platformed?
       response = connection.get(url)
       sha256, spec_sha256 = response.body.values_at('sha', 'spec_sha')
+      if version.sha256.present? && version.sha256 != sha256
+        raise "SHA256 mismatch for #{version.full_name}: expected #{version.sha256}, got #{sha256}"
+      end
+      if version.spec_sha256.present? && version.spec_sha256 != spec_sha256
+        raise "Spec SHA256 mismatch for #{version.full_name}: expected #{version.spec_sha256}, got #{spec_sha256}"
+      end
       version.update!(sha256:, spec_sha256:)
     rescue Faraday::ResourceNotFound => e
       logger.warn("Version not found on server", version: version.full_name, server: version.server.url)
