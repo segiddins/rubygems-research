@@ -3,6 +3,8 @@ repositories:
     url: https://helm.datadoghq.com
   - name: bitnamicharts
     url: https://charts.bitnami.com/bitnami
+  - name: tailscale
+    url: https://pkgs.tailscale.com/helmcharts
 
 releases:
   - name: datadog-operator
@@ -29,3 +31,9 @@ releases:
   - name: cache
     namespace: rubygems-research-production
     chart: bitnamicharts/memcached
+  - name: tailscale-operator
+    namespace: tailscale
+    chart: tailscale/tailscale-operator
+    set:
+      - name: oauth.clientId
+        value: kDMk3WXHL211CNTRL

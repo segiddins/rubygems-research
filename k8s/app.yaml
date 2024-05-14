@@ -97,6 +97,8 @@ metadata:
   name: app
   labels:
     name: app
+  annotations:
+    tailscale.com/expose: "true"
 spec:
   ports:
     - port: 8080
