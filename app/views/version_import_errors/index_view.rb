@@ -10,11 +10,9 @@ class VersionImportErrors::IndexView < ApplicationView
   def template
     h1 { "VersionImportErrors" }
 
-    @counts.each do |err, count, version|
+    @counts.each do |err, count|
       p do
         plain "#{err}: #{count}"
-        br
-        link_to "example", version_path(version)
       end
     end
 
