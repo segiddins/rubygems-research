@@ -32,6 +32,6 @@ class Maintenance::DownloadVersionBlobsTask < MaintenanceTasks::Task
 
     DownloadVersionBlobsJob.new.perform(version: version)
   rescue Gem::Package::FormatError, Gem::Package::TarInvalidError => e
-    VersionImportError.create!(version: version, error: e.full_message(highlight: false))
+    VersionImportError.where(version:).find_or_initialize.update!(e.message)
   end
 end
