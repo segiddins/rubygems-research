@@ -16,18 +16,22 @@ class Maintenance::DownloadVersionBlobsTask < MaintenanceTasks::Task
     where = { indexed: true }
     where[:rubygem] = { name: gem_name } if gem_name.present?
     Version.joins(:rubygem)
-      .where
-      .not(sha256: nil)
-      .where
-      .not(spec_sha256: nil)
       .where(**where)
       .includes(:package_blob_with_contents)
   end
 
   def process(version)
-    raise "Missing SHA256 for #{version.full_name}" unless version.sha256.present?
-    raise "Missing spec SHA256 for #{version.full_name}" unless version.spec_sha256.present?
+    unless version.sha256.present?
+      VersionImportError.create!(version: version, error: "Missing SHA256 for #{version.full_name}")
+      return
+    end
+    unless version.spec_sha256.present?
+      VersionImportError.create!(version: version, error: "Missing spec SHA256 for #{version.full_name}")
+      return
+    end
 
     DownloadVersionBlobsJob.new.perform(version: version)
+  rescue Gem::Package::FormatError, Gem::Package::TarInvalidError => e
+    VersionImportError.create!(version: version, error: e.full_message(highlight: false))
   end
 end
