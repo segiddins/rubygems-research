@@ -22,11 +22,11 @@ class Maintenance::DownloadVersionBlobsTask < MaintenanceTasks::Task
 
   def process(version)
     unless version.sha256.present?
-      VersionImportError.create!(version: version, error: "Missing SHA256 for #{version.full_name}")
+      VersionImportError.find_or_initialize_by(version: version).update!(error: "Missing SHA256")
       return
     end
     unless version.spec_sha256.present?
-      VersionImportError.create!(version: version, error: "Missing spec SHA256 for #{version.full_name}")
+      VersionImportError.find_or_initialize_by(version: version).update!(error: "Missing spec SHA256")
       return
     end
 

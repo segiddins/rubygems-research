@@ -1,7 +1,7 @@
 # == Route Map
 #
-# I, [2024-05-13T16:38:41.470504 #8155]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - CORE - {"date":"2024-05-13T07:38:41Z","os_name":"arm64-apple-darwin23","version":"1.22.0","lang":"ruby","lang_version":"3.3.1","env":null,"service":"rake","dd_version":null,"debug":false,"tags":null,"runtime_metrics_enabled":false,"vm":"ruby-3.3.1","health_metrics_enabled":false,"profiling_enabled":false}
-# I, [2024-05-13T16:38:42.468563 #8371]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - CORE - {"date":"2024-05-13T07:38:42Z","os_name":"arm64-apple-darwin23","version":"1.22.0","lang":"ruby","lang_version":"3.3.1","env":null,"service":"rails","dd_version":null,"debug":false,"tags":null,"runtime_metrics_enabled":false,"vm":"ruby-3.3.1","health_metrics_enabled":false,"profiling_enabled":false}
+# I, [2024-05-16T16:28:47.936306 #70533]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - CORE - {"date":"2024-05-16T07:28:47Z","os_name":"arm64-apple-darwin23","version":"1.23.0","lang":"ruby","lang_version":"3.3.1","env":null,"service":"rake","dd_version":null,"debug":false,"tags":null,"runtime_metrics_enabled":false,"vm":"ruby-3.3.1","health_metrics_enabled":false,"profiling_enabled":false}
+# I, [2024-05-16T16:28:48.835366 #70584]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - CORE - {"date":"2024-05-16T07:28:48Z","os_name":"arm64-apple-darwin23","version":"1.23.0","lang":"ruby","lang_version":"3.3.1","env":null,"service":"rails","dd_version":null,"debug":false,"tags":null,"runtime_metrics_enabled":false,"vm":"ruby-3.3.1","health_metrics_enabled":false,"profiling_enabled":false}
 #                            Prefix Verb   URI Pattern                                         Controller#Action
 #                     gem_downloads GET    /gem_downloads(.:format)                            gem_downloads#index
 #                                   POST   /gem_downloads(.:format)                            gem_downloads#create
