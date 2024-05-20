@@ -56,7 +56,7 @@ group :development do
   gem 'matrix'
 end
 
-gem "activerecord-import", "~> 1.5"
+gem "activerecord-import", "~> 1.7"
 gem "annotate", "~> 3.2"
 gem "ddtrace", "~> 1.23", require: "ddtrace/auto_instrument"
 gem "diff-lcs", "~> 1.5"
