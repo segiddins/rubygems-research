@@ -3,7 +3,10 @@ Rails.application.configure do
   config.good_job.retry_on_unhandled_error = true
   config.good_job.on_thread_error = ->(exception) { Rails.error.report(exception, handled: false) }
   config.good_job.queues = '*'
-  config.good_job.shutdown_timeout = 25 # seconds
+  # Wait 20 seconds for jobs to finish before shutting down. The kubernetes grace
+  # period is 30 seconds so forcing a shutdown after 20 seconds will allow good_job
+  # to handle the shutdown somewhat gracefully.
+  config.good_job.shutdown_timeout = 20
   config.good_job.logger = SemanticLogger[GoodJob]
 
   config.good_job.enable_cron = !Rails.env.development?

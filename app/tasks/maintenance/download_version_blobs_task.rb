@@ -6,10 +6,6 @@ class Maintenance::DownloadVersionBlobsTask < MaintenanceTasks::Task
   include SemanticLogger::Loggable
   attribute :gem_name, :string
 
-  throttle_on(backoff: 1.second) do
-    rand < 0.02
-  end
-
   class SHA256Mismatch < StandardError; end
 
   def collection

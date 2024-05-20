@@ -24,6 +24,7 @@ spec:
         app: rubygems-research
         tags.datadoghq.com/env: production
         tags.datadoghq.com/service: rubygems-research
+        tags.datadoghq.com/source: rails
         admission.datadoghq.com/enabled: "true"
     spec:
       containers:
@@ -174,6 +175,7 @@ spec:
         app: rubygems-research
         tags.datadoghq.com/env: production
         tags.datadoghq.com/service: rubygems-research
+        tags.datadoghq.com/source: rails
         admission.datadoghq.com/enabled: "true"
     spec:
       containers:
@@ -184,10 +186,10 @@ spec:
           resources:
             requests:
               cpu: 500m
-              memory: 1Gi
+              memory: 2Gi
             limits:
-              cpu: "1.5"
-              memory: 3.0Gi
+              cpu: "3.0"
+              memory: 64.0Gi
           ports:
             - name: probe-port
               containerPort: 7001
