@@ -163,13 +163,23 @@ class DownloadVersionBlobsJob < ApplicationJob
       end
     end
 
-    Blob.import!(
-      missing,
-      on_duplicate_key_update: {
-        conflict_target: [:sha256], columns: [:compression, :contents, :size],
-        index_predicate: "blobs.contents is null"
-      },
-    )
+    missing.each_with_object([[]]) do |elem, acc|
+      s = acc.last
+      if s.sum { _1.contents.size } + elem.size < 100.megabytes
+        s << elem
+      else
+        acc << [elem]
+      end
+      acc
+    end.each do |chunk|
+      Blob.import!(
+        chunk,
+        on_duplicate_key_update: {
+          conflict_target: [:sha256], columns: [:compression, :contents, :size],
+          index_predicate: "blobs.contents is null"
+        },
+      )
+    end
 
     blobs
   end
