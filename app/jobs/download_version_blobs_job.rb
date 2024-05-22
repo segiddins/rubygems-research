@@ -165,13 +165,14 @@ class DownloadVersionBlobsJob < ApplicationJob
 
     missing.each_with_object([[]]) do |elem, acc|
       s = acc.last
-      if s.sum { _1.contents.size } + elem.size < 100.megabytes
+      if s.sum { _1.contents.size } + elem.size < 50.megabytes
         s << elem
       else
         acc << [elem]
       end
       acc
     end.each do |chunk|
+      logger.info "Importing #{chunk.size} blobs totalling #{chunk.sum { _1.contents.size }} bytes"
       Blob.import!(
         chunk,
         on_duplicate_key_update: {
