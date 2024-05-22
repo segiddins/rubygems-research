@@ -28,7 +28,7 @@ class Maintenance::DownloadVersionBlobsTask < MaintenanceTasks::Task
 
     DownloadVersionBlobsJob.new.perform(version: version)
   rescue Gem::Package::FormatError, Gem::Package::TarInvalidError => e
-    logger.error "Failed to download blobs for #{version.full_name} (#{version.id})", error: e
+    logger.error "Failed to download blobs for #{version.full_name} (#{version.id})", exception: e
     VersionImportError.find_or_initialize_by(version:).update!(error: e.message)
   end
 end
