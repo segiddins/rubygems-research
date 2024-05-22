@@ -166,12 +166,15 @@ class DownloadVersionBlobsJob < ApplicationJob
 
     missing.each_with_object([[]]) do |elem, acc|
       s = acc.last
-      if s.sum { _1.contents&.size || 0 } + elem.size < 50.megabytes
+      if elem.contents.size > 500.megabytes
+          logger.warn "Blob too large to store", sha256: elem.sha256, size: elem.size
+          next
+      end
+      if s.sum { _1.contents&.size || 0 } + elem.size < 100.megabytes
         s << elem
       else
         acc << [elem]
       end
-      acc
     end.each do |chunk|
       logger.info "Importing #{chunk.size} blobs totalling #{chunk.sum { _1.contents&.size || 0 }} bytes"
       Blob.import!(
@@ -195,12 +198,6 @@ class DownloadVersionBlobsJob < ApplicationJob
         blob.compression = "gzip"
         blob.contents = compressed
       end
-    end
-
-    if blob.contents.size > 50.megabytes
-      logger.warn "Blob too large to store", sha256: blob.sha256, size: blob.size
-      blob.contents = nil
-      blob.compression = nil
     end
   end
 end
