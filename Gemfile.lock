@@ -130,7 +130,7 @@ GEM
       raabro (~> 1.4)
     globalid (1.2.1)
       activesupport (>= 6.1)
-    good_job (3.28.3)
+    good_job (3.29.0)
       activejob (>= 6.0.0)
       activerecord (>= 6.0.0)
       concurrent-ruby (>= 1.0.2)
@@ -221,7 +221,7 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2024.0305)
     mini_mime (1.1.5)
-    minitest (5.23.0)
+    minitest (5.23.1)
     msgpack (1.7.2)
     multi_json (1.15.0)
     multi_xml (0.7.1)
@@ -270,7 +270,7 @@ GEM
     puma (6.4.2)
       nio4r (~> 2.0)
     raabro (1.4.0)
-    racc (1.7.3)
+    racc (1.8.0)
     rack (3.0.11)
     rack-mini-profiler (3.3.1)
       rack (>= 1.2.0)
@@ -378,7 +378,7 @@ DEPENDENCIES
   dotenv-rails (~> 3.1)
   faraday (~> 2.9)
   ffi-rzmq
-  good_job (~> 3.28)
+  good_job (~> 3.29)
   hairtrigger (~> 1.1)
   importmap-rails
   jbuilder
