@@ -151,6 +151,7 @@ class DownloadVersionBlobsJob < ApplicationJob
 
   def import_blobs(blobs)
     ids = Blob.where(sha256: blobs.pluck(:sha256))
+      .where("contents is not null")
       .pluck(:sha256, :id).to_h
 
     missing = []
@@ -165,14 +166,14 @@ class DownloadVersionBlobsJob < ApplicationJob
 
     missing.each_with_object([[]]) do |elem, acc|
       s = acc.last
-      if s.sum { _1.contents.size } + elem.size < 50.megabytes
+      if s.sum { _1.contents&.size || 0 } + elem.size < 50.megabytes
         s << elem
       else
         acc << [elem]
       end
       acc
     end.each do |chunk|
-      logger.info "Importing #{chunk.size} blobs totalling #{chunk.sum { _1.contents.size }} bytes"
+      logger.info "Importing #{chunk.size} blobs totalling #{chunk.sum { _1.contents&.size || 0 }} bytes"
       Blob.import!(
         chunk,
         on_duplicate_key_update: {
@@ -194,6 +195,12 @@ class DownloadVersionBlobsJob < ApplicationJob
         blob.compression = "gzip"
         blob.contents = compressed
       end
+    end
+
+    if blob.contents.size > 50.megabytes
+      logger.warn "Blob too large to store", sha256: blob.sha256, size: blob.size
+      blob.contents = nil
+      blob.compression = nil
     end
   end
 end
