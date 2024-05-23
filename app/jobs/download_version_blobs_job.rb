@@ -93,6 +93,10 @@ class DownloadVersionBlobsJob < ApplicationJob
           raise "unexpected file in gem: #{entry.header.name}"
         end
       end
+    rescue Gem::Package::TarInvalidError => e
+      logger.error message: "Failed to read gem", exception: e, version: version.full_name, version_id: version.id,
+                  read_io_offset: entry.full_name
+      raise
     end
 
     return source_date_epoch, metadata, entries
