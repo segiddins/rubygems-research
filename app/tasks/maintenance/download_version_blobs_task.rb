@@ -28,6 +28,7 @@ class Maintenance::DownloadVersionBlobsTask < MaintenanceTasks::Task
 
     SemanticLogger.tagged(version: version.full_name, version_id: version.id) do
       DownloadVersionBlobsJob.new.perform(version: version)
+      version.version_import_error&.destroy!
     end
   rescue Gem::Package::FormatError, Gem::Package::TarInvalidError => e
     logger.error message: "Failed to download blobs for #{version.full_name} (#{version.id})", exception: e
