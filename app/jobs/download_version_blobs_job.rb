@@ -64,7 +64,7 @@ class DownloadVersionBlobsJob < ApplicationJob
   def read_package(version, blob)
     source_date_epoch = metadata = entries = nil
 
-    pkg = Gem::Package.new(StringIO.new(blob.contents))
+    pkg = Gem::Package.new(StringIO.new(blob.decompressed_contents))
     pkg.gem.with_read_io do |io|
       reader = Gem::Package::TarReader.new io
 
@@ -94,8 +94,7 @@ class DownloadVersionBlobsJob < ApplicationJob
         end
       end
     rescue Gem::Package::TarInvalidError => e
-      logger.error message: "Failed to read gem", exception: e, version: version.full_name, version_id: version.id,
-                  read_io_offset: entry.full_name
+      logger.error message: "Failed to read gem", exception: e, version: version.full_name, version_id: version.id
       raise
     end
 
