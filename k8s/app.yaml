@@ -169,7 +169,7 @@ spec:
     metadata:
       annotations:
         admission.datadoghq.com/ruby-lib.version: v1.23.0
-        ad.datadoghq.com/good-job.logs: '[{"source":"rails","service":"research.rubygems.info"]'
+        ad.datadoghq.com/good-job.logs: '[{"source":"rails","service":"rubygems-research","env":"production"}]'
       labels:
         name: jobs
         app: rubygems-research

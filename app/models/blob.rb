@@ -21,9 +21,9 @@ class Blob < ApplicationRecord
 
   has_many :data_entry_versions, -> {distinct}, through: :version_data_entries, source: :version
   has_many :data_entry_rubygems, -> {distinct}, through: :data_entry_versions, source: :rubygem
-  has_one :package_version, class_name: "Version", foreign_key: "sha256", primary_key: "sha256"
-  has_one :quick_spec_version, class_name: "Version", foreign_key: "spec_sha256", primary_key: "sha256"
-  has_one :package_spec_version, class_name: "Version", inverse_of: :metadata_blob
+  has_one :package_version, class_name: "Version", foreign_key: "sha256", primary_key: "sha256", inverse_of: :package_blob_with_contents
+  has_one :quick_spec_version, class_name: "Version", foreign_key: "spec_sha256", primary_key: "sha256", inverse_of: :quick_spec_blob
+  has_one :package_spec_version, class_name: "Version", inverse_of: :metadata_blob, foreign_key: "metadata_blob_id"
 
   validates :size, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_nil: false
 

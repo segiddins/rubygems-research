@@ -37,7 +37,7 @@ class DownloadVersionBlobsJob < ApplicationJob
       }
     )
 
-    version.metadata_blob = import_blobs([metadata_blob]).sole
+    version.metadata_blob_id = import_blobs([metadata_blob]).sole.id
 
     unless version.quick_spec_blob.present?
       resp = Faraday.get("#{version.server.url}/quick/Marshal.4.8/#{version.full_name}.gemspec.rz", nil, { "Accept" => "application/octet-stream" })
@@ -51,9 +51,11 @@ class DownloadVersionBlobsJob < ApplicationJob
       _quick_spec_blob = Blob.create!(contents:, sha256:, size: contents.size)
     end
 
+    version.save!
+
     {
       version:,
-      metadata_blob: version.metadata_blob,
+      metadata_blob: metadata_blob,
       quick_spec_blob: version.quick_spec_blob,
       entries: version.version_data_entries.joins(:blob).pluck(:id, :sha256, 'blobs.id'),
     }
@@ -156,6 +158,8 @@ class DownloadVersionBlobsJob < ApplicationJob
     ids = Blob.where(sha256: blobs.pluck(:sha256))
       .where("contents is not null")
       .pluck(:sha256, :id).to_h
+
+    logger.info "Importing #{blobs.size} blobs, #{ids.size} already present"
 
     missing = []
     blobs.each do |blob|
