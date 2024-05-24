@@ -23,6 +23,7 @@
 #              rubygem_file_history GET    /rubygems/:rubygem_name/file_history(.:format)      file_histories#show
 #                          rubygems GET    /rubygems(.:format)                                 rubygems#index
 #                           rubygem GET    /rubygems/:name(.:format)                           rubygems#show
+#                       hook_server POST   /servers/:id/hook(.:format)                         servers#hook
 #                           servers GET    /servers(.:format)                                  servers#index
 #                            server GET    /servers/:id(.:format)                              servers#show
 #                rails_health_check GET    /up(.:format)                                       rails/health#show
@@ -115,7 +116,11 @@ Rails.application.routes.draw do
       get :diff
     end
   end
-  resources :servers, only: %i[show index]
+  resources :servers, only: %i[show index] do
+    member do
+      post :hook
+    end
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

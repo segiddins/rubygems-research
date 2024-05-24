@@ -67,6 +67,11 @@ spec:
                 secretKeyRef:
                   name: app
                   key: SECRET_KEY_BASE
+            - name: RUBYGEMS_HASHED_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: app
+                  key: rubygems-hashed-api-key
             - name: PORT
               value: "8080"
           securityContext:
