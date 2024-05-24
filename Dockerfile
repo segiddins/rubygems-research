@@ -73,6 +73,9 @@ RUN groupadd --system --gid 1000 rails && \
     chown -R 1000:1000 db log tmp app bin config
 USER 1000:1000
 
+ARG APP_VERSION=unknown
+ENV APP_VERSION=${APP_VERSION}
+
 # Entrypoint prepares the database.
 ENTRYPOINT ["./bin/docker-entrypoint"]
 

@@ -2,7 +2,7 @@ Datadog.configure do |c|
    # unified service tagging
 
    c.service = "rubygems-research"
-  #  c.version = ENV.fetch("APP_VERSION") { `git rev-parse HEAD` }.strip
+   c.version = ENV.fetch("APP_VERSION") { "unknown" }.strip
    c.env = Rails.env
 
    # Enabling datadog functionality
