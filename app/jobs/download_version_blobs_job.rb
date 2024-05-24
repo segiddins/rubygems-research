@@ -175,7 +175,7 @@ class DownloadVersionBlobsJob < ApplicationJob
       s = acc.last
       if elem.contents.size >= 400.megabytes
         logger.warn "Blob too large to store", sha256: elem.sha256, size: elem.size
-        blob.id = Blob.create!(contents: nil, compression: nil, sha256: elem.sha256, size: elem.size).id
+        elem.id = Blob.create!(contents: nil, compression: nil, sha256: elem.sha256, size: elem.size).id
         next
       end
       if s.sum { _1.contents&.size || 0 } + elem.size < 100.megabytes
