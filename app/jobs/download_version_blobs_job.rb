@@ -8,7 +8,7 @@ class DownloadVersionBlobsJob < ApplicationJob
     end
 
     if version.spec_sha256.nil?
-      raise "Version #{version.id} (#{version.full_name}) has no spec_sha256"
+      logger.warn "Version #{version.id} (#{version.full_name}) has no spec_sha256"
     end
 
     gem_blob =
@@ -39,7 +39,7 @@ class DownloadVersionBlobsJob < ApplicationJob
 
     version.metadata_blob_id = import_blobs([metadata_blob]).sole.id
 
-    unless version.quick_spec_blob.present?
+    if version.spec_sha256.present? && !version.quick_spec_blob.present?
       resp = Faraday.get("#{version.server.url}/quick/Marshal.4.8/#{version.full_name}.gemspec.rz", nil, { "Accept" => "application/octet-stream" })
       if resp.status != 200
         raise "Failed to download quick spec: #{resp.status}"
