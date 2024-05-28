@@ -27,18 +27,18 @@ class ServersController < ApplicationController
     end
 
     auth = Digest::SHA256.hexdigest([name, version, hashed_api_key].join)
-    unless auth == headers['Authorization']
-      logger.warn "Invalid Authorization header", name: name, version: version, platform: platform, expected: auth, actual: headers['Authorization']
+    unless auth == request.headers['Authorization']
+      logger.warn "Invalid Authorization header", name: name, version: version, platform: platform, expected: auth, actual: request.headers['Authorization']
       return head :bad_request
     end
 
     rubygem = Rubygem.where(server: @server).find_or_create_by!(name: params[:name])
-    version = rubygem.versions.create_with(uploaded_at:, sha256:)
+    version = rubygem.versions.create_with(uploaded_at:, sha256:, metadata:)
       .find_or_create_by!(version:, platform:)
 
     # TODO: spec_sha256
     if version.sha256 != sha256
-      render json: { error: "sha256 mismatch", version: version.as_json, expected: version.sha256, actual: sha256 }, status: :bad_request
+      render json: { error: "sha256 mismatch", version: version.as_json, expected: version.sha256, actual: sha256 }, status: :conflict
     end
 
     DownloadVersionBlobsJob.perform_later(version:)
