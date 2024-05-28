@@ -19,7 +19,7 @@ class ServersController < ApplicationController
     platform = hook_params.require(:platform)
     uploaded_at = hook_params.require(:version_created_at)
     sha256 = hook_params.require(:sha)
-    metadata = hook_params.require(:metadata)
+    metadata = hook_params.fetch(:metadata, {})
 
     hashed_api_key = ENV,fetch("RUBYGEMS_HASHED_API_KEY") do
       raise "RUBYGEMS_HASHED_API_KEY is not set" if Rails.env.production?
