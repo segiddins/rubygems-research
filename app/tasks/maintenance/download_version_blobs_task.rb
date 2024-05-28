@@ -10,9 +10,9 @@ class Maintenance::DownloadVersionBlobsTask < MaintenanceTasks::Task
 
   def collection
     where = { indexed: true }
-    where[:rubygem] = { name: gem_name } if gem_name.present?
     Version.joins(:rubygem)
-      .where(**where)
+      .where(indexed: true)
+      .then { |q| gem_name.present? ? q.joins(:rubygem).where(rubygem: { name: gem_name }) : q }
       .includes(:package_blob_with_contents)
   end
 
@@ -21,10 +21,10 @@ class Maintenance::DownloadVersionBlobsTask < MaintenanceTasks::Task
       VersionImportError.find_or_initialize_by(version: version).update!(error: "Missing SHA256")
       return
     end
-    unless version.spec_sha256.present?
-      VersionImportError.find_or_initialize_by(version: version).update!(error: "Missing spec SHA256")
-      return
-    end
+    # unless version.spec_sha256.present?
+    #   VersionImportError.find_or_initialize_by(version: version).update!(error: "Missing spec SHA256")
+    #   return
+    # end
 
     SemanticLogger.tagged(version: version.full_name, version_id: version.id) do
       DownloadVersionBlobsJob.new.perform(version: version)
