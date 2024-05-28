@@ -1,5 +1,6 @@
 class ServersController < ApplicationController
   before_action :set_server, only: %i[ show hook ]
+  skip_before_action :verify_authenticity_token, only: :hook
 
   # GET /servers or /servers.json
   def index
