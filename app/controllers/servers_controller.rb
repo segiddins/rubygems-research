@@ -41,6 +41,8 @@ class ServersController < ApplicationController
       render json: { error: "sha256 mismatch", version: version.as_json, expected: version.sha256, actual: sha256 }, status: :conflict
     end
 
+    rubygem.bulk_reorder_versions
+
     DownloadVersionBlobsJob.perform_later(version:)
 
     render json: version, status: :created
