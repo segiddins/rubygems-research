@@ -21,7 +21,7 @@ class ServersController < ApplicationController
     sha256 = hook_params.require(:sha)
     metadata = hook_params.fetch(:metadata, {})
 
-    hashed_api_key = ENV,fetch("RUBYGEMS_HASHED_API_KEY") do
+    hashed_api_key = ENV.fetch("RUBYGEMS_HASHED_API_KEY") do
       raise "RUBYGEMS_HASHED_API_KEY is not set" if Rails.env.production?
       ""
     end
