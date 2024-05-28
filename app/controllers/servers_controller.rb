@@ -13,12 +13,12 @@ class ServersController < ApplicationController
   end
 
   def hook
-    hook_params = params.permit(:name, :version, :platform, :version_created_at, :sha256, metadata: {})
+    hook_params = params.permit(:name, :version, :platform, :version_created_at, :sha, metadata: {})
     name = hook_params.require(:name)
     version = hook_params.require(:version)
     platform = hook_params.require(:platform)
     uploaded_at = hook_params.require(:version_created_at)
-    sha256 = hook_params.require(:sha256)
+    sha256 = hook_params.require(:sha)
     metadata = hook_params.require(:metadata)
 
     hashed_api_key = ENV,fetch("RUBYGEMS_HASHED_API_KEY") do
