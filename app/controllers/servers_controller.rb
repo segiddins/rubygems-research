@@ -15,7 +15,7 @@ class ServersController < ApplicationController
   def hook
     hook_params = params.permit(:name, :version, :platform, :version_created_at, :sha, metadata: {})
     name = hook_params.require(:name)
-    version = hook_params.require(:version)
+    number = hook_params.require(:version)
     platform = hook_params.require(:platform)
     uploaded_at = hook_params.require(:version_created_at)
     sha256 = hook_params.require(:sha)
@@ -26,15 +26,15 @@ class ServersController < ApplicationController
       ""
     end
 
-    auth = Digest::SHA256.hexdigest([name, version, hashed_api_key].join)
+    auth = Digest::SHA256.hexdigest([name, number, hashed_api_key].join)
     unless auth == request.headers['Authorization']
-      logger.warn "Invalid Authorization header", name: name, version: version, platform: platform, expected: auth, actual: request.headers['Authorization']
-      return head :bad_request
+      logger.warn "Invalid Authorization header", name: name, version: number, platform: platform, expected: auth, actual: request.headers['Authorization']
+      return head :unauthorized
     end
 
     rubygem = Rubygem.where(server: @server).find_or_create_by!(name: params[:name])
     version = rubygem.versions.create_with(uploaded_at:, sha256:, metadata:)
-      .find_or_create_by!(version:, platform:)
+      .find_or_create_by!(number:, platform:)
 
     # TODO: spec_sha256
     if version.sha256 != sha256
