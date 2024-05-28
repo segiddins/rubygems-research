@@ -221,6 +221,6 @@ Rails.application.routes.draw do
     mount MaintenanceTasks::Engine, at: "/maintenance_tasks"
     mount PgHero::Engine, at: "/pghero"
     mount Avo::Engine, at: Avo.configuration.root_path
-    mount(Debugbar::Engine => Debugbar.config.prefix) #if defined?(Debugbar)
+    mount(Debugbar::Engine => Debugbar.config.prefix) if defined?(Debugbar)
   end
 end
