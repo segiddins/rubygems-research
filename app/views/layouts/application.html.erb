@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <%= debugbar_head if respond_to?(:debugbar_path) %>
   </head>
-
   <body>
     <%= yield %>
+    <%= debugbar_body cable: {url: "wss://rubygems-research.microplane:443"} if respond_to?(:debugbar_path) %>
   </body>
 </html>

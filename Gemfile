@@ -58,7 +58,9 @@ end
 
 gem "activerecord-import", "~> 1.7"
 gem "annotate", "~> 3.2"
+gem "avo", ">= 3.2"
 gem "ddtrace", "~> 1.23", require: "ddtrace/auto_instrument"
+gem "debugbar", "~> 0.3.2", group: :development
 gem "diff-lcs", "~> 1.5"
 gem "dockerfile-rails", "~> 1.6", group: :development
 gem "dotenv-rails", "~> 3.1"

@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+exec docker run --rm --name jupyter -it -v /Users/segiddins/.gem/ruby/3.3.1/bin/iruby:/Users/segiddins/.gem/ruby/3.3.1/bin/iruby -v ${JUPYTER_DATA_DIR}:/home/jovyan/.ipython rubydata/datascience-notebook
+# exit 1
