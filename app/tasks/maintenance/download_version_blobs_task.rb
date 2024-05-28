@@ -9,11 +9,10 @@ class Maintenance::DownloadVersionBlobsTask < MaintenanceTasks::Task
   class SHA256Mismatch < StandardError; end
 
   def collection
-    where = { indexed: true }
-    Version.joins(:rubygem)
+    Version
       .where(indexed: true)
       .then { |q| gem_name.present? ? q.joins(:rubygem).where(rubygem: { name: gem_name }) : q }
-      .includes(:package_blob_with_contents)
+      .includes(:rubygem, :package_blob_with_contents)
   end
 
   def process(version)
@@ -26,7 +25,7 @@ class Maintenance::DownloadVersionBlobsTask < MaintenanceTasks::Task
     #   return
     # end
 
-    SemanticLogger.tagged(version: version.full_name, version_id: version.id) do
+    SemanticLogger.tagged(version: version.full_name, version_id: version.id, rubygem: version.rubygem.name) do
       DownloadVersionBlobsJob.new.perform(version: version)
       version.version_import_error&.destroy!
     end
