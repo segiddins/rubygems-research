@@ -20,8 +20,16 @@ class ServersController < ApplicationController
     sha256 = hook_params.require(:sha256)
     metadata = hook_params.require(:metadata)
 
-    auth = Digest::SHA256.hexdigest([name, version, ENV.fetch("RUBYGEMS_HASHED_API_KEY", "")].join)
-    return head :bad_request unless auth == headers['Authorization']
+    hashed_api_key = ENV,fetch("RUBYGEMS_HASHED_API_KEY") do
+      raise "RUBYGEMS_HASHED_API_KEY is not set" if Rails.env.production?
+      ""
+    end
+
+    auth = Digest::SHA256.hexdigest([name, version, hashed_api_key].join)
+    unless auth == headers['Authorization']
+      logger.warn "Invalid Authorization header", name: name, version: version, platform: platform, expected: auth, actual: headers['Authorization']
+      return head :bad_request
+    end
 
     rubygem = Rubygem.where(server: @server).find_or_create_by!(name: params[:name])
     version = rubygem.versions.create_with(uploaded_at:, sha256:)
@@ -29,7 +37,7 @@ class ServersController < ApplicationController
 
     # TODO: spec_sha256
     if version.sha256 != sha256
-      render json: { error: "sha256 mismatch", version: }, status: :bad_request
+      render json: { error: "sha256 mismatch", version: version.as_json, expected: version.sha256, actual: sha256 }, status: :bad_request
     end
 
     DownloadVersionBlobsJob.perform_later(version:)
