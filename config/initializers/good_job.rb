@@ -32,4 +32,4 @@ Rails.application.configure do
   end
 end
 
-require "job-iteration/interruption_adapters/good_job_adapter"
+require "job_iteration/interruption_adapters/good_job_adapter"
