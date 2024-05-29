@@ -12,7 +12,7 @@ class DownloadVersionBlobsJob < ApplicationJob
     end
 
     gem_blob =
-      if version.package_blob_with_contents.present?
+      if version.package_blob_with_contents.present? && version.package_blob_with_contents.contents.present?
         version.package_blob_with_contents
       else
         resp = Faraday.get("#{version.server.url}/gems/#{version.full_name}.gem", nil, { "Accept" => "application/octet-stream" })
