@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class Rubygems::ShowView < ApplicationView
-include Phlex::Rails::Helpers::LinkTo
-include Phlex::Rails::Helpers::NumberToHumanSize
+  include Phlex::Rails::Helpers::LinkTo
+
   extend Literal::Attributes
   attribute :rubygem, Rubygem
   attribute :versions, Object
@@ -29,30 +29,7 @@ include Phlex::Rails::Helpers::NumberToHumanSize
       end
     end
 
-    table do
-      thead do
-        tr do
-          th {  }
-          th { "Version" }
-          th { "Platform" }
-          th { "Size" }
-          th { "Uploaded" }
-          th { "Indexed" }
-        end
-      end
-      tbody do
-        @versions.each do |version|
-          tr do
-            td { link_to version.full_name, version }
-            td { version.number }
-            td { version.platform }
-            td { number_to_human_size version.package_blob&.size }
-            td { version.uploaded_at.to_fs }
-            td { version.indexed.inspect }
-          end
-        end
-      end
-    end
+    render VersionsTableComponent.new(versions: @versions)
 
     unsafe_raw helpers.pagy_nav(@pagy) if @pagy.pages > 1
   end
