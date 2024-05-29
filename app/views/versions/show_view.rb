@@ -3,8 +3,12 @@
 class Versions::ShowView < ApplicationView
   include Phlex::Rails::Helpers::LinkTo
   include Phlex::Rails::Helpers::NumberToHumanSize
+
   extend Literal::Attributes
   attribute :version, Version
+  attribute :version_data_entries, Object
+  attribute :pagy, Pagy
+
   def template
     h1 { @version.full_name }
     p { @version.server.url }
@@ -32,7 +36,7 @@ class Versions::ShowView < ApplicationView
     p { "Gem size: #{number_to_human_size @version.package_blob.size}" } if @version.package_blob
 
     h2 { "Version Data Entries" }
-    p { "Total: #{@version.version_data_entries.count.to_fs(:delimited)}" }
+    p { "Total: #{@pagy.count.to_fs(:delimited)}" }
     p { "Unpacked size: #{number_to_human_size @version.data_blobs.sum(:size)}" }
     table do
       thead do
@@ -49,7 +53,7 @@ class Versions::ShowView < ApplicationView
       end
 
       tbody do
-        @version.version_data_entries.includes(:blob_excluding_contents).find_each do |entry|
+        @version_data_entries.each do |entry|
           tr do
             td { link_to entry.full_name, rubygem_file_history_path(@version.rubygem.name, path: entry.full_name) }
             td { entry.mode.to_s(8) }
@@ -63,6 +67,6 @@ class Versions::ShowView < ApplicationView
         end
       end
     end
-
+    unsafe_raw helpers.pagy_nav(@pagy) if @pagy.pages > 1
   end
 end
