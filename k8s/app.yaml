@@ -236,4 +236,6 @@ spec:
                   name: app
                   key: SECRET_KEY_BASE
           securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
             privileged: false

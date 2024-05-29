@@ -31,3 +31,5 @@ Rails.application.configure do
     config.good_job.queues = ""
   end
 end
+
+require "job-iteration/interruption_adapters/good_job_adapter"
