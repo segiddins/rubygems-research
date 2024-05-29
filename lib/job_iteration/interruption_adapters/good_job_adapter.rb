@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 JobIteration::InterruptionAdapters.module_eval do
-  unless defined?(GoodJobAdapter)
+  unless defined?(self::GoodJobAdapter)
     # from https://github.com/Shopify/job-iteration/pull/464
-    module GoodJobAdapter
+    module self::GoodJobAdapter
       class << self
         def call
           !!::GoodJob.current_thread_shutting_down?
@@ -11,6 +11,6 @@ JobIteration::InterruptionAdapters.module_eval do
       end
     end
 
-    register(:good_job, GoodJobAdapter)
+    register(:good_job, self::GoodJobAdapter)
   end
 end
