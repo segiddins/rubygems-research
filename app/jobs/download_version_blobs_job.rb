@@ -173,9 +173,9 @@ class DownloadVersionBlobsJob < ApplicationJob
 
     missing.each_with_object([[]]) do |elem, acc|
       s = acc.last
-      if elem.contents.size >= 400.megabytes
-        logger.warn "Blob too large to store", sha256: elem.sha256, size: elem.size
-        elem.id = Blob.create!(contents: nil, compression: nil, sha256: elem.sha256, size: elem.size).id
+      if elem.contents.size >= 100.megabytes
+        logger.warn "Blob too large to store via activerecord-import", sha256: elem.sha256, size: elem.size
+        elem.save!
         next
       end
       if s.sum { _1.contents&.size || 0 } + elem.size < 100.megabytes
@@ -196,7 +196,7 @@ class DownloadVersionBlobsJob < ApplicationJob
 
     blobs
   rescue ActiveRecord::StatementInvalid => e
-    logger.error message: "Failed to import blobs", exception: e, sql: e.sql
+    logger.error message: "Failed to import blobs", exception: e, sql_size: e.sql.size
     raise
   end
 

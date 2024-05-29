@@ -11,8 +11,8 @@ class Maintenance::DownloadVersionBlobsTask < MaintenanceTasks::Task
   def collection
     Version
       .where(indexed: true)
-      .then { |q| gem_name.present? ? q.joins(:rubygem).where(rubygem: { name: gem_name }) : q }
-      .includes(:rubygem, :package_blob_with_contents)
+      .then { |q| gem_name.present? ? q.where(rubygem: Rubygem.where(name: gem_name)) : q }
+      .preload(:rubygem, :package_blob_with_contents)
   end
 
   def process(version)
