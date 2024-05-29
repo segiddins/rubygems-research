@@ -1,8 +1,11 @@
 # frozen_string_literal: true
 
+require "job-iteration/interruption_adapters"
+
 module JobIteration
   module InterruptionAdapters
     unless defined?(GoodJobAdapter)
+      # from https://github.com/Shopify/job-iteration/pull/464
       module GoodJobAdapter
         class << self
           def call
