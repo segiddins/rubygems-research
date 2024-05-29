@@ -195,6 +195,9 @@ class DownloadVersionBlobsJob < ApplicationJob
     end
 
     blobs
+  rescue ActiveRecord::StatementInvalid => e
+    logger.error message: "Failed to import blobs", exception: e, sql: e.sql
+    raise
   end
 
   def compress_if_needed(blob)
