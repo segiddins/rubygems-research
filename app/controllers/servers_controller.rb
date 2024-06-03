@@ -13,13 +13,14 @@ class ServersController < ApplicationController
   end
 
   def hook
-    hook_params = params.permit(:name, :version, :platform, :version_created_at, :sha, metadata: {})
+    hook_params = params.permit(:name, :version, :platform, :version_created_at, :sha, :yanked, metadata: {})
     name = hook_params.require(:name)
     number = hook_params.require(:version)
     platform = hook_params.require(:platform)
     uploaded_at = hook_params.require(:version_created_at)
     sha256 = hook_params.require(:sha)
     metadata = hook_params.fetch(:metadata, {})
+    yanked = hook_params.fetch(:yanked, false)
 
     hashed_api_key = ENV.fetch("RUBYGEMS_HASHED_API_KEY") do
       raise "RUBYGEMS_HASHED_API_KEY is not set" if Rails.env.production?
@@ -43,7 +44,14 @@ class ServersController < ApplicationController
 
     rubygem.bulk_reorder_versions
 
-    DownloadVersionBlobsJob.perform_later(version:)
+    if yanked
+      logger.info "Yanking version #{version.full_name}"
+      # TODO: add yanked_at
+      version.update!(indexed: false)
+    else
+      version.update!(indexed: true) unless version.indexed
+      DownloadVersionBlobsJob.perform_later(version:)
+    end
 
     render json: version, status: :created
   end
