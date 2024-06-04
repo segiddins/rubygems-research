@@ -13,12 +13,13 @@ class ServersController < ApplicationController
   end
 
   def hook
-    hook_params = params.permit(:name, :version, :platform, :version_created_at, :sha, :yanked, metadata: {})
+    hook_params = params.permit(:name, :version, :platform, :version_created_at, :spec_sha256, :sha, :yanked, metadata: {})
     name = hook_params.require(:name)
     number = hook_params.require(:version)
     platform = hook_params.require(:platform)
     uploaded_at = hook_params.require(:version_created_at)
     sha256 = hook_params.require(:sha)
+    spec_sha256 = params.fetch(:spec_sha256, nil)
     metadata = hook_params.fetch(:metadata, {})
     yanked = hook_params.fetch(:yanked, false)
 
@@ -34,12 +35,18 @@ class ServersController < ApplicationController
     end
 
     rubygem = Rubygem.where(server: @server).find_or_create_by!(name: params[:name])
-    version = rubygem.versions.create_with(uploaded_at:, sha256:, metadata:)
+    version = rubygem.versions.create_with(uploaded_at:, sha256:, metadata:, spec_sha256:)
       .find_or_create_by!(number:, platform:)
 
     # TODO: spec_sha256
     if version.sha256 != sha256
       render json: { error: "sha256 mismatch", version: version.as_json, expected: version.sha256, actual: sha256 }, status: :conflict
+    end
+
+    if spec_sha256.present? && version.spec_sha256.present? && version.spec_sha256 != spec_sha256
+      render json: { error: "spec_sha256 mismatch", version: version.as_json, expected: version.spec_sha256, actual: spec_sha256 }, status: :conflict
+    elsif spec_sha256.present? && version.spec_sha256.nil?
+      version.update!(spec_sha256:)
     end
 
     rubygem.bulk_reorder_versions

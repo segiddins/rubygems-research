@@ -1,6 +1,8 @@
 class DownloadVersionBlobsJob < ApplicationJob
   queue_as :default
 
+  class SHA256Mismatch < StandardError; end
+
   def perform(version:)
     logger.info "Downloading blobs for #{version.full_name} (#{version.id})"
     if version.sha256.nil?
@@ -22,7 +24,9 @@ class DownloadVersionBlobsJob < ApplicationJob
 
         contents = resp.body
         sha256 = Digest::SHA256.hexdigest(contents)
-        raise "Checksum mismatch, expected: #{version.sha256} got: #{sha256}" unless sha256 == version.sha256
+        unless sha256 == version.sha256
+          raise SHA256Mismatch, "SHA256 Checksum mismatch"
+        end
         import_blobs([Blob.new(contents:, sha256:, size: contents.size)]).sole
       else
         logger.warn "Version #{version.id} (#{version.full_name}) is not indexed"
@@ -50,7 +54,7 @@ class DownloadVersionBlobsJob < ApplicationJob
 
       contents = resp.body
       sha256 = Digest::SHA256.hexdigest(contents)
-      raise "Checksum mismatch, expected: #{version.spec_sha256} got: #{sha256}" unless sha256 == version.spec_sha256
+      raise SHA256Mismatch, "spec sha256 checksum mismatch" unless sha256 == version.spec_sha256
       _quick_spec_blob = Blob.create!(contents:, sha256:, size: contents.size)
     end
 
