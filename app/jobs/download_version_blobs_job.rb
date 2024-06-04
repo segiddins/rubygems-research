@@ -14,7 +14,7 @@ class DownloadVersionBlobsJob < ApplicationJob
     gem_blob =
       if version.package_blob_with_contents.present? && version.package_blob_with_contents.contents.present?
         version.package_blob_with_contents
-      else
+      elsif version.indexed
         resp = Faraday.get("#{version.server.url}/gems/#{version.full_name}.gem", nil, { "Accept" => "application/octet-stream" })
         if resp.status != 200
           raise "Failed to download gem: #{resp.status}"
@@ -24,6 +24,9 @@ class DownloadVersionBlobsJob < ApplicationJob
         sha256 = Digest::SHA256.hexdigest(contents)
         raise "Checksum mismatch, expected: #{version.sha256} got: #{sha256}" unless sha256 == version.sha256
         import_blobs([Blob.new(contents:, sha256:, size: contents.size)]).sole
+      else
+        logger.warn "Version #{version.id} (#{version.full_name}) is not indexed"
+        return
       end
 
     source_date_epoch, metadata_blob, entries = read_package(version, gem_blob)
@@ -39,7 +42,7 @@ class DownloadVersionBlobsJob < ApplicationJob
 
     version.metadata_blob_id = import_blobs([metadata_blob]).sole.id
 
-    if version.spec_sha256.present? && !version.quick_spec_blob.present?
+    if version.spec_sha256.present? && !version.quick_spec_blob.present? && version.indexed
       resp = Faraday.get("#{version.server.url}/quick/Marshal.4.8/#{version.full_name}.gemspec.rz", nil, { "Accept" => "application/octet-stream" })
       if resp.status != 200
         raise "Failed to download quick spec: #{resp.status}"
