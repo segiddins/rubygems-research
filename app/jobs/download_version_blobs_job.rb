@@ -100,7 +100,7 @@ class DownloadVersionBlobsJob < ApplicationJob
       raise
     end
 
-    return source_date_epoch, metadata, entries
+    return source_date_epoch, metadata, (entries || [])
   end
 
   def read_data_tar_gz(version, io)
