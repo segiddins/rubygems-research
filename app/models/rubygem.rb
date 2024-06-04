@@ -42,4 +42,16 @@ class Rubygem < ApplicationRecord
       end
     end
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["created_at", "name", "updated_at"]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["package_blobs", "server", "version_data_entries", "versions"]
+  end
+
+  def self.ransortable_attributes(_ = nil)
+    ["name", "created_at"]
+  end
 end

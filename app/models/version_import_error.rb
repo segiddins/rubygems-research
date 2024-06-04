@@ -19,4 +19,8 @@
 #
 class VersionImportError < ApplicationRecord
   belongs_to :version
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["created_at", "error", "updated_at"]
+  end
 end

@@ -19,6 +19,14 @@ class ApplicationLayout < ApplicationView
 				stylesheet_link_tag "application", data_turbo_track: "reload"
 				javascript_importmap_tags
 				debugbar_head if respond_to?(:debugbar_path)
+				script type: "module" do
+					unsafe_raw <<~JS
+						import $ from "jquery";
+						$(function() {
+							#{yield :document_ready}
+						});
+					JS
+				end
 			end
 
 			body do

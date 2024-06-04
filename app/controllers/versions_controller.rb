@@ -13,4 +13,22 @@ class VersionsController < ApplicationController
     pagy, versions = pagy(Version.includes(:rubygem, :package_blob).strict_loading.order(uploaded_at: :desc), items: 50)
     render Versions::IndexView.new(pagy:, versions:)
   end
+
+  def search
+    search = Version
+      .preload(:rubygem, :package_blob)
+      .ransack!(params[:q])
+    search.build_grouping if search.groupings.blank?
+    search.build_condition if search.conditions.blank?
+    search.build_sort if search.sorts.blank?
+    distinct = params[:distinct]
+    result = search.result(distinct:)
+
+    pagy, versions = pagy(result)
+    render Versions::SearchView.new(
+      search:,
+      pagy:,
+      versions:
+    )
+  end
 end

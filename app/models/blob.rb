@@ -78,4 +78,8 @@ class Blob < ApplicationRecord
       raise "No contents for blob #{sha256}"
     end
   end
+
+  def self.ransackable_attributes(_ = nil)
+    %w[sha256 size compression]
+  end
 end

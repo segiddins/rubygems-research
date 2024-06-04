@@ -186,7 +186,9 @@ Rails.application.routes.draw do
   resources :version_import_errors, only: [:index]
   resources :data_summary, only: [:index]
 
-  resources :versions, only: [:show, :index]
+  resources :versions, only: [:show, :index] do
+    get :search, on: :collection
+  end
   special_characters    = ".-_".freeze
   allowed_characters    = "[A-Za-z0-9#{Regexp.escape(special_characters)}]+".freeze
   route_pattern          = /#{allowed_characters}/
@@ -197,6 +199,7 @@ Rails.application.routes.draw do
     end
   end
   resources :rubygems, only: %i[show index], param: :name, constraints: { id: route_pattern } do
+    get :search, on: :collection
     get :diff, on: :member
     resource :file_history, only: [:show], param: :path, constraints: { id: /.+/} do
       get :diff

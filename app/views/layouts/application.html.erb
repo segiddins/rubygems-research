@@ -8,6 +8,12 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <%= debugbar_head if respond_to?(:debugbar_path) %>
+    <script type="module">
+      import $ from "jquery";
+      $(function() {
+        <%= yield :document_ready %>
+      });
+    </script>
   </head>
   <body>
     <%= yield %>

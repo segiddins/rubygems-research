@@ -23,6 +23,22 @@ class RubygemsController < ApplicationController
     render Rubygems::DiffView.new(rubygem: @rubygem, v1:, v2:)
   end
 
+  def search
+    search = Rubygem.all.ransack!(params[:q])
+    search.build_grouping if search.groupings.blank?
+    search.build_condition if search.conditions.blank?
+    search.build_sort if search.sorts.blank?
+    distinct = params[:distinct]
+    result = search.result(distinct:)
+
+    pagy, rubygems = pagy(result)
+    render Rubygems::SearchView.new(
+      search:,
+      pagy:,
+      rubygems:
+    )
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

@@ -47,4 +47,8 @@ class VersionDataEntry < ApplicationRecord
   trigger.after(:insert) do
     "UPDATE versions SET version_data_entries_count = version_data_entries_count + 1, updated_at = CURRENT_TIMESTAMP WHERE id = NEW.version_id;"
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["full_name", "gid", "linkname", "mode", "mtime", "name", "sha256", "uid"]
+  end
 end

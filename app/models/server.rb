@@ -15,4 +15,10 @@ class Server < ApplicationRecord
   has_many :rubygems
   has_many :versions, through: :rubygems
   has_many :compact_index_entries
+
+  def self.ransackable_attributes(auth_object = nil)
+    %w[
+      url
+    ]
+  end
 end

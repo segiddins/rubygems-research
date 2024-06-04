@@ -79,4 +79,25 @@ class Version < ApplicationRecord
   def <=>(other)
     [to_gem_version, platform_as_number, platform] <=> [other.to_gem_version, other.platform_as_number, other.platform]
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    %w[
+      indexed
+      number
+      platform
+      position
+      sha256
+      spec_sha256
+      uploaded_at
+      version_data_entries_count
+    ]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["data_blobs", "metadata_blob", "package_blob", "package_blob_with_contents", "quick_spec_blob", "rubygem", "server", "version_data_entries", "version_import_error"]
+  end
+
+  def self.ransortable_attributes(_ = nil)
+    ["uploaded_at", "version_data_entries_count"]
+  end
 end
