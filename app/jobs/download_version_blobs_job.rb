@@ -1,6 +1,8 @@
 class DownloadVersionBlobsJob < ApplicationJob
   queue_as :default
 
+  rescue_from Faraday::TimeoutError, with: :retry_job
+
   class SHA256Mismatch < StandardError; end
 
   def perform(version:)
