@@ -4,6 +4,7 @@ class DownloadVersionBlobsJob < ApplicationJob
   rescue_from Faraday::TimeoutError, with: :retry_job
 
   class SHA256Mismatch < StandardError; end
+  class DuplicateEntry < StandardError; end
 
   def perform(version:)
     logger.info "Downloading blobs for #{version.full_name} (#{version.id})"
@@ -85,10 +86,10 @@ class DownloadVersionBlobsJob < ApplicationJob
 
         case entry.header.name
         when "metadata.gz"
-          raise "metadata.gz already present" if metadata
+          raise DuplicateEntry, "metadata.gz already present" if metadata
           metadata = read_already_gzipped(entry)
         when "data.tar.gz"
-          raise "data.tar.gz already present" if entries
+          raise DuplicateEntry, "data.tar.gz already present" if entries
           entries = read_data_tar_gz(version, entry)
         when "checksums.yaml.gz.asc",
          "checksums.yaml.gz.sig",

@@ -29,7 +29,7 @@ class Maintenance::DownloadVersionBlobsTask < MaintenanceTasks::Task
       DownloadVersionBlobsJob.new.perform(version: version)
       version.version_import_error&.destroy!
     end
-  rescue Gem::Package::FormatError, Gem::Package::TarInvalidError, ActiveRecord::StatementInvalid, DownloadVersionBlobsJob::SHA256Mismatch => e
+  rescue Gem::Package::FormatError, Gem::Package::TarInvalidError, ActiveRecord::StatementInvalid, DownloadVersionBlobsJob::SHA256Mismatch, DownloadVersionBlobsJob::DuplicateEntry => e
     logger.error message: "Failed to download blobs for #{version.full_name} (#{version.id})", exception: e
     VersionImportError.find_or_initialize_by(version:).update!(error: e.message)
   end
