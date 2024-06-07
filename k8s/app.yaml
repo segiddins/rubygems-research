@@ -32,15 +32,7 @@ spec:
           image: ghcr.io/segiddins/rubygems-research:main
           imagePullPolicy: Always
           command:
-            [
-              "bundle",
-              "exec",
-              "puma",
-              "--environment",
-              "production",
-              "-C",
-              "config/puma.rb",
-            ]
+            ["bin/puma", "--environment", "production", "-C", "config/puma.rb"]
           ports:
             - containerPort: 8080
               name: http
@@ -186,7 +178,7 @@ spec:
       containers:
         - name: good-job
           image: ghcr.io/segiddins/rubygems-research:main
-          args: ["bundle", "exec", "good_job", "start"]
+          args: ["bin/good_job", "start"]
           imagePullPolicy: Always
           resources:
             requests:
