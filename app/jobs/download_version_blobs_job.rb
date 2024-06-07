@@ -7,6 +7,7 @@ class DownloadVersionBlobsJob < ApplicationJob
   class UnexpectedEntry < Error; end
   class MissingSHA256 < Error; end
   class RequestError < Error; end
+  class GZIPReadError < Error; end
 
   rescue_from Faraday::TimeoutError, with: :retry_job
   discard_on Error
@@ -147,7 +148,12 @@ class DownloadVersionBlobsJob < ApplicationJob
   end
 
   def entry_to_blob(version, entry)
-    contents = entry.read
+    begin
+      contents = entry.read
+    rescue => e
+      logger.error message: "Failed to read entry", exception: e, entry: entry.as_json
+      raise GZIPReadError, e.message
+    end
     size = contents.size
     sha256 = Digest::SHA256.hexdigest(contents)
     compression = nil
