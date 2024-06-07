@@ -1,6 +1,6 @@
 Rails.application.configure do
   config.good_job.preserve_job_records = true
-  config.good_job.retry_on_unhandled_error = true
+  config.good_job.retry_on_unhandled_error = false
   config.good_job.on_thread_error = ->(exception) { Rails.error.report(exception, handled: false) }
   config.good_job.queues = '*'
   # Wait 20 seconds for jobs to finish before shutting down. The kubernetes grace
