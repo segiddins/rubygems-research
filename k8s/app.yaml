@@ -46,10 +46,15 @@ spec:
             - name: DD_AGENT_HOST
               valueFrom:
                 fieldRef:
-                  fieldPath: status.hostIP
                   apiVersion: v1
+                  fieldPath: status.hostIP
             - name: STATSD_IMPLEMENTATION
-              value: datadog
+              value: "datadog"
+            - name: STATSD_HOST
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: status.hostIP
             - name: DATABASE_URL
               value: postgresql://postgres:iZLNkfG3P1@rubygems-research-db-postgresql.rubygems-research-production.svc.cluster.local:5432/rubygems_research_production
             - name: DUMP_DATABASE_URL
@@ -209,8 +214,18 @@ spec:
               value: "7001"
             - name: RAILS_MAX_THREADS
               value: "5"
+            - name: DD_AGENT_HOST
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: status.hostIP
             - name: STATSD_IMPLEMENTATION
-              value: datadog
+              value: "datadog"
+            - name: STATSD_HOST
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: status.hostIP
             - name: DATABASE_URL
               value: postgresql://postgres:iZLNkfG3P1@rubygems-research-db-postgresql.rubygems-research-production.svc.cluster.local:5432/rubygems_research_production
             - name: DUMP_DATABASE_URL
