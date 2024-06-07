@@ -76,12 +76,14 @@ class DownloadVersionBlobsJob < ApplicationJob
 
     version.save!
 
-    {
-      version:,
-      metadata_blob: metadata_blob,
-      quick_spec_blob: version.quick_spec_blob,
-      entries: version.version_data_entries.joins(:blob).pluck(:id, :sha256, 'blobs.id'),
-    }
+    version.as_json
+
+    # {
+    #   version:,
+    #   metadata_blob: metadata_blob,
+    #   quick_spec_blob: version.quick_spec_blob,
+    #   entries: version.version_data_entries.joins(:blob).pluck(:id, :sha256, 'blobs.id'),
+    # }
   end
 
   private
