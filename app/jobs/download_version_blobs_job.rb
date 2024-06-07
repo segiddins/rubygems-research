@@ -5,6 +5,8 @@ class DownloadVersionBlobsJob < ApplicationJob
   class SHA256Mismatch < Error; end
   class DuplicateEntry < Error; end
   class UnexpectedEntry < Error; end
+  class MissingSHA256 < Error; end
+  class RequestError < Error; end
 
   rescue_from Faraday::TimeoutError, with: :retry_job
   discard_on Error
@@ -12,7 +14,7 @@ class DownloadVersionBlobsJob < ApplicationJob
   def perform(version:)
     logger.info "Downloading blobs for #{version.full_name} (#{version.id})"
     if version.sha256.nil?
-      raise "Version has no sha256"
+      raise MissingSHA256, "Version has no sha256"
     end
 
     if version.spec_sha256.nil?
@@ -25,7 +27,7 @@ class DownloadVersionBlobsJob < ApplicationJob
       elsif version.indexed
         resp = Faraday.get("#{version.server.url}/gems/#{version.full_name}.gem", nil, { "Accept" => "application/octet-stream" })
         if resp.status != 200
-          raise "Failed to download gem: #{resp.status}"
+          raise RequestError, "Failed to download gem: #{resp.status}"
         end
 
         contents = resp.body
@@ -55,7 +57,7 @@ class DownloadVersionBlobsJob < ApplicationJob
     if version.spec_sha256.present? && !version.quick_spec_blob.present? && version.indexed
       resp = Faraday.get("#{version.server.url}/quick/Marshal.4.8/#{version.full_name}.gemspec.rz", nil, { "Accept" => "application/octet-stream" })
       if resp.status != 200
-        raise "Failed to download quick spec: #{resp.status}"
+        raise RequestError, "Failed to download quick spec: #{resp.status}"
       end
 
       contents = resp.body
