@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/Shopify/job-iteration.git
-  revision: d8b852ead441295aa08335fb1b31c0e177194e09
+  revision: 10787b962a33ea26c2b75f6eaffd6f773eb06937
   branch: main
   specs:
-    job-iteration (1.4.1)
+    job-iteration (1.5.1)
       activejob (>= 5.2)
 
 GEM
@@ -533,7 +533,7 @@ CHECKSUMS
   irb (1.13.1) sha256=aa552f30b33f15615cff4ca8d04bace0bdd442777efb5187d9a621707889f292
   iruby (0.7.4) sha256=cc219e2ac797c3fbf8c2b937ee7d26547723c8ae0e5ad65f2975aa3325b3a620
   jbuilder (2.12.0) sha256=47e9be3240b8901cabbbfa2191a2a87fcab01630816fb8b979e787cf268726d2
-  job-iteration (1.4.1)
+  job-iteration (1.5.1)
   jupyter_on_rails (0.13.0) sha256=0268483c8473537451f4a989a65500e6774d5cc9ebf342156ef9d3205a3c1c60
   libdatadog (7.0.0.1.0) sha256=b4321485dd0f664ad43540cacb5ace0fedba064ad978f97510172c1ad6940316
   libdatadog (7.0.0.1.0-aarch64-linux) sha256=f38b4b3ce5ad11dee395a687435491f22fde34e4854f6d447dc5dcc1e40fa15b
