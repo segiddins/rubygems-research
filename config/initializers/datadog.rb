@@ -44,4 +44,5 @@ Datadog.configure do |c|
    c.tracing.instrument :pg
    c.tracing.instrument :rails, request_queuing: true
    c.tracing.instrument :active_record
+   c.tracing.instrument :active_job
 end
