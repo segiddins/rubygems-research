@@ -139,7 +139,7 @@ GEM
       rails
     diff-lcs (1.5.1)
     docile (1.4.0)
-    dockerfile-rails (1.6.14)
+    dockerfile-rails (1.6.16)
       rails (>= 3.0.0)
     dotenv (3.1.2)
     dotenv-rails (3.1.2)
@@ -273,7 +273,7 @@ GEM
     native-package-installer (1.1.9)
     net-http (0.4.1)
       uri
-    net-imap (0.4.11)
+    net-imap (0.4.12)
       date
       net-protocol
     net-pop (0.1.2)
@@ -498,7 +498,7 @@ CHECKSUMS
   debugbar (0.3.2) sha256=e047190c39f4784cfc0c2e58c2136bd258edf61ac09aa341265fb9ce7acfc643
   diff-lcs (1.5.1) sha256=273223dfb40685548436d32b4733aa67351769c7dea621da7d9dd4813e63ddfe
   docile (1.4.0) sha256=5f1734bde23721245c20c3d723e76c104208e1aa01277a69901ce770f0ebb8d3
-  dockerfile-rails (1.6.14) sha256=c8ab33941955ad79050b1150b2b17c08f5e8f00198275f648eff0cab32249f61
+  dockerfile-rails (1.6.16) sha256=402a9c8ee34d2429693a0c12e869cae5792014253e643b98484025e2bf26396c
   dotenv (3.1.2) sha256=08036c2aa1246590034a83df2adc85b72cb4944692c49da24d8e911f97924478
   dotenv-rails (3.1.2) sha256=66d2ad1a5aca1de742dd8ec2ceed2148675c73617a3b8d7703ef86ed47ca5d6a
   drb (2.2.1) sha256=e9d472bf785f558b96b25358bae115646da0dbfd45107ad858b0bc0d935cb340
@@ -563,7 +563,7 @@ CHECKSUMS
   mutex_m (0.2.0) sha256=b6ef0c6c842ede846f2ec0ade9e266b1a9dac0bc151682b04835e8ebd54840d5
   native-package-installer (1.1.9) sha256=fbb41b6b22750791a4304f0a0aeea3dd837668892117f49c4caf2e8e0f4e792f
   net-http (0.4.1) sha256=a96efc5ea18bcb9715e24dda4159d10f67ff0345c8a980d04630028055b2c282
-  net-imap (0.4.11) sha256=ac8140736df32ed87ff4155189b6ae3d846e2101be794ba657d269c5aefa17f8
+  net-imap (0.4.12) sha256=63a3f247934786b28555b0865c6c615a59445b683a8458b1449e016bc0a6cca3
   net-pop (0.1.2) sha256=848b4e982013c15b2f0382792268763b748cce91c9e91e36b0f27ed26420dff3
   net-protocol (0.2.2) sha256=aa73e0cba6a125369de9837b8d8ef82a61849360eba0521900e2c3713aa162a8
   net-smtp (0.5.0) sha256=5fc0415e6ea1cc0b3dfea7270438ec22b278ca8d524986a3ae4e5ae8d087b42a
