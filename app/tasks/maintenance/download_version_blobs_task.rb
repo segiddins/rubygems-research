@@ -12,7 +12,7 @@ class Maintenance::DownloadVersionBlobsTask < MaintenanceTasks::Task
     Version
       .where(indexed: true)
       .then { |q| gem_name.present? ? q.where(rubygem: Rubygem.where(name: gem_name)) : q }
-      .preload(:rubygem, :package_blob_with_contents)
+      .preload(:rubygem, :package_blob_with_contents, :server)
   end
 
   def process(version)

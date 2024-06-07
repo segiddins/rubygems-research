@@ -9,6 +9,13 @@ class DownloadVersionBlobsJob < ApplicationJob
   class RequestError < Error; end
   class GZIPReadError < Error; end
 
+  cattr_accessor(:server_client) do
+    Faraday.new do |conn|
+      conn.request :instrumentation
+      conn.response :logger, logger
+    end
+  end
+
   rescue_from Faraday::TimeoutError, with: :retry_job
   discard_on Error
 
@@ -26,7 +33,7 @@ class DownloadVersionBlobsJob < ApplicationJob
       if version.package_blob_with_contents.present? && version.package_blob_with_contents.contents.present?
         version.package_blob_with_contents
       elsif version.indexed
-        resp = Faraday.get("#{version.server.url}/gems/#{version.full_name}.gem", nil, { "Accept" => "application/octet-stream" })
+        resp = server_client.get("#{version.server.url}/gems/#{version.full_name}.gem", nil, { "Accept" => "application/octet-stream" })
         if resp.status != 200
           raise RequestError, "Failed to download gem: #{resp.status}"
         end
@@ -56,7 +63,7 @@ class DownloadVersionBlobsJob < ApplicationJob
     version.metadata_blob_id = import_blobs([metadata_blob]).sole.id
 
     if version.spec_sha256.present? && !version.quick_spec_blob.present? && version.indexed
-      resp = Faraday.get("#{version.server.url}/quick/Marshal.4.8/#{version.full_name}.gemspec.rz", nil, { "Accept" => "application/octet-stream" })
+      resp = server_client.get("#{version.server.url}/quick/Marshal.4.8/#{version.full_name}.gemspec.rz", nil, { "Accept" => "application/octet-stream" })
       if resp.status != 200
         raise RequestError, "Failed to download quick spec: #{resp.status}"
       end
