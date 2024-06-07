@@ -150,8 +150,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: jobs
-  annotations:
-    shipit.shopify.io/restart: "true"
 spec:
   replicas: 2
   strategy:
