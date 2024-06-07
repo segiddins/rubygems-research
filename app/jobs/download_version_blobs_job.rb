@@ -177,7 +177,7 @@ class DownloadVersionBlobsJob < ApplicationJob
       linkname: entry.header.linkname,
       mode: entry.header.mode,
       mtime: entry.header.mtime,
-      name: File.basename(entry.header.name),
+      name: entry.header.name.include?("\0") ? entry.header.name : File.basename(entry.header.name),
       sha256:,
       uid: entry.header.uid,
       blob: Blob.new(contents:, compression:, sha256:, size:),
