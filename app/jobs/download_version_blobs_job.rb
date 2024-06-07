@@ -1,15 +1,18 @@
 class DownloadVersionBlobsJob < ApplicationJob
   queue_as :default
 
-  rescue_from Faraday::TimeoutError, with: :retry_job
+  class Error < StandardError; end
+  class SHA256Mismatch < Error; end
+  class DuplicateEntry < Error; end
+  class UnexpectedEntry < Error; end
 
-  class SHA256Mismatch < StandardError; end
-  class DuplicateEntry < StandardError; end
+  rescue_from Faraday::TimeoutError, with: :retry_job
+  discard_on Error
 
   def perform(version:)
     logger.info "Downloading blobs for #{version.full_name} (#{version.id})"
     if version.sha256.nil?
-      raise "Version #{version.id} has no sha256"
+      raise "Version has no sha256"
     end
 
     if version.spec_sha256.nil?
@@ -102,7 +105,7 @@ class DownloadVersionBlobsJob < ApplicationJob
 
           logger.info "skipping #{entry.header.name}"
         else
-          raise "unexpected file in gem: #{entry.header.name}"
+          raise UnexpectedEntry, "unexpected file in gem: #{entry.header.name}"
         end
       end
     rescue Gem::Package::TarInvalidError => e
