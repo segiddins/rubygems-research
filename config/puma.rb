@@ -24,6 +24,11 @@ before_fork do
   end
 end
 
+on_worker_boot do
+  # Re-open appenders after forking the process. https://logger.rocketjob.io/forking.html
+  SemanticLogger.reopen
+end
+
 # Specifies the `worker_timeout` threshold that Puma will use to wait before
 # terminating a worker in development environments.
 worker_timeout 60 if ENV.fetch("RAILS_ENV", "development") == "development"

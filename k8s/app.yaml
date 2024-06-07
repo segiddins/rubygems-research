@@ -209,11 +209,6 @@ spec:
               value: "7001"
             - name: RAILS_MAX_THREADS
               value: "5"
-            - name: DD_AGENT_HOST
-              valueFrom:
-                fieldRef:
-                  fieldPath: status.hostIP
-                  apiVersion: v1
             - name: STATSD_IMPLEMENTATION
               value: datadog
             - name: DATABASE_URL
