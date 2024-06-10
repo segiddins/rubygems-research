@@ -7,6 +7,7 @@ metadata:
     tags.datadoghq.com/env: production
     tags.datadoghq.com/service: rubygems-research
     tags.datadoghq.com/source: rails
+    tags.datadoghq.com/version: unknown
 spec:
   replicas: 2
   strategy:
@@ -27,6 +28,7 @@ spec:
         tags.datadoghq.com/env: production
         tags.datadoghq.com/service: rubygems-research
         tags.datadoghq.com/source: rails
+        tags.datadoghq.com/version: unknown
         admission.datadoghq.com/enabled: "true"
     spec:
       containers:
@@ -47,11 +49,6 @@ spec:
               value: "true"
             - name: RAILS_MAX_THREADS
               value: "5"
-            - name: DD_AGENT_HOST
-              valueFrom:
-                fieldRef:
-                  apiVersion: v1
-                  fieldPath: status.hostIP
             - name: STATSD_IMPLEMENTATION
               value: "datadog"
             - name: STATSD_HOST
@@ -164,6 +161,7 @@ metadata:
     tags.datadoghq.com/env: production
     tags.datadoghq.com/service: rubygems-research
     tags.datadoghq.com/source: rails
+    tags.datadoghq.com/version: unknown
 spec:
   replicas: 2
   strategy:
@@ -184,6 +182,7 @@ spec:
         tags.datadoghq.com/env: production
         tags.datadoghq.com/service: rubygems-research
         tags.datadoghq.com/source: rails
+        tags.datadoghq.com/version: unknown
         admission.datadoghq.com/enabled: "true"
     spec:
       containers:
@@ -224,18 +223,8 @@ spec:
               value: "7001"
             - name: RAILS_MAX_THREADS
               value: "5"
-            - name: DD_AGENT_HOST
-              valueFrom:
-                fieldRef:
-                  apiVersion: v1
-                  fieldPath: status.hostIP
             - name: STATSD_IMPLEMENTATION
               value: "datadog"
-            - name: STATSD_HOST
-              valueFrom:
-                fieldRef:
-                  apiVersion: v1
-                  fieldPath: status.hostIP
             - name: STATSD_ADDR
               value: $(STATSD_HOST):8125
             - name: DATABASE_URL
