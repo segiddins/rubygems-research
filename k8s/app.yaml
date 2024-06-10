@@ -4,6 +4,9 @@ metadata:
   name: app
   labels:
     app: rubygems-research
+    tags.datadoghq.com/env: production
+    tags.datadoghq.com/service: rubygems-research
+    tags.datadoghq.com/source: rails
 spec:
   replicas: 2
   strategy:
@@ -17,7 +20,6 @@ spec:
   template:
     metadata:
       annotations:
-        admission.datadoghq.com/ruby-lib.version: v1.23.0
         ad.datadoghq.com/rubygems-research.logs: '[{"source":"rails","service":"rubygems-research","env":"production"}]'
       labels:
         name: app
@@ -157,6 +159,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: jobs
+  labels:
+    app: rubygems-research
+    tags.datadoghq.com/env: production
+    tags.datadoghq.com/service: rubygems-research
+    tags.datadoghq.com/source: rails
 spec:
   replicas: 2
   strategy:
@@ -170,7 +177,6 @@ spec:
   template:
     metadata:
       annotations:
-        admission.datadoghq.com/ruby-lib.version: v1.23.0
         ad.datadoghq.com/good-job.logs: '[{"source":"rails","service":"rubygems-research","env":"production"}]'
       labels:
         name: jobs

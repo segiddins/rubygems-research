@@ -75,6 +75,7 @@ USER 1000:1000
 
 ARG APP_VERSION=unknown
 ENV APP_VERSION=${APP_VERSION}
+ENV DD_VERSION=${APP_VERSION}
 
 # Entrypoint prepares the database.
 ENTRYPOINT ["./bin/docker-entrypoint"]
