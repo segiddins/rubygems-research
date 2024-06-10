@@ -139,7 +139,7 @@ GEM
       rails
     diff-lcs (1.5.1)
     docile (1.4.0)
-    dockerfile-rails (1.6.14)
+    dockerfile-rails (1.6.16)
       rails (>= 3.0.0)
     dotenv (3.1.2)
     dotenv-rails (3.1.2)
@@ -498,7 +498,7 @@ CHECKSUMS
   debugbar (0.3.2) sha256=e047190c39f4784cfc0c2e58c2136bd258edf61ac09aa341265fb9ce7acfc643
   diff-lcs (1.5.1) sha256=273223dfb40685548436d32b4733aa67351769c7dea621da7d9dd4813e63ddfe
   docile (1.4.0) sha256=5f1734bde23721245c20c3d723e76c104208e1aa01277a69901ce770f0ebb8d3
-  dockerfile-rails (1.6.14) sha256=c8ab33941955ad79050b1150b2b17c08f5e8f00198275f648eff0cab32249f61
+  dockerfile-rails (1.6.16) sha256=402a9c8ee34d2429693a0c12e869cae5792014253e643b98484025e2bf26396c
   dotenv (3.1.2) sha256=08036c2aa1246590034a83df2adc85b72cb4944692c49da24d8e911f97924478
   dotenv-rails (3.1.2) sha256=66d2ad1a5aca1de742dd8ec2ceed2148675c73617a3b8d7703ef86ed47ca5d6a
   drb (2.2.1) sha256=e9d472bf785f558b96b25358bae115646da0dbfd45107ad858b0bc0d935cb340
