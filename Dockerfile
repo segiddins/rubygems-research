@@ -77,6 +77,10 @@ ARG APP_VERSION=unknown
 ENV APP_VERSION=${APP_VERSION}
 ENV DD_VERSION=${APP_VERSION}
 
+ARG DD_GIT_REPOSITORY_URL="https://github.com/segiddins/rubygems-research"
+ARG DD_GIT_COMMIT_SHA="unknown"
+ENV DD_TAGS="git.repository_url:${DD_GIT_REPOSITORY_URL},git.commit.sha:${DD_GIT_COMMIT_SHA}"
+
 # Entrypoint prepares the database.
 ENTRYPOINT ["./bin/docker-entrypoint"]
 
