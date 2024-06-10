@@ -23,10 +23,6 @@ Datadog.configure do |c|
      original_tags = Array.wrap(Rails.application.config.log_tags).reject { |tag| tag.try(:source_location)&.first&.include?('datadog') }
      Rails.application.config.log_tags = original_tags
 
-     c.tracing.transport_options = proc { |t|
-       # Set transport to no-op mode. Does not retain traces.
-       t.adapter :test
-     }
      c.diagnostics.startup_logs.enabled = false
    end
 
@@ -37,8 +33,8 @@ Datadog.configure do |c|
    # Configuring tracing
 
    c.tracing.report_hostname = true
-   c.tracing.distributed_tracing.propagation_inject_style << 'tracecontext'
-   c.tracing.distributed_tracing.propagation_extract_style << 'tracecontext'
+   c.tracing.propagation_style_inject << 'tracecontext'
+   c.tracing.propagation_style_extract << 'tracecontext'
 
    c.tracing.instrument :faraday, split_by_domain: true, service_name: c.service
    c.tracing.instrument :http, split_by_domain: true, service_name: c.service
