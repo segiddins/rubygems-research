@@ -26,7 +26,7 @@ end
 
 on_worker_boot do
   # Re-open appenders after forking the process. https://logger.rocketjob.io/forking.html
-  SemanticLogger.reopen
+  SemanticLogger.reopen if defined?(SemanticLogger)
 end
 
 # Specifies the `worker_timeout` threshold that Puma will use to wait before
