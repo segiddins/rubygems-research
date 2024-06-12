@@ -7,7 +7,6 @@ metadata:
     tags.datadoghq.com/env: production
     tags.datadoghq.com/service: rubygems-research
     tags.datadoghq.com/source: rails
-    tags.datadoghq.com/version: unknown
 spec:
   replicas: 2
   strategy:
@@ -28,7 +27,6 @@ spec:
         tags.datadoghq.com/env: production
         tags.datadoghq.com/service: rubygems-research
         tags.datadoghq.com/source: rails
-        tags.datadoghq.com/version: unknown
         admission.datadoghq.com/enabled: "true"
     spec:
       containers:
@@ -90,8 +88,6 @@ spec:
             limits:
               memory: "12Gi"
               cpu: "5"
-      imagePullSecrets:
-        - name: ghcr
       restartPolicy: Always
 
 ---
@@ -131,6 +127,22 @@ spec:
       - main: "research.rubygems.info"
 
 ---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: admin-app
+spec:
+  defaultBackend:
+    service:
+      name: app
+      port:
+        number: 8080
+  ingressClassName: tailscale
+  tls:
+    - hosts:
+        - rubygems-research
+
+---
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -161,13 +173,12 @@ metadata:
     tags.datadoghq.com/env: production
     tags.datadoghq.com/service: rubygems-research
     tags.datadoghq.com/source: rails
-    tags.datadoghq.com/version: unknown
 spec:
   replicas: 2
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxSurge: 100%
+      maxSurge: 50%
       maxUnavailable: 50%
   selector:
     matchLabels:
@@ -182,7 +193,6 @@ spec:
         tags.datadoghq.com/env: production
         tags.datadoghq.com/service: rubygems-research
         tags.datadoghq.com/source: rails
-        tags.datadoghq.com/version: unknown
         admission.datadoghq.com/enabled: "true"
     spec:
       containers:

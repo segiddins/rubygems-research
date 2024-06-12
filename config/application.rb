@@ -44,6 +44,9 @@ module RubygemsResearch
     # Don't generate system test files.
     config.generators.system_tests = nil
 
-    config.hosts << "research.rubygems.info" << "rubygems-research-1.folk-dinosaur.ts.net"
+    config.hosts <<
+      "research.rubygems.info" <<
+      "rubygems-research-1.folk-dinosaur.ts.net" <<
+      "rubygems-research.folk-dinosaur.ts.net"
   end
 end

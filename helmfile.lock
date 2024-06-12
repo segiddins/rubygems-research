@@ -1,0 +1,16 @@
+version: v0.164.0
+dependencies:
+- name: datadog-operator
+  repository: https://helm.datadoghq.com
+  version: 1.7.1
+- name: memcached
+  repository: https://charts.bitnami.com/bitnami
+  version: 7.4.5
+- name: postgresql
+  repository: https://charts.bitnami.com/bitnami
+  version: 15.5.4
+- name: tailscale-operator
+  repository: https://pkgs.tailscale.com/helmcharts
+  version: 1.66.4
+digest: sha256:f3a1f24537dbfca8816cbdb8d5a84794075ce3ea33367d8d859294c2f4ebec06
+generated: "2024-06-10T19:13:04.063778-07:00"

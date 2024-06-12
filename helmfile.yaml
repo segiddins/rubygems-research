@@ -20,6 +20,13 @@ releases:
         value: 1Ti
       - name: primary.resourcesPreset
         value: 2xlarge
+      - name: postgresqlSharedPreloadLibraries
+        value: pgaudit,pg_stat_statements
+      - name: metrics.enabled
+        value: true
+      - name: primary.extendedConfiguration
+        value: |
+          pg_stat_statements.track = all
   - name: rubygems-db
     namespace: rubygems-research-production
     chart: bitnamicharts/postgresql
@@ -28,6 +35,13 @@ releases:
         value: rubygems_production
       - name: primary.resourcesPreset
         value: xlarge
+      - name: postgresqlSharedPreloadLibraries
+        value: pgaudit,pg_stat_statements
+      - name: metrics.enabled
+        value: true
+      - name: primary.extendedConfiguration
+        value: |
+          pg_stat_statements.track = all
   - name: cache
     namespace: rubygems-research-production
     chart: bitnamicharts/memcached

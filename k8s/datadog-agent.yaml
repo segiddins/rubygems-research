@@ -12,6 +12,7 @@ spec:
         keyName: api-key
     kubelet:
       tlsVerify: false
+    registry: public.ecr.aws/datadog
   features:
     apm:
       enabled: true
@@ -30,3 +31,10 @@ spec:
       collectKubernetesEvents: true
     liveProcessCollection:
       enabled: true
+    clusterChecks:
+      enabled: true
+  override:
+    clusterAgent:
+      env:
+        - name: DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_CONTAINER_REGISTRY
+          value: "public.ecr.aws/datadog"
