@@ -38,6 +38,18 @@ spec:
           ports:
             - containerPort: 8080
               name: http
+          startupProbe:
+            httpGet:
+              path: "/up"
+              port: http
+            failureThreshold: 30
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: "/up"
+              port: http
+            failureThreshold: 1
+            periodSeconds: 10
           env:
             - name: RAILS_ENV
               value: production
