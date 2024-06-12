@@ -20,6 +20,8 @@ class VersionImportErrors::IndexView < ApplicationView
       @version_import_errors.each do |err|
         li do
           link_to err.version.full_name, err.version
+          whitespace
+          plain err.version.uploaded_at
           br
           code { err.error }
         end

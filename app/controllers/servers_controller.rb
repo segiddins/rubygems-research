@@ -19,7 +19,7 @@ class ServersController < ApplicationController
     platform = hook_params.require(:platform)
     uploaded_at = hook_params.require(:version_created_at)
     sha256 = hook_params.require(:sha)
-    spec_sha256 = params.fetch(:spec_sha256, nil)
+    spec_sha256 = params.fetch(:spec_sha, nil)
     metadata = hook_params.fetch(:metadata, {})
     yanked = hook_params.fetch(:yanked, false)
 

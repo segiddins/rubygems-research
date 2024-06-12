@@ -41,13 +41,23 @@ spec:
           startupProbe:
             httpGet:
               path: "/up"
-              port: http
+              port: 8080
+              httpHeaders:
+                - name: X-Forwarded-Proto
+                  value: https
+                - name: Host
+                  value: research.rubygems.info
             failureThreshold: 30
             periodSeconds: 10
           livenessProbe:
             httpGet:
               path: "/up"
-              port: http
+              port: 8080
+              httpHeaders:
+                - name: X-Forwarded-Proto
+                  value: https
+                - name: Host
+                  value: research.rubygems.info
             failureThreshold: 1
             periodSeconds: 10
           env:
