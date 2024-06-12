@@ -35,12 +35,11 @@ class DataSummary::IndexView < ApplicationView
 
     h3 { "Blob storage" }
 
-    render TableComponent.new(contents: Blob.connection.execute('select count(id) as count, sum(length(contents)) as stored_size, sum(size) as decompressed_size, compression, contents is null as missing from blobs group by 4, 5')) do |table|
+    render TableComponent.new(contents: Blob.connection.execute('select count(id) as count, sum(length(contents)) as stored_size, sum(size) as decompressed_size, compression from blobs group by 4')) do |table|
       table.column("Count") { |row| plain row["count"].to_fs(:delimited) }
       table.column("Stored size") { |row| plain number_to_human_size row["stored_size"] }
       table.column("Decompressed size") { |row| plain number_to_human_size row["decompressed_size"] }
       table.column("Compression") { |row| plain row["compression"] }
-      table.column("Contents is null") { |row| plain row["missing"].to_s }
     end # if false
 
     h3 { "Biggest gems" }
@@ -66,6 +65,12 @@ class DataSummary::IndexView < ApplicationView
       table.column("Ref count") { |_, c| plain c.to_fs(:delimited) }
       table.column("SHA256") { |blob, _| link_to blob.sha256, blob_path(blob.sha256) if blob }
       table.column("Size") { |b, _| number_to_human_size b&.size }
+    end
+
+    h3 { "Gems with most files" }
+    render TableComponent.new(contents: VersionDataEntry.group(:version).limit(limit).order('count_all desc').count) do |table|
+      table.column("Version") { |version, _| link_to version.full_name, version_path(version) }
+      table.column("Count") { |_, c| plain c.to_fs(:delimited) }
     end
   end
 end
