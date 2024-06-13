@@ -33,6 +33,7 @@ class VersionDataEntry < ApplicationRecord
 
   belongs_to :version
   has_one :rubygem, through: :version
+  has_one :server, through: :rubygem
   belongs_to :blob, optional: true, strict_loading: true
   belongs_to :blob_excluding_contents, -> { excluding_contents }, optional: true, foreign_key: :blob_id, class_name: "Blob"
 
@@ -49,6 +50,10 @@ class VersionDataEntry < ApplicationRecord
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    ["full_name", "gid", "linkname", "mode", "mtime", "name", "sha256", "uid"]
+    ["full_name", "gid", "linkname", "mode", "mtime", "name", "sha256", "uid"] + _ransackers.keys
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["blob_excluding_contents", "rubygem", "version", "server"]
   end
 end

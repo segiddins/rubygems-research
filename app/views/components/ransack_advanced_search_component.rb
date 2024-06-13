@@ -22,12 +22,6 @@ class RansackAdvancedSearchComponent < ApplicationComponent
     ].each do |method_name|
       define_builder_yielding_method method_name, self
     end
-
-    # def_delegators :@object,
-    #   :object_name,
-    #   :attribute_select,
-    #   :predicate_select,
-    #   :name
   end
 
   extend Phlex::Rails::HelperMacros
@@ -92,9 +86,9 @@ class RansackAdvancedSearchComponent < ApplicationComponent
   end
 
   def _condition_fields(f)
-    fieldset class: :condition_fields, 'data-object-name': f.object_name do
+    fieldset class: "condition_fields fields", 'data-object-name': f.object_name do
       legend do
-        f.button :remove_fields, data: {field_type: :condition} do
+        f.button class: :remove_fields, data: {field_type: :condition} do
           "Remove Condition"
         end
       end
@@ -163,13 +157,13 @@ class RansackAdvancedSearchComponent < ApplicationComponent
           }
           add_fields(button, type, content) {
             var new_id, regexp;
-            new_id = new Date().getTime();
+            new_id = new crypto.randomUUID();
             regexp = new RegExp("new_" + type, "g");
             return $(button).before(content.replace(regexp, new_id));
           }
           nest_fields(button, type) {
             var id_regexp, new_id, object_name, sanitized_object_name, template;
-            new_id = new Date().getTime();
+            new_id = new crypto.randomUUID();
             id_regexp = new RegExp("new_" + type, "g");
             template = this.templates[type];
             object_name = $(button).closest(".fields").attr("data-object-name");
