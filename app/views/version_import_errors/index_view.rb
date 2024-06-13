@@ -21,7 +21,9 @@ class VersionImportErrors::IndexView < ApplicationView
         li do
           link_to err.version.full_name, err.version
           whitespace
-          plain err.version.uploaded_at
+          plain "uploaded at"
+          whitespace
+          plain err.version.uploaded_at.to_fs
           br
           code { err.error }
         end

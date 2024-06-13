@@ -1,10 +1,13 @@
 # frozen_string_literal: true
 
 class FileHistoriesController < ApplicationController
+  before_action :set_server
+  before_action :set_rubygem, only: %i[ show diff ]
+
   layout -> { ApplicationLayout }
 
   def show
-    rubygem = Rubygem.find_by!(name: params[:rubygem_name])
+    rubygem = @rubygem
     path = params[:path]
     if path.nil?
       render plain: rubygem.version_data_entries.distinct.pluck(:full_name).sort.join("\n")
@@ -15,7 +18,7 @@ class FileHistoriesController < ApplicationController
   end
 
   def diff
-    rubygem = Rubygem.find_by!(name: params[:rubygem_name])
+    rubygem = @rubygem
     path = params[:path]
     v1 = rubygem.versions.find_by!(number: params[:v1])
     v2 = rubygem.versions.find_by!(number: params[:v2])
@@ -45,4 +48,17 @@ class FileHistoriesController < ApplicationController
 
     render FileHistory::DiffView.new(v1_entry:, v2_entry:)
   end
+
+  private
+    def set_rubygem
+      @rubygem = @server.rubygems.find_by!(name: params[:name])
+    end
+
+    def set_server
+      if params[:server_id].present?
+        @server = Server.find(server_id)
+      else
+        @server = Server.find_by!(url: "https://rubygems.org")
+      end
+    end
 end

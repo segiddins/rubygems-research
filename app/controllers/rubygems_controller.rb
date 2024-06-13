@@ -41,14 +41,8 @@ class RubygemsController < ApplicationController
 
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_rubygem
       @rubygem = @server.rubygems.find_by!(name: params[:name])
-    end
-
-    # Only allow a list of trusted parameters through.
-    def rubygem_params
-      params.require(:rubygem).permit(:server_id, :name)
     end
 
     def set_server

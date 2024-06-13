@@ -140,7 +140,10 @@ class DownloadVersionBlobsJob < ApplicationJob
       end
       # dedup blobs
       blobs = entries.map(&:blob).to_h { |blob| [blob.sha256, blob] }
+      names = {}
       entries.each do |entry|
+        raise DuplicateEntry, "Duplicate entry in data.tar.gz: #{entry.full_name}" if names[entry.full_name]
+        names[entry.full_name] = entry
         entry.blob = blobs[entry.blob.sha256]
       end
     end
@@ -214,14 +217,19 @@ class DownloadVersionBlobsJob < ApplicationJob
         acc << [elem]
       end
     end.each do |chunk|
+      next if chunk.empty?
       logger.info "Importing #{chunk.size} blobs totalling #{chunk.sum { _1.contents&.size || 0 }} bytes"
-      Blob.import!(
-        chunk,
-        on_duplicate_key_update: {
-          conflict_target: [:sha256], columns: [:compression, :contents, :size],
-          index_predicate: "blobs.contents is null"
-        },
-      )
+      if chunk.size == 1
+        chunk.each(&:save!)
+      else
+        Blob.import!(
+          chunk,
+          on_duplicate_key_update: {
+            conflict_target: [:sha256], columns: [:compression, :contents, :size],
+            index_predicate: "blobs.contents is null"
+          },
+        )
+      end
     end
 
     blobs

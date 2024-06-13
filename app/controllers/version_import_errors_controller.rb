@@ -5,7 +5,7 @@ class VersionImportErrorsController < ApplicationController
 
   def index
     counts = VersionImportError.group(:error).pluck("error", "count(version_id)")
-    pagy, version_import_errors = pagy(VersionImportError.all)
+    pagy, version_import_errors = pagy(VersionImportError.preload(:version))
     render VersionImportErrors::IndexView.new(pagy:, version_import_errors:, counts:)
   end
 end
