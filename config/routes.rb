@@ -1,7 +1,9 @@
 # == Route Map
 #
-# I, [2024-05-24T15:57:22.192212 #82363]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - CORE - {"date":"2024-05-24T22:57:22Z","os_name":"arm64-apple-darwin23","version":"1.23.0","lang":"ruby","lang_version":"3.3.1","env":null,"service":"rake","dd_version":null,"debug":false,"tags":null,"runtime_metrics_enabled":false,"vm":"ruby-3.3.1","health_metrics_enabled":false,"profiling_enabled":false}
-# I, [2024-05-24T15:57:23.236425 #82464]  INFO -- ddtrace: [ddtrace] DATADOG CONFIGURATION - CORE - {"date":"2024-05-24T22:57:23Z","os_name":"arm64-apple-darwin23","version":"1.23.0","lang":"ruby","lang_version":"3.3.1","env":null,"service":"rails","dd_version":null,"debug":false,"tags":null,"runtime_metrics_enabled":false,"vm":"ruby-3.3.1","health_metrics_enabled":false,"profiling_enabled":false}
+# I, [2024-06-14T01:29:47.920378 #816]  INFO -- datadog: [datadog] DATADOG CONFIGURATION - CORE - {"date":"2024-06-13T23:29:47Z","os_name":"arm64-apple-darwin23","version":"2.1.0","lang":"ruby","lang_version":"3.3.2","env":null,"service":"rake","dd_version":null,"debug":false,"tags":null,"runtime_metrics_enabled":false,"vm":"ruby-3.3.2","health_metrics_enabled":false,"profiling_enabled":false}
+# I, [2024-06-14T01:29:48.121366 #816]  INFO -- datadog: [datadog] DATADOG CONFIGURATION - CORE - {"date":"2024-06-13T23:29:48Z","os_name":"arm64-apple-darwin23","version":"2.1.0","lang":"ruby","lang_version":"3.3.2","env":null,"service":"rake","dd_version":null,"debug":false,"tags":null,"runtime_metrics_enabled":false,"vm":"ruby-3.3.2","health_metrics_enabled":false,"profiling_enabled":false}
+# I, [2024-06-14T01:29:49.123796 #3325]  INFO -- datadog: [datadog] DATADOG CONFIGURATION - CORE - {"date":"2024-06-13T23:29:49Z","os_name":"arm64-apple-darwin23","version":"2.1.0","lang":"ruby","lang_version":"3.3.2","env":null,"service":"rails","dd_version":null,"debug":false,"tags":null,"runtime_metrics_enabled":false,"vm":"ruby-3.3.2","health_metrics_enabled":false,"profiling_enabled":false}
+# I, [2024-06-14T01:29:49.278101 #3325]  INFO -- datadog: [datadog] DATADOG CONFIGURATION - CORE - {"date":"2024-06-13T23:29:49Z","os_name":"arm64-apple-darwin23","version":"2.1.0","lang":"ruby","lang_version":"3.3.2","env":null,"service":"rails","dd_version":null,"debug":false,"tags":null,"runtime_metrics_enabled":false,"vm":"ruby-3.3.2","health_metrics_enabled":false,"profiling_enabled":false}
 #                            Prefix Verb   URI Pattern                                         Controller#Action
 #                     gem_downloads GET    /gem_downloads(.:format)                            gem_downloads#index
 #                                   POST   /gem_downloads(.:format)                            gem_downloads#create
@@ -13,11 +15,13 @@
 #                                   DELETE /gem_downloads/:id(.:format)                        gem_downloads#destroy
 #             version_import_errors GET    /version_import_errors(.:format)                    version_import_errors#index
 #                data_summary_index GET    /data_summary(.:format)                             data_summary#index
+#                   search_versions GET    /versions/search(.:format)                          versions#search
 #                          versions GET    /versions(.:format)                                 versions#index
 #                           version GET    /versions/:id(.:format)                             versions#show
 #                          raw_blob GET    /blobs/:sha256/raw(.:format)                        blobs#raw
 #                             blobs GET    /blobs(.:format)                                    blobs#index
 #                              blob GET    /blobs/:sha256(.:format)                            blobs#show
+#                   search_rubygems GET    /rubygems/search(.:format)                          rubygems#search
 #                      diff_rubygem GET    /rubygems/:name/diff(.:format)                      rubygems#diff
 #         diff_rubygem_file_history GET    /rubygems/:rubygem_name/file_history/diff(.:format) file_histories#diff
 #              rubygem_file_history GET    /rubygems/:rubygem_name/file_history(.:format)      file_histories#show
@@ -26,6 +30,7 @@
 #                       hook_server POST   /servers/:id/hook(.:format)                         servers#hook
 #                           servers GET    /servers(.:format)                                  servers#index
 #                            server GET    /servers/:id(.:format)                              servers#show
+#       search_version_data_entries GET    /version_data_entries/search(.:format)              version_data_entries#search
 #                rails_health_check GET    /up(.:format)                                       rails/health#show
 #                              root GET    /                                                   servers#index
 #                          good_job        /good_job                                           GoodJob::Engine
@@ -175,7 +180,7 @@
 #                     avo_private_design GET    /avo_private/design(.:format)                                                                      avo/private#design
 #
 # Routes for Debugbar::Engine:
-#                       /cable                   #<ActionCable::Server::Base:0x000000012d1bce10 @config=#<ActionCable::Server::Configuration:0x000000012d1bee90 @log_tags=[], @connection_class=#<Proc:0x000000012d1dd958 /Users/segiddins/.gem/ruby/3.3.1/gems/actioncable-7.1.3.3/lib/action_cable/engine.rb:53 (lambda)>, @worker_pool_size=4, @disable_request_forgery_protection=false, @allow_same_origin_as_host=true, @filter_parameters=[:passw, :secret, :token, :_key, :crypt, :salt, :certificate, :otp, :ssn], @health_check_application=#<Proc:0x000000012d1df280 /Users/segiddins/.gem/ruby/3.3.1/gems/actioncable-7.1.3.3/lib/action_cable/engine.rb:29 (lambda)>, @logger=#<SemanticLogger::Logger:0x000000012d1be850 @filter=nil, @name="ActionCable", @level_index=nil, @level=nil>, @cable={"adapter"=>"async"}, @mount_path="/cable", @precompile_assets=true, @allowed_request_origins=/https?:\/\/localhost:\d+/>, @mutex=#<Monitor:0x000000012d1d8728>, @pubsub=nil, @worker_pool=nil, @event_loop=nil, @remote_connections=nil>
+#                       /cable                   #<ActionCable::Server::Base:0x000000012e79a570 @config=#<ActionCable::Server::Configuration:0x000000012e953da8 @log_tags=[], @connection_class=#<Proc:0x000000012d7dd240 /Users/segiddins/.gem/ruby/3.3.2/gems/actioncable-7.1.3.4/lib/action_cable/engine.rb:53 (lambda)>, @worker_pool_size=4, @disable_request_forgery_protection=false, @allow_same_origin_as_host=true, @filter_parameters=[:passw, :secret, :token, :_key, :crypt, :salt, :certificate, :otp, :ssn], @health_check_application=#<Proc:0x000000012d7dfe28 /Users/segiddins/.gem/ruby/3.3.2/gems/actioncable-7.1.3.4/lib/action_cable/engine.rb:29 (lambda)>, @logger=#<SemanticLogger::Logger:0x000000012e952c78 @filter=nil, @name="ActionCable", @level_index=nil, @level=nil>, @cable={"adapter"=>"async"}, @mount_path="/cable", @precompile_assets=true, @allowed_request_origins=/https?:\/\/localhost:\d+/>, @mutex=#<Monitor:0x000000012d799180>, @pubsub=nil, @worker_pool=nil, @event_loop=nil, @remote_connections=nil>
 #          poll GET     /poll(.:format)          debugbar/polling#poll
 #  poll_confirm OPTIONS /poll/confirm(.:format)  debugbar/polling#confirm
 #               POST    /poll/confirm(.:format)  debugbar/polling#confirm

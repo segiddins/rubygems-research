@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_22_204221) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_13_232930) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -184,10 +184,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_22_204221) do
     t.string "linkname"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "sha256"
     t.index ["blob_id"], name: "index_version_data_entries_on_blob_id"
     t.index ["full_name", "version_id"], name: "index_version_data_entries_on_full_name_and_version_id", unique: true
-    t.index ["sha256"], name: "index_version_data_entries_on_sha256"
     t.index ["version_id"], name: "index_version_data_entries_on_version_id"
   end
 

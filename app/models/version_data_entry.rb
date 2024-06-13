@@ -9,7 +9,6 @@
 #  mode       :integer
 #  mtime      :datetime
 #  name       :string
-#  sha256     :string
 #  uid        :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -20,7 +19,6 @@
 #
 #  index_version_data_entries_on_blob_id                   (blob_id)
 #  index_version_data_entries_on_full_name_and_version_id  (full_name,version_id) UNIQUE
-#  index_version_data_entries_on_sha256                    (sha256)
 #  index_version_data_entries_on_version_id                (version_id)
 #
 # Foreign Keys
@@ -50,7 +48,7 @@ class VersionDataEntry < ApplicationRecord
   end
 
   def self.ransackable_attributes(auth_object = nil)
-    ["full_name", "gid", "linkname", "mode", "mtime", "name", "sha256", "uid"] + _ransackers.keys
+    ["full_name", "gid", "linkname", "mode", "mtime", "name", "uid"] + _ransackers.keys
   end
 
   def self.ransackable_associations(auth_object = nil)
