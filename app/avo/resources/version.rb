@@ -1,11 +1,12 @@
 class Avo::Resources::Version < Avo::BaseResource
-  self.includes = []
+  self.includes = [:rubygem, :server, :version_import_error, :package_blob]
   # self.search = {
   #   query: -> { query.ransack(id_eq: params[:q], m: "or").result(distinct: false) }
   # }
 
   def fields
     field :id, as: :id
+    field :full_name, as: :text
     field :rubygem_id, as: :number
     field :number, as: :text
     field :platform, as: :text
@@ -13,6 +14,7 @@ class Avo::Resources::Version < Avo::BaseResource
     field :sha256, as: :text
     field :metadata, as: :code
     field :metadata_blob_id, as: :number
+    field :extensions, as: :string
     field :position, as: :number
     field :version_data_entries_count, as: :number
     field :uploaded_at, as: :date_time

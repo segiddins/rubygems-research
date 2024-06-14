@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_13_232930) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_14_102025) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_stat_statements"
   enable_extension "plpgsql"
@@ -231,6 +231,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_13_232930) do
     t.integer "version_data_entries_count", default: 0
     t.datetime "uploaded_at"
     t.boolean "indexed", default: true
+    t.boolean "has_extensions"
+    t.string "extensions", array: true
     t.index ["metadata_blob_id"], name: "index_versions_on_metadata_blob_id"
     t.index ["rubygem_id", "number", "platform"], name: "index_versions_on_rubygem_id_and_number_and_platform", unique: true
     t.index ["sha256"], name: "index_versions_on_sha256"

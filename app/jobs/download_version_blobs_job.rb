@@ -74,6 +74,9 @@ class DownloadVersionBlobsJob < ApplicationJob
       _quick_spec_blob = Blob.create!(contents:, sha256:, size: contents.size)
     end
 
+    version.extensions = Gem::Specification.from_yaml(metadata_blob.decompressed_contents).extensions.map(&:to_s)
+    version.has_extensions = version.extensions.present?
+
     version.save!
 
     version.as_json
@@ -181,7 +184,6 @@ class DownloadVersionBlobsJob < ApplicationJob
       mode: entry.header.mode,
       mtime: entry.header.mtime,
       name: entry.header.name.include?("\0") ? entry.header.name : File.basename(entry.header.name),
-      sha256:,
       uid: entry.header.uid,
       blob: Blob.new(contents:, compression:, sha256:, size:),
     )

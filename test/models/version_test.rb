@@ -3,6 +3,8 @@
 # Table name: versions
 #
 #  id                         :bigint           not null, primary key
+#  extensions                 :string           is an Array
+#  has_extensions             :boolean
 #  indexed                    :boolean          default(TRUE)
 #  metadata                   :json
 #  number                     :string

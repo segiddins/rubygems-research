@@ -3,6 +3,8 @@
 # Table name: versions
 #
 #  id                         :bigint           not null, primary key
+#  extensions                 :string           is an Array
+#  has_extensions             :boolean
 #  indexed                    :boolean          default(TRUE)
 #  metadata                   :json
 #  number                     :string
@@ -74,6 +76,11 @@ class Version < ApplicationRecord
 
   def to_gem_version
     Gem::Version.new(number)
+  end
+
+  def gemspec
+    yaml = metadata_blob&.decompressed_contents || raise(ActiveRecord::RecordNotFound, "metadata_blob not found for version #{id}")
+    Gem::Specification.from_yaml(yaml)
   end
 
   def <=>(other)
