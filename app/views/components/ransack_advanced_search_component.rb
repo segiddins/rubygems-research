@@ -157,13 +157,13 @@ class RansackAdvancedSearchComponent < ApplicationComponent
           }
           add_fields(button, type, content) {
             var new_id, regexp;
-            new_id = new crypto.randomUUID();
+            new_id = crypto.randomUUID();
             regexp = new RegExp("new_" + type, "g");
             return $(button).before(content.replace(regexp, new_id));
           }
           nest_fields(button, type) {
             var id_regexp, new_id, object_name, sanitized_object_name, template;
-            new_id = new crypto.randomUUID();
+            new_id = crypto.randomUUID();
             id_regexp = new RegExp("new_" + type, "g");
             template = this.templates[type];
             object_name = $(button).closest(".fields").attr("data-object-name");
