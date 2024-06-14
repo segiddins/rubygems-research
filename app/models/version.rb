@@ -97,6 +97,8 @@ class Version < ApplicationRecord
       spec_sha256
       uploaded_at
       version_data_entries_count
+      extensions
+      has_extensions
     ]
   end
 
