@@ -193,6 +193,7 @@ Rails.application.routes.draw do
 
   resources :versions, only: [:show, :index] do
     get :search, on: :collection
+    get :gemspec, on: :member, defaults: { format: :gemspec }
   end
   special_characters    = ".-_".freeze
   allowed_characters    = "[A-Za-z0-9#{Regexp.escape(special_characters)}]+".freeze

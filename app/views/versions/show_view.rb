@@ -16,6 +16,7 @@ class Versions::ShowView < ApplicationView
     p { link_to "quick gemspec", blob_path(@version.spec_sha256) } if @version.spec_sha256.present?
     p { link_to ".gem", blob_path(@version.sha256) } if @version.sha256
     p { link_to ".gem metadata (gemspec)", blob_path(@version.metadata_blob.sha256) } if @version.metadata_blob
+    p { link_to ".gemspec", gemspec_version_path(@version) } if @version.metadata_blob
     if @version.version_import_error
       p do
         plain "Import error:"

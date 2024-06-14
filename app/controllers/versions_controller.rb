@@ -9,6 +9,11 @@ class VersionsController < ApplicationController
     render Versions::ShowView.new(version:, version_data_entries:, pagy:)
   end
 
+  def gemspec
+    version = Version.includes(:metadata_blob).strict_loading.find(params[:id])
+    render plain: version.gemspec.to_ruby
+  end
+
   def index
     pagy, versions = pagy(Version.includes(:rubygem, :package_blob).strict_loading.order(uploaded_at: :desc), items: 50)
     render Versions::IndexView.new(pagy:, versions:)
