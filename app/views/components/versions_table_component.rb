@@ -17,6 +17,7 @@ class VersionsTableComponent < ApplicationComponent
           th { "Size" }
           th { "Uploaded" }
           th { "Indexed" }
+          th { "Extensions" }
         end
       end
       tbody do
@@ -28,6 +29,7 @@ class VersionsTableComponent < ApplicationComponent
             td { number_to_human_size version.package_blob&.size }
             td { version.uploaded_at.to_fs }
             td { version.indexed.inspect }
+            td { version.extensions.presence&.inspect }
           end
         end
       end
