@@ -5,6 +5,7 @@ require 'rubygems/package'
 class Maintenance::DownloadVersionBlobsTask < MaintenanceTasks::Task
   include SemanticLogger::Loggable
   attribute :gem_name, :string
+  attribute :only_errors, :boolean, default: false
 
   class SHA256Mismatch < StandardError; end
 
@@ -12,6 +13,7 @@ class Maintenance::DownloadVersionBlobsTask < MaintenanceTasks::Task
     Version
       .where(indexed: true)
       .then { |q| gem_name.present? ? q.where(rubygem: Rubygem.where(server: Server.all.pluck(:id), name: gem_name)) : q }
+      .then { |q| only_errors ? q.where.associated(:version_import_error) : q }
       .preload(:rubygem, :package_blob_with_contents, :server, :quick_spec_blob)
   end
 
