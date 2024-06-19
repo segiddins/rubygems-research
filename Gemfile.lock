@@ -167,7 +167,7 @@ GEM
       raabro (~> 1.4)
     globalid (1.2.1)
       activesupport (>= 6.1)
-    good_job (3.29.3)
+    good_job (3.29.4)
       activejob (>= 6.0.0)
       activerecord (>= 6.0.0)
       concurrent-ruby (>= 1.0.2)
@@ -269,7 +269,7 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2024.0604)
     mini_mime (1.1.5)
-    minitest (5.23.1)
+    minitest (5.24.0)
     msgpack (1.7.2)
     multi_json (1.15.0)
     multi_xml (0.7.1)
@@ -522,7 +522,7 @@ CHECKSUMS
   ffi-rzmq-core (1.0.7) sha256=6541625a0f80016e4cb1b22a68b3870bd711c30de7d77625d8d6c92be95eb32a
   fugit (1.11.0) sha256=addc9cd3031611921d1dbac094de3a645bc8858828639fd035c9cedd3b460bb9
   globalid (1.2.1) sha256=70bf76711871f843dbba72beb8613229a49429d1866828476f9c9d6ccc327ce9
-  good_job (3.29.3) sha256=9ee44573af5195068d57078627c1e7a9b2bd415412f7efe13a228f04fe507d73
+  good_job (3.29.4) sha256=169b2eec9421a28360f47b830322b87685ae5acb1fdeb3c6f2f533db10f4de65
   google-protobuf (4.27.1) sha256=a988ba32cbb4a85c2340e4840dd3e88874225b54f23f7432dedea6ae25695578
   google-protobuf (4.27.1-aarch64-linux) sha256=44b499a33a45943813e9e8f8de58b26a68a72ce1c244e9b9029c8b4878373f6a
   google-protobuf (4.27.1-arm64-darwin) sha256=cf4dc1cfc8b5c170a834f259a011c070f45e8250406a22a81f9bb709b8dc0c0d
@@ -561,7 +561,7 @@ CHECKSUMS
   mime-types (3.5.2) sha256=c1299f10fa34c75a6f168e99e9dadbd11bc507d9d62dc5cf98c4e65f2af8c4e4
   mime-types-data (3.2024.0604) sha256=c538378ff7036755f8009d246eb5c2b6dbdc0365fd624f9e5e63fa4669213167
   mini_mime (1.1.5) sha256=8681b7e2e4215f2a159f9400b5816d85e9d8c6c6b491e96a12797e798f8bccef
-  minitest (5.23.1) sha256=f1e8f8d6ffd96fb17339ce50768bcbbdbbadff5073cb9583d084403877a77abe
+  minitest (5.24.0) sha256=affaa7dc0ce9b9162bb389e49428998875315ed4f40e886fb5f879a07818f87d
   msgpack (1.7.2) sha256=59ab62fd8a4d0dfbde45009f87eb6f158ab2628a7c48886b0256f175166baaa8
   multi_json (1.15.0) sha256=1fd04138b6e4a90017e8d1b804c039031399866ff3fbabb7822aea367c78615d
   multi_xml (0.7.1) sha256=4fce100c68af588ff91b8ba90a0bb3f0466f06c909f21a32f4962059140ba61b
