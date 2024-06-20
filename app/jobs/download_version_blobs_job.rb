@@ -176,6 +176,10 @@ class DownloadVersionBlobsJob < ApplicationJob
       raise "size mismatch: expected #{entry.header.size}, got #{size}"
     end
 
+    unless entry.full_name.valid_encoding?
+      logger.info "Invalid encoding in entry name", entry: entry.full_name.dump, encoding: entry.full_name.encoding
+    end
+
     VersionDataEntry.build(
       version: version,
       full_name: entry.full_name,
