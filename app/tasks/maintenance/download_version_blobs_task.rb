@@ -32,12 +32,16 @@ class Maintenance::DownloadVersionBlobsTask < MaintenanceTasks::Task
       version.version_import_error&.destroy!
     end
   rescue Gem::Package::FormatError, Gem::Package::TarInvalidError, ActiveRecord::StatementInvalid, DownloadVersionBlobsJob::Error, Psych::AliasesNotEnabled => e
+    logger.warn message: "DEBUGGING", encoding: e.message.encoding, valid_encoding: e.message.valid_encoding?, dump: e.message.dump
     if e.message.valid_encoding?
       logger.error message: "Failed to download blobs for #{version.full_name} (#{version.id})", exception: e
-      VersionImportError.find_or_initialize_by(version:).update!(error: "#{e.class}: #{e.message}")
     else
       logger.error message: "Failed to download blobs for #{version.full_name} (#{version.id})", exception: e.class, error: e.message.scrub
-      VersionImportError.find_or_initialize_by(version:).update!(error: "#{e.class}")
+    end
+    begin
+      VersionImportError.find_or_initialize_by(version:).update!(error: "#{e.class}: #{e.message}")
+    rescue ActiveRecord::StatementInvalid => e
+      VersionImportError.find_or_initialize_by(version:).update!(error: "while saving error #{e.class}: #{e.message}")
     end
   end
 end
