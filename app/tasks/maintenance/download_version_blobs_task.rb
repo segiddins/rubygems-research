@@ -33,6 +33,6 @@ class Maintenance::DownloadVersionBlobsTask < MaintenanceTasks::Task
     end
   rescue Gem::Package::FormatError, Gem::Package::TarInvalidError, ActiveRecord::StatementInvalid, DownloadVersionBlobsJob::Error, Psych::AliasesNotEnabled => e
     logger.error message: "Failed to download blobs for #{version.full_name} (#{version.id})", exception: e
-    VersionImportError.find_or_initialize_by(version:).update!(error: "#{e.class}:#{e.message}")
+    VersionImportError.find_or_initialize_by(version:).update!(error: "#{e.class}: #{e.message}".scrub)
   end
 end
