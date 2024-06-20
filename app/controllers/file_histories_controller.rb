@@ -51,7 +51,7 @@ class FileHistoriesController < ApplicationController
 
   private
     def set_rubygem
-      @rubygem = @server.rubygems.find_by!(name: params[:name])
+      @rubygem = @server.rubygems.find_by!(name: params[:rubygem_name])
     end
 
     def set_server
