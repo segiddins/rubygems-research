@@ -18,10 +18,11 @@ class FileHistoriesController < ApplicationController
   end
 
   def diff
+    v1, v2 = params.permit(:v1, :v2).require([:v1, :v2])
     rubygem = @rubygem
     path = params[:path]
-    v1 = rubygem.versions.find_by!(number: params[:v1])
-    v2 = rubygem.versions.find_by!(number: params[:v2])
+    v1 = rubygem.versions.find_by!(number: v1)
+    v2 = rubygem.versions.find_by!(number: v2)
 
     v1_entry = v1.version_data_entries.includes(:blob).find_by(full_name: path)
     v2_entry = v2.version_data_entries.includes(:blob).find_by(full_name: path)
