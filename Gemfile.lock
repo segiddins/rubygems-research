@@ -239,7 +239,7 @@ GEM
       ffi (~> 1.0)
     libddwaf (1.14.0.0.0-x86_64-linux)
       ffi (~> 1.0)
-    literal (0.1.0)
+    literal (0.2.1)
     loofah (2.22.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -445,7 +445,7 @@ DEPENDENCIES
   jbuilder
   job-iteration!
   jupyter_on_rails
-  literal (~> 0.1.0)
+  literal (~> 0.2.1)
   maintenance_tasks (~> 2.7)
   matrix
   meilisearch-rails (~> 0.13.1)
@@ -548,7 +548,7 @@ CHECKSUMS
   libddwaf (1.14.0.0.0-arm64-darwin) sha256=cd3c84d58b8f77f93ebb17e6ceb1cfd257c8d3a3a1ea558a7fc14d92f697cc2b
   libddwaf (1.14.0.0.0-x86_64-darwin) sha256=33017c057fd6b4948ef4577c4a13bc89d878541961b205309fac1e71516433ff
   libddwaf (1.14.0.0.0-x86_64-linux) sha256=030640a4158ae05f9276cc1e09bfe9d19dda5af26703235cf17cf3752f1985b1
-  literal (0.1.0) sha256=7e6273c7b06b5e470a87d9c6179609b83298a127c7f66603049893812531c90e
+  literal (0.2.1) sha256=7544725886486ce6ae701fea1ea23bb7955ef218ef109f91ad4414f3b7921261
   loofah (2.22.0) sha256=10d76e070c86b12fec74b6a9515fd1940f4459198b991342d0a7897d86c372fe
   mail (2.8.1) sha256=ec3b9fadcf2b3755c78785cb17bc9a0ca9ee9857108a64b6f5cfc9c0b5bfc9ad
   maintenance_tasks (2.7.1) sha256=2f1f42239a11f5b30ef34e821f1beb42010d08e81634d8945884aba8bdb982db
