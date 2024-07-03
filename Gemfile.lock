@@ -93,16 +93,16 @@ GEM
     annotate (3.2.0)
       activerecord (>= 3.2, < 8.0)
       rake (>= 10.4, < 14.0)
-    avo (3.9.2)
+    avo (3.10.1)
       actionview (>= 6.1)
       active_link_to
       activerecord (>= 6.1)
       activesupport (>= 6.1)
       addressable
       docile
-      dry-initializer
       httparty
       inline_svg
+      literal (~> 0.2)
       meta-tags
       pagy (>= 7.0.0)
       turbo-rails (>= 2.0.0)
@@ -144,7 +144,6 @@ GEM
       dotenv (= 3.1.2)
       railties (>= 6.1)
     drb (2.2.1)
-    dry-initializer (3.1.1)
     erubi (1.13.0)
     et-orbi (1.2.11)
       tzinfo
@@ -320,7 +319,7 @@ GEM
       nio4r (~> 2.0)
     raabro (1.4.0)
     racc (1.8.0)
-    rack (3.1.4)
+    rack (3.1.6)
     rack-mini-profiler (3.3.1)
       rack (>= 1.2.0)
     rack-session (2.0.0)
@@ -484,7 +483,7 @@ CHECKSUMS
   activesupport (7.1.3.4) sha256=455bbc43d82e5ba20daa25f0888b80c9f7e2d80ca0cc96cea3e6acfec3e40309
   addressable (2.8.7) sha256=462986537cf3735ab5f3c0f557f14155d778f4b43ea4f485a9deb9c8f7c58232
   annotate (3.2.0) sha256=9a61baa1fb13880aa3a8d9f62553889bb2a3b7970f88bbc66d3ac75a567780d3
-  avo (3.9.2) sha256=dc8a544bd69e79d8766f8345e96fd211c68de60b83816e7d4bf59652d2746ef0
+  avo (3.10.1) sha256=ecf40f4e88b273d3d278e14ffd4df46e17f17e6733289c76cd180348eb81ddc2
   base64 (0.2.0) sha256=0f25e9b21a02a0cc0cea8ef92b2041035d39350946e8789c562b2d1a3da01507
   bigdecimal (3.1.8) sha256=a89467ed5a44f8ae01824af49cbc575871fa078332e8f77ea425725c1ffe27be
   bindex (0.8.1) sha256=7b1ecc9dc539ed8bccfc8cb4d2732046227b09d6f37582ff12e50a5047ceb17e
@@ -507,7 +506,6 @@ CHECKSUMS
   dotenv (3.1.2) sha256=08036c2aa1246590034a83df2adc85b72cb4944692c49da24d8e911f97924478
   dotenv-rails (3.1.2) sha256=66d2ad1a5aca1de742dd8ec2ceed2148675c73617a3b8d7703ef86ed47ca5d6a
   drb (2.2.1) sha256=e9d472bf785f558b96b25358bae115646da0dbfd45107ad858b0bc0d935cb340
-  dry-initializer (3.1.1) sha256=4d267dea367ccabe498b259c62b909b99d577d6db547d9510561999403546dec
   erubi (1.13.0) sha256=fca61b47daefd865d0fb50d168634f27ad40181867445badf6427c459c33cd62
   et-orbi (1.2.11) sha256=d26e868cc21db88280a9ec1a50aa3da5d267eb9b2037ba7b831d6c2731f5df64
   faraday (2.9.2) sha256=6595edbe3b4663223e52a315f6bf2bca97ea1527bab7e02a926bf8afcf7423a4
@@ -593,7 +591,7 @@ CHECKSUMS
   puma (6.4.2) sha256=3eb41999d00733280be3faeb00d610331b6965a537a8cd3d905f316c38575b44
   raabro (1.4.0) sha256=d4fa9ff5172391edb92b242eed8be802d1934b1464061ae5e70d80962c5da882
   racc (1.8.0) sha256=09349a65c37c4fe710a435f25c9f1652e39f29ad6b1fa08d4a8d30c0553d3a08
-  rack (3.1.4) sha256=0d5719cc5c36e92a1ad077406734246052c65494db3d69ba8ac49fad1b260a3b
+  rack (3.1.6) sha256=08cd573725c9c223bb0466d483153cae9bb3606d17760328c814902e6bf83c32
   rack-mini-profiler (3.3.1) sha256=2bf0de7d5795f54581e453b248e42cc50e8d0529efac73828653a9ad2407a801
   rack-session (2.0.0) sha256=db04b2063e180369192a9046b4559af311990af38c6a93d4c600cee4eb6d4e81
   rack-test (2.1.0) sha256=0c61fc61904049d691922ea4bb99e28004ed3f43aa5cfd495024cc345f125dfb
