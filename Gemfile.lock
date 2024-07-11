@@ -363,7 +363,7 @@ GEM
       thor (~> 1.0, >= 1.2.2)
       zeitwerk (~> 2.6)
     rake (13.2.1)
-    ransack (4.1.1)
+    ransack (4.2.0)
       activerecord (>= 6.1.5)
       activesupport (>= 6.1.5)
       i18n
@@ -459,7 +459,7 @@ DEPENDENCIES
   rack-mini-profiler
   rails (~> 7.1.3)
   rails_semantic_logger (~> 4.17)
-  ransack (~> 4.1)
+  ransack (~> 4.2)
   ruby-progressbar (~> 1.13)
   sprockets-rails
   stimulus-rails
@@ -602,7 +602,7 @@ CHECKSUMS
   rails_semantic_logger (4.17.0) sha256=cc10cca01491736596cd5ab40b52b3bbf98338d9d1f5a7916b2be10231615047
   railties (7.1.3.4) sha256=6c6049f3a788669d94f95c7bf6378204ae94098567cc25237e3c73dac4a21afc
   rake (13.2.1) sha256=46cb38dae65d7d74b6020a4ac9d48afed8eb8149c040eccf0523bec91907059d
-  ransack (4.1.1) sha256=01db200ede29be9f147a2c433eb0005b36df24bc7f8b624a6eeea62d50788901
+  ransack (4.2.0) sha256=1125ab22d597b4ac29852332ee868811cd43260756260110686d3928f7c9b9fb
   rdoc (6.7.0) sha256=b17d5f0f57b0853d7b880d4360a32c7caf8dbb81f8503a36426df809e617f379
   reline (0.5.9) sha256=5d2dd7ed0fd078e79a05e4eaa47dc91b8dacec7358e9e1dd6d9c4636cff7d378
   ruby-progressbar (1.13.0) sha256=80fc9c47a9b640d6834e0dc7b3c94c9df37f08cb072b7761e4a71e22cff29b33
