@@ -93,14 +93,13 @@ GEM
     annotate (3.2.0)
       activerecord (>= 3.2, < 8.0)
       rake (>= 10.4, < 14.0)
-    avo (3.10.2)
+    avo (3.10.6)
       actionview (>= 6.1)
       active_link_to
       activerecord (>= 6.1)
       activesupport (>= 6.1)
       addressable
       docile
-      httparty
       inline_svg
       literal (~> 0.2)
       meta-tags
@@ -261,8 +260,8 @@ GEM
       httparty (>= 0.17.1, < 0.22.0)
     meilisearch-rails (0.13.1)
       meilisearch (~> 0.26.0)
-    meta-tags (2.21.0)
-      actionpack (>= 6.0.0, < 7.2)
+    meta-tags (2.22.0)
+      actionpack (>= 6.0.0, < 8.1)
     method_source (1.1.0)
     mime-types (3.5.2)
       mime-types-data (~> 3.2015)
@@ -319,7 +318,7 @@ GEM
       nio4r (~> 2.0)
     raabro (1.4.0)
     racc (1.8.0)
-    rack (3.1.6)
+    rack (3.1.7)
     rack-mini-profiler (3.3.1)
       rack (>= 1.2.0)
     rack-session (2.0.0)
@@ -402,7 +401,7 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     uri (0.13.0)
-    view_component (3.12.1)
+    view_component (3.13.0)
       activesupport (>= 5.2.0, < 8.0)
       concurrent-ruby (~> 1.0)
       method_source (~> 1.0)
@@ -483,7 +482,7 @@ CHECKSUMS
   activesupport (7.1.3.4) sha256=455bbc43d82e5ba20daa25f0888b80c9f7e2d80ca0cc96cea3e6acfec3e40309
   addressable (2.8.7) sha256=462986537cf3735ab5f3c0f557f14155d778f4b43ea4f485a9deb9c8f7c58232
   annotate (3.2.0) sha256=9a61baa1fb13880aa3a8d9f62553889bb2a3b7970f88bbc66d3ac75a567780d3
-  avo (3.10.2) sha256=61458a4b9b298cb9fd177c56c75472baa7013297a7a9a6e24872168793a7d6b4
+  avo (3.10.6) sha256=8eea97b594a19c52b0017591bd0e411827b00fe9b05cc13210812ee8e7f60a1a
   base64 (0.2.0) sha256=0f25e9b21a02a0cc0cea8ef92b2041035d39350946e8789c562b2d1a3da01507
   bigdecimal (3.1.8) sha256=a89467ed5a44f8ae01824af49cbc575871fa078332e8f77ea425725c1ffe27be
   bindex (0.8.1) sha256=7b1ecc9dc539ed8bccfc8cb4d2732046227b09d6f37582ff12e50a5047ceb17e
@@ -554,7 +553,7 @@ CHECKSUMS
   matrix (0.4.2) sha256=71083ccbd67a14a43bfa78d3e4dc0f4b503b9cc18e5b4b1d686dc0f9ef7c4cc0
   meilisearch (0.26.0) sha256=634746172c336a42660cd344a94be39bf0addf6497b7d907334335fc704a3f8c
   meilisearch-rails (0.13.1) sha256=f3b3460dc31502f16f6e42eb8bd23f2ec0787aa15a3fbf086f434e27b96524fa
-  meta-tags (2.21.0) sha256=cfaa2ccd32b2700c3538c9eae647191295a06f47f0d8558e685a6a7158171cfb
+  meta-tags (2.22.0) sha256=c04df1f39cfbf7d48e2ae955124d89a2429ab508fc936b9a8f9a8ce4d326e6ec
   method_source (1.1.0) sha256=181301c9c45b731b4769bc81e8860e72f9161ad7d66dd99103c9ab84f560f5c5
   mime-types (3.5.2) sha256=c1299f10fa34c75a6f168e99e9dadbd11bc507d9d62dc5cf98c4e65f2af8c4e4
   mime-types-data (3.2024.0604) sha256=c538378ff7036755f8009d246eb5c2b6dbdc0365fd624f9e5e63fa4669213167
@@ -591,7 +590,7 @@ CHECKSUMS
   puma (6.4.2) sha256=3eb41999d00733280be3faeb00d610331b6965a537a8cd3d905f316c38575b44
   raabro (1.4.0) sha256=d4fa9ff5172391edb92b242eed8be802d1934b1464061ae5e70d80962c5da882
   racc (1.8.0) sha256=09349a65c37c4fe710a435f25c9f1652e39f29ad6b1fa08d4a8d30c0553d3a08
-  rack (3.1.6) sha256=08cd573725c9c223bb0466d483153cae9bb3606d17760328c814902e6bf83c32
+  rack (3.1.7) sha256=0e9982db4ea9013326788ca2a7f48e32a4e746765e7c3512d424ef0dd22ae58b
   rack-mini-profiler (3.3.1) sha256=2bf0de7d5795f54581e453b248e42cc50e8d0529efac73828653a9ad2407a801
   rack-session (2.0.0) sha256=db04b2063e180369192a9046b4559af311990af38c6a93d4c600cee4eb6d4e81
   rack-test (2.1.0) sha256=0c61fc61904049d691922ea4bb99e28004ed3f43aa5cfd495024cc345f125dfb
@@ -620,7 +619,7 @@ CHECKSUMS
   turbo_power (0.6.2) sha256=c9080d0d1bb79deed67bee2a7654dd38f9c903b57ad52b98d19d000958fde2cc
   tzinfo (2.0.6) sha256=8daf828cc77bcf7d63b0e3bdb6caa47e2272dcfaf4fbfe46f8c3a9df087a829b
   uri (0.13.0) sha256=26553c2a9399762e1e8bebd4444b4361c4b21298cf1c864b22eeabc9c4998f24
-  view_component (3.12.1) sha256=f2ce2ad2945389f4bbd4ff77465605e9019041e5c804d16d093791be2542b18b
+  view_component (3.13.0) sha256=316e6479f51387160e7eb372d33cbb97d586ac2ed9d9fe80495cec48b346187b
   web-console (4.2.1) sha256=e7bcf37a10ea2b4ec4281649d1cee461b32232d0a447e82c786e6841fd22fe20
   webrick (1.8.1) sha256=19411ec6912911fd3df13559110127ea2badd0c035f7762873f58afc803e158f
   websocket-driver (0.7.6) sha256=f69400be7bc197879726ad8e6f5869a61823147372fd8928836a53c2c741d0db
