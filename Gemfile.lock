@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/Shopify/job-iteration.git
-  revision: 5d5b9c3998abf064fd6b13db045c4c75c7674935
+  revision: ae5828f1ecfaa45555593b4694dffb699629e7fd
   branch: main
   specs:
     job-iteration (1.5.1)
