@@ -147,8 +147,9 @@ GEM
     erubi (1.13.0)
     et-orbi (1.2.11)
       tzinfo
-    faraday (2.9.2)
+    faraday (2.10.0)
       faraday-net_http (>= 2.0, < 3.2)
+      logger
     faraday-net_http (3.1.0)
       net-http
     ffi (1.17.0-aarch64-linux-gnu)
@@ -239,6 +240,7 @@ GEM
     libddwaf (1.14.0.0.0-x86_64-linux)
       ffi (~> 1.0)
     literal (0.2.1)
+    logger (1.6.0)
     loofah (2.22.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -436,7 +438,7 @@ DEPENDENCIES
   diff-lcs (~> 1.5)
   dockerfile-rails (~> 1.6)
   dotenv-rails (~> 3.1)
-  faraday (~> 2.9)
+  faraday (~> 2.10)
   ffi-rzmq
   good_job (~> 3.29)
   hairtrigger (~> 1.1)
@@ -508,7 +510,7 @@ CHECKSUMS
   drb (2.2.1) sha256=e9d472bf785f558b96b25358bae115646da0dbfd45107ad858b0bc0d935cb340
   erubi (1.13.0) sha256=fca61b47daefd865d0fb50d168634f27ad40181867445badf6427c459c33cd62
   et-orbi (1.2.11) sha256=d26e868cc21db88280a9ec1a50aa3da5d267eb9b2037ba7b831d6c2731f5df64
-  faraday (2.9.2) sha256=6595edbe3b4663223e52a315f6bf2bca97ea1527bab7e02a926bf8afcf7423a4
+  faraday (2.10.0) sha256=1a3e6c02acc511fc334d799521f1013e449bde38aa2dceb3af71e8030519bda9
   faraday-net_http (3.1.0) sha256=1627be414960d0131691190ff524506ba6607402a50fb6eccda9e64ca60f859f
   ffi (1.17.0-aarch64-linux-gnu) sha256=228c8fb79e6b018a31c75414115a75ca65f74e8138b2c9c97d22041e4e12f2c1
   ffi (1.17.0-arm-linux-gnu) sha256=ae3b5bf4701c84263002f13eadfde35fe1e6f88720e7c6f15f1f08f46d745857
@@ -547,6 +549,7 @@ CHECKSUMS
   libddwaf (1.14.0.0.0-x86_64-darwin) sha256=33017c057fd6b4948ef4577c4a13bc89d878541961b205309fac1e71516433ff
   libddwaf (1.14.0.0.0-x86_64-linux) sha256=030640a4158ae05f9276cc1e09bfe9d19dda5af26703235cf17cf3752f1985b1
   literal (0.2.1) sha256=7544725886486ce6ae701fea1ea23bb7955ef218ef109f91ad4414f3b7921261
+  logger (1.6.0) sha256=0ab7c120262dd8de2a18cb8d377f1f318cbe98535160a508af9e7710ff43ef3e
   loofah (2.22.0) sha256=10d76e070c86b12fec74b6a9515fd1940f4459198b991342d0a7897d86c372fe
   mail (2.8.1) sha256=ec3b9fadcf2b3755c78785cb17bc9a0ca9ee9857108a64b6f5cfc9c0b5bfc9ad
   maintenance_tasks (2.7.1) sha256=2f1f42239a11f5b30ef34e821f1beb42010d08e81634d8945884aba8bdb982db
