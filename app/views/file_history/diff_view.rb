@@ -2,9 +2,9 @@
 
 class FileHistory::DiffView < ApplicationView
   include Phlex::Rails::Helpers::LinkTo
-  extend Literal::Attributes
-  attribute :v1_entry, Object
-  attribute :v2_entry, Object
+  extend Literal::Properties
+  prop :v1_entry, Object
+  prop :v2_entry, Object
 
   def template
     h1 do

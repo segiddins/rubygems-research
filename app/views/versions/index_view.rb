@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class Versions::IndexView < ApplicationView
-  extend Literal::Attributes
-  attribute :versions, Object
-  attribute :pagy, Object
+  extend Literal::Properties
+  prop :versions, Object
+  prop :pagy, Object
 
   def template
     h1 { "Versions" }

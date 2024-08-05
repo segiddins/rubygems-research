@@ -4,10 +4,10 @@ class Versions::ShowView < ApplicationView
   include Phlex::Rails::Helpers::LinkTo
   include Phlex::Rails::Helpers::NumberToHumanSize
 
-  extend Literal::Attributes
-  attribute :version, Version
-  attribute :version_data_entries, Object
-  attribute :pagy, Pagy
+  extend Literal::Properties
+  prop :version, Version
+  prop :version_data_entries, Object
+  prop :pagy, Pagy
 
   def template
     h1 { @version.full_name }

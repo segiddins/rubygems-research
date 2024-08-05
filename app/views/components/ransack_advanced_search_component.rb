@@ -27,11 +27,11 @@ class RansackAdvancedSearchComponent < ApplicationComponent
   extend Phlex::Rails::HelperMacros
 	register_builder_yielding_helper :search_form_for, RansackFormBuilder
 
-  extend Literal::Attributes
-  attribute :search, Object
-  attribute :search_url, String
-  attribute :condition_associations, Array
-  attribute :sort_associations, Array
+  extend Literal::Properties
+  prop :search, Object
+  prop :search_url, String
+  prop :condition_associations, Array
+  prop :sort_associations, Array
 
   def view_template
     search_form_for(@search, url: @search_url, class: "p-2 space-y-2") do |f|

@@ -3,11 +3,12 @@
 class Rubygems::ShowView < ApplicationView
   include Phlex::Rails::Helpers::LinkTo
 
-  extend Literal::Attributes
-  attribute :rubygem, Rubygem
-  attribute :versions, Object
-  attribute :pagy, Pagy
-  attribute :platform, Object
+  extend Literal::Properties
+  prop :rubygem, Rubygem
+  prop :versions, Object
+  prop :pagy, Pagy
+  prop :platform, Object
+
   def template
     p(style: "color: green") { helpers.notice }
     h1 { @rubygem.name }

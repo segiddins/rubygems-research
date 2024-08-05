@@ -2,10 +2,10 @@
 
 class VersionImportErrors::IndexView < ApplicationView
   include Phlex::Rails::Helpers::LinkTo
-  extend Literal::Attributes
-  attribute :pagy, Object
-  attribute :version_import_errors, Object
-  attribute :counts, Array
+  extend Literal::Properties
+  prop :pagy, Object
+  prop :version_import_errors, Object
+  prop :counts, Array
 
   def template
     h1 { "VersionImportErrors" }

@@ -2,10 +2,11 @@
 
 class FileHistory::ShowView < ApplicationView
   include Phlex::Rails::Helpers::LinkTo
-  extend Literal::Attributes
-  attribute :entries, Object
-  attribute :rubygem, Rubygem
-  attribute :path, String
+  extend Literal::Properties
+  prop :entries, Object
+  prop :rubygem, Rubygem
+  prop :path, String
+
   def template
     h1 { "File History" }
     h2 do

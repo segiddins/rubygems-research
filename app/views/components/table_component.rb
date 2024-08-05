@@ -2,11 +2,11 @@
 
 class TableComponent < ApplicationComponent
 extend Literal::Types
-  extend Literal::Attributes
-  attribute :contents, Enumerable
-  attribute :columns, _Maybe(_Hash(String, Proc))
+  extend Literal::Properties
+  prop :contents, Enumerable
+  prop :columns, _Maybe(_Hash(String, Proc))
 
-include Phlex::DeferredRender
+  include Phlex::DeferredRender
 
   def template
     table do

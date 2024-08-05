@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class DiffComponent < ApplicationComponent
-  extend Literal::Attributes
-  attribute :data_old, String
-  attribute :data_new, String
+  extend Literal::Properties
+  prop :data_old, String
+  prop :data_new, String
 
   def template
     div(style: 'white-space: pre; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;') do

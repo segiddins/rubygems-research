@@ -4,10 +4,10 @@ class Rubygems::SearchView < ApplicationView
 
   include Phlex::Rails::Helpers::LinkTo
 
-  extend Literal::Attributes
-  attribute :rubygems, Object
-  attribute :pagy, Object
-  attribute :search, Object
+  extend Literal::Properties
+  prop :rubygems, Object
+  prop :pagy, Object
+  prop :search, Object
 
   def view_template
     h1 { "Rubygems Search" }

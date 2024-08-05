@@ -3,10 +3,10 @@
 class Rubygems::DiffView < ApplicationView
   include Phlex::Rails::Helpers::LinkTo
 
-  extend Literal::Attributes
-  attribute :rubygem, Rubygem
-  attribute :v1, Version
-  attribute :v2, Version
+  extend Literal::Properties
+  prop :rubygem, Rubygem
+  prop :v1, Version
+  prop :v2, Version
 
   def template
     h2 { "Gemspec" }

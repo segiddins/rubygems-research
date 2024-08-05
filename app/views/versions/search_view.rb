@@ -4,10 +4,10 @@ class Versions::SearchView < ApplicationView
 
   include Phlex::Rails::Helpers::LinkTo
 
-  extend Literal::Attributes
-  attribute :versions, Object
-  attribute :pagy, Object
-  attribute :search, Object
+  extend Literal::Properties
+  prop :versions, Object
+  prop :pagy, Object
+  prop :search, Object
 
   def view_template
     h1 { "Versions Search" }

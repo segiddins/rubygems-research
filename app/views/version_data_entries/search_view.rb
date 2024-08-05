@@ -4,10 +4,10 @@ class VersionDataEntries::SearchView < ApplicationView
   include Phlex::Rails::Helpers::LinkTo
   include Phlex::Rails::Helpers::NumberToHumanSize
 
-  extend Literal::Attributes
-  attribute :version_data_entries, Object
-  attribute :pagy, Object
-  attribute :search, Object
+  extend Literal::Properties
+  prop :version_data_entries, Object
+  prop :pagy, Object
+  prop :search, Object
 
   def view_template
     h1 { "Version Data Entries Search" }

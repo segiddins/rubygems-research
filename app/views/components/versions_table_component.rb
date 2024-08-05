@@ -4,8 +4,8 @@ class VersionsTableComponent < ApplicationComponent
   include Phlex::Rails::Helpers::LinkTo
   include Phlex::Rails::Helpers::NumberToHumanSize
 
-  extend Literal::Attributes
-  attribute :versions, Object
+  extend Literal::Properties
+  prop :versions, Object
 
   def view_template
     table(class: "table-auto") do
