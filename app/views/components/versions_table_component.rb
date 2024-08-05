@@ -8,8 +8,8 @@ class VersionsTableComponent < ApplicationComponent
   attribute :versions, Object
 
   def view_template
-    table do
-      thead do
+    table(class: "table-auto") do
+      thead(class: "border-b") do
         tr do
           th {  }
           th { "Version" }

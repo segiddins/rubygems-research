@@ -34,10 +34,10 @@ class RansackAdvancedSearchComponent < ApplicationComponent
   attribute :sort_associations, Array
 
   def view_template
-    search_form_for(@search, url: @search_url) do |f|
+    search_form_for(@search, url: @search_url, class: "p-2 space-y-2") do |f|
       setup_search_form(f)
 
-      fieldset do
+      fieldset(class: "border-2 space-y-2 p-2") do
         legend { "Sorting" }
         f.sort_fields do |s|
           _sort_fields(s)
@@ -45,7 +45,7 @@ class RansackAdvancedSearchComponent < ApplicationComponent
         button_to_add_fields(f, :sort)
       end
 
-      fieldset do
+      fieldset(class: "border-2 space-y-2 p-2") do
         legend { "Condition Groups" }
         f.grouping_fields do |g|
           _grouping_fields(g)
@@ -58,19 +58,19 @@ class RansackAdvancedSearchComponent < ApplicationComponent
         label_tag(:distinct, "Return distinct records")
       end
 
-      f.submit
+      f.submit(class: "border-2")
     end
   end
 
   private
 
   def _grouping_fields(f)
-    fieldset class: :fields, 'data-object-name': f.object_name do
+    fieldset class: :fields, 'data-object-name border-2 space-y-2': f.object_name do
       legend(escape: false) do
         plain "Match "
         f.combinator_select
         plain " conditions "
-        f.button class: :remove_fields, data: {field_type: :grouping} do
+        f.button class: "remove_fields border-2", data: {field_type: :grouping} do
           "Remove Fields"
         end
       end
@@ -86,7 +86,7 @@ class RansackAdvancedSearchComponent < ApplicationComponent
   end
 
   def _condition_fields(f)
-    fieldset class: "condition_fields fields", 'data-object-name': f.object_name do
+    fieldset class: "condition_fields fields border-2", 'data-object-name': f.object_name do
       legend do
         f.button class: :remove_fields, data: {field_type: :condition} do
           "Remove Condition"
@@ -128,7 +128,7 @@ class RansackAdvancedSearchComponent < ApplicationComponent
       end
     end
 
-    button class: "add_fields btn", 'data-field-type': type, 'data-content': fields do
+    button class: "add_fields btn border-2", 'data-field-type': type, 'data-content': fields do
       button_label[type]
     end
   end

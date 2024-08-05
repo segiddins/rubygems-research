@@ -29,9 +29,14 @@ on_worker_boot do
   SemanticLogger.reopen if defined?(SemanticLogger)
 end
 
-# Specifies the `worker_timeout` threshold that Puma will use to wait before
-# terminating a worker in development environments.
-worker_timeout 60 if ENV.fetch("RAILS_ENV", "development") == "development"
+if ENV.fetch("RAILS_ENV", "development") == "development"
+  # Specifies the `worker_timeout` threshold that Puma will use to wait before
+  # terminating a worker in development environments.
+  worker_timeout 60
+
+  # Run tailwindcss:watch in the background
+  plugin :tailwindcss
+end
 
 # Specifies the `port` that Puma will listen on to receive requests; default is 3000.
 port ENV.fetch("PORT") { 3000 }

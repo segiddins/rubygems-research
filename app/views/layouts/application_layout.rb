@@ -17,6 +17,7 @@ class ApplicationLayout < ApplicationView
 				csp_meta_tag
 				csrf_meta_tags
 				stylesheet_link_tag "application", data_turbo_track: "reload"
+				stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload"
 				javascript_importmap_tags
 				debugbar_head if respond_to?(:debugbar_path)
 				script type: "module" do
@@ -30,7 +31,7 @@ class ApplicationLayout < ApplicationView
 			end
 
 			body do
-				main(&block)
+				main(class: "p-2", &block)
 				debugbar_body cable: {url: "wss://rubygems-research.microplane:443"} if respond_to?(:debugbar_path)
 			end
 		end
