@@ -303,7 +303,7 @@ GEM
       racc (~> 1.4)
     packable (1.3.18)
     pagy (8.6.2)
-    parallel (1.25.1)
+    parallel (1.26.1)
     pg (1.5.7)
     pg_query (5.1.0)
       google-protobuf (>= 3.22.3)
@@ -463,7 +463,7 @@ DEPENDENCIES
   matrix
   meilisearch-rails (~> 0.13.1)
   pagy (~> 8.6)
-  parallel (~> 1.25)
+  parallel (~> 1.26)
   pg (~> 1.5)
   pg_query (~> 5.1)
   pghero (~> 3.6)
@@ -595,7 +595,7 @@ CHECKSUMS
   nokogiri (1.16.6-x86_64-linux) sha256=769bd2c14ad76dd5a7e14c867741cf2e3b8c25626a34f40aee7b0b998b8de820
   packable (1.3.18) sha256=9b5d6588ef6f5eaf02c2e44b4f9b9d6cbd672896eb13e3ac9fbfe7a827d1607f
   pagy (8.6.2) sha256=d21c9129b0b77145bf89a33a85ec421f7266ec852542a1887b0118da388d1ef4
-  parallel (1.25.1) sha256=12e089b9aa36ea2343f6e93f18cfcebd031798253db8260590d26a7f70b1ab90
+  parallel (1.26.1) sha256=968fb64946c8bb29fc115c144b583a366cf10fab890cc62feb41d6615791e23e
   pg (1.5.7) sha256=07a7d86e5aac8b964a0288076a7a7c699c27b25c9b40b001726f6eb03ed13427
   pg_query (5.1.0) sha256=b7f7f47c864f08ccbed46a8244906fb6ee77ee344fd27250717963928c93145d
   pghero (3.6.0) sha256=cad9cb865f99ff40bb5ba47d3dae20d06be06ac8ea6b01172f6a8ccc85671109
