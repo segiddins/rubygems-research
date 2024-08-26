@@ -70,7 +70,7 @@ GEM
       activemodel (= 7.1.3.4)
       activesupport (= 7.1.3.4)
       timeout (>= 0.4.0)
-    activerecord-import (1.7.0)
+    activerecord-import (1.8.0)
       activerecord (>= 4.2)
     activestorage (7.1.3.4)
       actionpack (= 7.1.3.4)
@@ -115,7 +115,7 @@ GEM
     bootsnap (1.18.3)
       msgpack (~> 1.2)
     builder (3.3.0)
-    concurrent-ruby (1.3.3)
+    concurrent-ruby (1.3.4)
     connection_pool (2.4.1)
     crass (1.0.6)
     csv (3.3.0)
@@ -270,7 +270,7 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2024.0604)
     mini_mime (1.1.5)
-    minitest (5.24.1)
+    minitest (5.25.1)
     msgpack (1.7.2)
     multi_json (1.15.0)
     multi_xml (0.7.1)
@@ -440,7 +440,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  activerecord-import (~> 1.7)
+  activerecord-import (~> 1.8)
   annotate (~> 3.2)
   avo (>= 3.2)
   bootsnap
@@ -493,7 +493,7 @@ CHECKSUMS
   activejob (7.1.3.4) sha256=3f8aeef0fdfb2dd65f9a663828dbcc8ca187e70ef0c5a773c5fe4dd67e040f62
   activemodel (7.1.3.4) sha256=f4c838ea76dfca8967e433ac89603342ae20b65dd61366e62f07120a08e1ad72
   activerecord (7.1.3.4) sha256=784eeca4d6f23391d445552d6675a47c594555361c3b042108d29f0c7b9230f2
-  activerecord-import (1.7.0) sha256=f849fb0216868c76cee4d9de73458215280ad849493fdbc917206c1ede940458
+  activerecord-import (1.8.0) sha256=97d5f375a428152d8c94b6eee4ccf2cf1cb94b46dbbe57551d9b522898663915
   activestorage (7.1.3.4) sha256=f2020ea0a77e105e480a9a15251c91d615eecb4b28a1a80968d6fb6a5dcb0a2e
   activesupport (7.1.3.4) sha256=455bbc43d82e5ba20daa25f0888b80c9f7e2d80ca0cc96cea3e6acfec3e40309
   addressable (2.8.7) sha256=462986537cf3735ab5f3c0f557f14155d778f4b43ea4f485a9deb9c8f7c58232
@@ -504,7 +504,7 @@ CHECKSUMS
   bindex (0.8.1) sha256=7b1ecc9dc539ed8bccfc8cb4d2732046227b09d6f37582ff12e50a5047ceb17e
   bootsnap (1.18.3) sha256=d7b70de761e2fb1d63d21dd941b393c881c5cab5575211369cede788dfc034eb
   builder (3.3.0) sha256=497918d2f9dca528fdca4b88d84e4ef4387256d984b8154e9d5d3fe5a9c8835f
-  concurrent-ruby (1.3.3) sha256=4f9cd28965c4dcf83ffd3ea7304f9323277be8525819cb18a3b61edcb56a7c6a
+  concurrent-ruby (1.3.4) sha256=d4aa926339b0a86b5b5054a0a8c580163e6f5dcbdfd0f4bb916b1a2570731c32
   connection_pool (2.4.1) sha256=0f40cf997091f1f04ff66da67eabd61a9fe0d4928b9a3645228532512fab62f4
   crass (1.0.6) sha256=dc516022a56e7b3b156099abc81b6d2b08ea1ed12676ac7a5657617f012bd45d
   csv (3.3.0) sha256=0bbd1defdc31134abefed027a639b3723c2753862150f4c3ee61cab71b20d67d
@@ -575,7 +575,7 @@ CHECKSUMS
   mime-types (3.5.2) sha256=c1299f10fa34c75a6f168e99e9dadbd11bc507d9d62dc5cf98c4e65f2af8c4e4
   mime-types-data (3.2024.0604) sha256=c538378ff7036755f8009d246eb5c2b6dbdc0365fd624f9e5e63fa4669213167
   mini_mime (1.1.5) sha256=8681b7e2e4215f2a159f9400b5816d85e9d8c6c6b491e96a12797e798f8bccef
-  minitest (5.24.1) sha256=31ec31ac9088d9e21fcc5a5487912234de83966f24368241b2bef03d7012464a
+  minitest (5.25.1) sha256=3db6795a80634def1cf86fda79d2d83b59b25ce5e186fa675f73c565589d2ad8
   msgpack (1.7.2) sha256=59ab62fd8a4d0dfbde45009f87eb6f158ab2628a7c48886b0256f175166baaa8
   multi_json (1.15.0) sha256=1fd04138b6e4a90017e8d1b804c039031399866ff3fbabb7822aea367c78615d
   multi_xml (0.7.1) sha256=4fce100c68af588ff91b8ba90a0bb3f0466f06c909f21a32f4962059140ba61b
