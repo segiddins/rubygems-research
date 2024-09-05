@@ -66,7 +66,7 @@ gem "dockerfile-rails", "~> 1.6", group: :development
 gem "dotenv-rails", "~> 3.1"
 gem "faraday", "~> 2.10"
 gem "good_job", "~> 3.29"
-gem "hairtrigger", "~> 1.1"
+gem "hairtrigger", "~> 1.2"
 gem "job-iteration", github: "Shopify/job-iteration", branch: "main"
 gem "literal", "~> 0.2.1"
 gem "maintenance_tasks", "~> 2.8"
