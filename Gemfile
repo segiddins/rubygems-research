@@ -64,7 +64,7 @@ gem "debugbar", "~> 0.3.3", group: :development
 gem "diff-lcs", "~> 1.5"
 gem "dockerfile-rails", "~> 1.6", group: :development
 gem "dotenv-rails", "~> 3.1"
-gem "faraday", "~> 2.10"
+gem "faraday", "~> 2.11"
 gem "good_job", "~> 3.29"
 gem "hairtrigger", "~> 1.2"
 gem "job-iteration", github: "Shopify/job-iteration", branch: "main"
