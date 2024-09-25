@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/Shopify/job-iteration.git
-  revision: ae5828f1ecfaa45555593b4694dffb699629e7fd
+  revision: 43a25590ad21faacb3b40ad11a0949f66886fe37
   branch: main
   specs:
     job-iteration (1.5.1)
@@ -199,7 +199,7 @@ GEM
     httparty (0.21.0)
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
-    i18n (1.14.5)
+    i18n (1.14.6)
       concurrent-ruby (~> 1.0)
     importmap-rails (2.0.1)
       actionpack (>= 6.0.0)
@@ -544,7 +544,7 @@ CHECKSUMS
   google-protobuf (4.27.1-x86_64-linux) sha256=9df0c88277f5d142b99c079d9a03ecd0b9c4261d6844bc0b66006d128ce30b57
   hairtrigger (1.2.0) sha256=3b127197ba3717cce0c39f2a5ffacfc81c2ef84bb21c932d3abad44a82b9baad
   httparty (0.21.0) sha256=00ef7bf9a71f30a3bff88edeb5b16a34bea883ab67c246b3f0db2d6794fe1214
-  i18n (1.14.5) sha256=26dcbc05e364b57e27ab430148b3377bc413987d34cc042336271d8f42e9d1b9
+  i18n (1.14.6) sha256=dc229a74f5d181f09942dd60ab5d6e667f7392c4ee826f35096db36d1fe3614c
   importmap-rails (2.0.1) sha256=e739a6e70c09f797688c6983fa79567ec1edc9becc30d55b3f7cc897b1825586
   inline_svg (1.9.0) sha256=f44c5e3d2e401fd619ad3047b7c8cee384517d855edb1d1fb1a248d3cae535d6
   io-console (0.7.2) sha256=f0dccff252f877a4f60d04a4dc6b442b185ebffb4b320ab69212a92b48a7a221
