@@ -82,4 +82,4 @@ gem "rails_semantic_logger", "~> 4.17"
 gem "ruby-progressbar", "~> 1.13"
 
 gem "ransack", "~> 4.2"
-gem "tailwindcss-rails", "~> 2.6"
+gem "tailwindcss-rails", "~> 2.7"
