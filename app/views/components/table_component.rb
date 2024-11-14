@@ -4,7 +4,7 @@ class TableComponent < ApplicationComponent
 extend Literal::Types
   extend Literal::Properties
   prop :contents, Enumerable
-  prop :columns, _Maybe(_Hash(String, Proc))
+  prop :columns, _Nilable(_Hash(String, Proc))
 
   include Phlex::DeferredRender
 
