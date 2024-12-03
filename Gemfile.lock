@@ -1,9 +1,9 @@
 GIT
   remote: https://github.com/Shopify/job-iteration.git
-  revision: ae5828f1ecfaa45555593b4694dffb699629e7fd
+  revision: 22b4ea26f8f0cda49f3ed44383dce1d838c79aff
   branch: main
   specs:
-    job-iteration (1.5.1)
+    job-iteration (1.7.0)
       activejob (>= 5.2)
 
 GEM
@@ -199,7 +199,7 @@ GEM
     httparty (0.21.0)
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
-    i18n (1.14.5)
+    i18n (1.14.6)
       concurrent-ruby (~> 1.0)
     importmap-rails (2.0.1)
       actionpack (>= 6.0.0)
@@ -270,12 +270,12 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2024.0604)
     mini_mime (1.1.5)
-    minitest (5.25.1)
+    minitest (5.25.2)
     msgpack (1.7.2)
     multi_json (1.15.0)
     multi_xml (0.7.1)
       bigdecimal (~> 3.1)
-    mutex_m (0.2.0)
+    mutex_m (0.3.0)
     native-package-installer (1.1.9)
     net-http (0.4.1)
       uri
@@ -544,14 +544,14 @@ CHECKSUMS
   google-protobuf (4.27.1-x86_64-linux) sha256=9df0c88277f5d142b99c079d9a03ecd0b9c4261d6844bc0b66006d128ce30b57
   hairtrigger (1.2.0) sha256=3b127197ba3717cce0c39f2a5ffacfc81c2ef84bb21c932d3abad44a82b9baad
   httparty (0.21.0) sha256=00ef7bf9a71f30a3bff88edeb5b16a34bea883ab67c246b3f0db2d6794fe1214
-  i18n (1.14.5) sha256=26dcbc05e364b57e27ab430148b3377bc413987d34cc042336271d8f42e9d1b9
+  i18n (1.14.6) sha256=dc229a74f5d181f09942dd60ab5d6e667f7392c4ee826f35096db36d1fe3614c
   importmap-rails (2.0.1) sha256=e739a6e70c09f797688c6983fa79567ec1edc9becc30d55b3f7cc897b1825586
   inline_svg (1.9.0) sha256=f44c5e3d2e401fd619ad3047b7c8cee384517d855edb1d1fb1a248d3cae535d6
   io-console (0.7.2) sha256=f0dccff252f877a4f60d04a4dc6b442b185ebffb4b320ab69212a92b48a7a221
   irb (1.14.0) sha256=53d805013bbd194874b8c13a56aca6aebcd11dd79166d88724f8a434fedde615
   iruby (0.7.4) sha256=cc219e2ac797c3fbf8c2b937ee7d26547723c8ae0e5ad65f2975aa3325b3a620
   jbuilder (2.12.0) sha256=47e9be3240b8901cabbbfa2191a2a87fcab01630816fb8b979e787cf268726d2
-  job-iteration (1.5.1)
+  job-iteration (1.7.0)
   jupyter_on_rails (0.13.0) sha256=0268483c8473537451f4a989a65500e6774d5cc9ebf342156ef9d3205a3c1c60
   libdatadog (10.0.0.1.0) sha256=2e2c2000f1250cd3bb3721bdd0672dcdb584e60eee13d4a4089fbce1cf40dafc
   libdatadog (10.0.0.1.0-aarch64-linux) sha256=fe86c03f33eb0f98a3d250cf7cbaed805f94c095e2acca45bcc1396b1458ab79
@@ -575,11 +575,11 @@ CHECKSUMS
   mime-types (3.5.2) sha256=c1299f10fa34c75a6f168e99e9dadbd11bc507d9d62dc5cf98c4e65f2af8c4e4
   mime-types-data (3.2024.0604) sha256=c538378ff7036755f8009d246eb5c2b6dbdc0365fd624f9e5e63fa4669213167
   mini_mime (1.1.5) sha256=8681b7e2e4215f2a159f9400b5816d85e9d8c6c6b491e96a12797e798f8bccef
-  minitest (5.25.1) sha256=3db6795a80634def1cf86fda79d2d83b59b25ce5e186fa675f73c565589d2ad8
+  minitest (5.25.2) sha256=59b379d63e0058159127b545c4725d3106624c9be2b3e030ddaee825d59e83eb
   msgpack (1.7.2) sha256=59ab62fd8a4d0dfbde45009f87eb6f158ab2628a7c48886b0256f175166baaa8
   multi_json (1.15.0) sha256=1fd04138b6e4a90017e8d1b804c039031399866ff3fbabb7822aea367c78615d
   multi_xml (0.7.1) sha256=4fce100c68af588ff91b8ba90a0bb3f0466f06c909f21a32f4962059140ba61b
-  mutex_m (0.2.0) sha256=b6ef0c6c842ede846f2ec0ade9e266b1a9dac0bc151682b04835e8ebd54840d5
+  mutex_m (0.3.0) sha256=cfcb04ac16b69c4813777022fdceda24e9f798e48092a2b817eb4c0a782b0751
   native-package-installer (1.1.9) sha256=fbb41b6b22750791a4304f0a0aeea3dd837668892117f49c4caf2e8e0f4e792f
   net-http (0.4.1) sha256=a96efc5ea18bcb9715e24dda4159d10f67ff0345c8a980d04630028055b2c282
   net-imap (0.4.14) sha256=a2184b3f09a4f7ca27998d113fd6df8cd0dd56b91e5bf0d6387b8350bb438065
