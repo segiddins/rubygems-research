@@ -70,7 +70,7 @@ GEM
       activemodel (= 7.1.3.4)
       activesupport (= 7.1.3.4)
       timeout (>= 0.4.0)
-    activerecord-import (1.7.0)
+    activerecord-import (2.0.0)
       activerecord (>= 4.2)
     activestorage (7.1.3.4)
       actionpack (= 7.1.3.4)
@@ -199,7 +199,7 @@ GEM
     httparty (0.21.0)
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
-    i18n (1.14.5)
+    i18n (1.14.6)
       concurrent-ruby (~> 1.0)
     importmap-rails (2.0.1)
       actionpack (>= 6.0.0)
@@ -270,12 +270,12 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2024.0604)
     mini_mime (1.1.5)
-    minitest (5.25.1)
+    minitest (5.25.4)
     msgpack (1.7.2)
     multi_json (1.15.0)
     multi_xml (0.7.1)
       bigdecimal (~> 3.1)
-    mutex_m (0.2.0)
+    mutex_m (0.3.0)
     native-package-installer (1.1.9)
     net-http (0.4.1)
       uri
@@ -406,7 +406,7 @@ GEM
     tailwindcss-rails (2.6.1-x86_64-linux)
       railties (>= 7.0.0)
     thor (1.3.2)
-    timeout (0.4.1)
+    timeout (0.4.2)
     turbo-rails (2.0.5)
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
@@ -440,7 +440,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  activerecord-import (~> 1.7)
+  activerecord-import (~> 2.0)
   annotate (~> 3.2)
   avo (>= 3.2)
   bootsnap
@@ -493,7 +493,7 @@ CHECKSUMS
   activejob (7.1.3.4) sha256=3f8aeef0fdfb2dd65f9a663828dbcc8ca187e70ef0c5a773c5fe4dd67e040f62
   activemodel (7.1.3.4) sha256=f4c838ea76dfca8967e433ac89603342ae20b65dd61366e62f07120a08e1ad72
   activerecord (7.1.3.4) sha256=784eeca4d6f23391d445552d6675a47c594555361c3b042108d29f0c7b9230f2
-  activerecord-import (1.7.0) sha256=f849fb0216868c76cee4d9de73458215280ad849493fdbc917206c1ede940458
+  activerecord-import (2.0.0) sha256=59750f936a40608f57ec9a2ab4d445190ff9d863c5bea36b1ef6c11f71438983
   activestorage (7.1.3.4) sha256=f2020ea0a77e105e480a9a15251c91d615eecb4b28a1a80968d6fb6a5dcb0a2e
   activesupport (7.1.3.4) sha256=455bbc43d82e5ba20daa25f0888b80c9f7e2d80ca0cc96cea3e6acfec3e40309
   addressable (2.8.7) sha256=462986537cf3735ab5f3c0f557f14155d778f4b43ea4f485a9deb9c8f7c58232
@@ -544,7 +544,7 @@ CHECKSUMS
   google-protobuf (4.27.1-x86_64-linux) sha256=9df0c88277f5d142b99c079d9a03ecd0b9c4261d6844bc0b66006d128ce30b57
   hairtrigger (1.2.0) sha256=3b127197ba3717cce0c39f2a5ffacfc81c2ef84bb21c932d3abad44a82b9baad
   httparty (0.21.0) sha256=00ef7bf9a71f30a3bff88edeb5b16a34bea883ab67c246b3f0db2d6794fe1214
-  i18n (1.14.5) sha256=26dcbc05e364b57e27ab430148b3377bc413987d34cc042336271d8f42e9d1b9
+  i18n (1.14.6) sha256=dc229a74f5d181f09942dd60ab5d6e667f7392c4ee826f35096db36d1fe3614c
   importmap-rails (2.0.1) sha256=e739a6e70c09f797688c6983fa79567ec1edc9becc30d55b3f7cc897b1825586
   inline_svg (1.9.0) sha256=f44c5e3d2e401fd619ad3047b7c8cee384517d855edb1d1fb1a248d3cae535d6
   io-console (0.7.2) sha256=f0dccff252f877a4f60d04a4dc6b442b185ebffb4b320ab69212a92b48a7a221
@@ -575,11 +575,11 @@ CHECKSUMS
   mime-types (3.5.2) sha256=c1299f10fa34c75a6f168e99e9dadbd11bc507d9d62dc5cf98c4e65f2af8c4e4
   mime-types-data (3.2024.0604) sha256=c538378ff7036755f8009d246eb5c2b6dbdc0365fd624f9e5e63fa4669213167
   mini_mime (1.1.5) sha256=8681b7e2e4215f2a159f9400b5816d85e9d8c6c6b491e96a12797e798f8bccef
-  minitest (5.25.1) sha256=3db6795a80634def1cf86fda79d2d83b59b25ce5e186fa675f73c565589d2ad8
+  minitest (5.25.4) sha256=9cf2cae25ac4dfc90c988ebc3b917f53c054978b673273da1bd20bcb0778f947
   msgpack (1.7.2) sha256=59ab62fd8a4d0dfbde45009f87eb6f158ab2628a7c48886b0256f175166baaa8
   multi_json (1.15.0) sha256=1fd04138b6e4a90017e8d1b804c039031399866ff3fbabb7822aea367c78615d
   multi_xml (0.7.1) sha256=4fce100c68af588ff91b8ba90a0bb3f0466f06c909f21a32f4962059140ba61b
-  mutex_m (0.2.0) sha256=b6ef0c6c842ede846f2ec0ade9e266b1a9dac0bc151682b04835e8ebd54840d5
+  mutex_m (0.3.0) sha256=cfcb04ac16b69c4813777022fdceda24e9f798e48092a2b817eb4c0a782b0751
   native-package-installer (1.1.9) sha256=fbb41b6b22750791a4304f0a0aeea3dd837668892117f49c4caf2e8e0f4e792f
   net-http (0.4.1) sha256=a96efc5ea18bcb9715e24dda4159d10f67ff0345c8a980d04630028055b2c282
   net-imap (0.4.14) sha256=a2184b3f09a4f7ca27998d113fd6df8cd0dd56b91e5bf0d6387b8350bb438065
@@ -637,7 +637,7 @@ CHECKSUMS
   tailwindcss-rails (2.6.1-x86_64-darwin) sha256=564bd5e954324d082f9b8e1f2873855bd91829f90dc45a58af737f2f043d3f90
   tailwindcss-rails (2.6.1-x86_64-linux) sha256=aa10378c3e0919348ccdced4e033e3df5067598c75e080098a56179f3ea86a97
   thor (1.3.2) sha256=eef0293b9e24158ccad7ab383ae83534b7ad4ed99c09f96f1a6b036550abbeda
-  timeout (0.4.1) sha256=6f1f4edd4bca28cffa59501733a94215407c6960bd2107331f0280d4abdebb9a
+  timeout (0.4.2) sha256=8aca2d5ff98eb2f7a501c03f8c3622065932cc58bc58f725cd50a09e63b4cc19
   turbo-rails (2.0.5) sha256=cef775349c24734e52937997c2c4582a95966b3f81a173a9bcf037074a766229
   turbo_power (0.6.2) sha256=c9080d0d1bb79deed67bee2a7654dd38f9c903b57ad52b98d19d000958fde2cc
   tzinfo (2.0.6) sha256=8daf828cc77bcf7d63b0e3bdb6caa47e2272dcfaf4fbfe46f8c3a9df087a829b
