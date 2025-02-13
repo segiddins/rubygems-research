@@ -135,7 +135,7 @@ GEM
     debugbar (0.3.3)
       actioncable
       rails
-    diff-lcs (1.5.1)
+    diff-lcs (1.6.0)
     docile (1.4.0)
     dockerfile-rails (1.6.17)
       rails (>= 3.0.0)
@@ -447,7 +447,7 @@ DEPENDENCIES
   datadog (~> 2.2)
   debug
   debugbar (~> 0.3.3)
-  diff-lcs (~> 1.5)
+  diff-lcs (~> 1.6)
   dockerfile-rails (~> 1.6)
   dotenv-rails (~> 3.1)
   faraday (~> 2.10)
@@ -515,7 +515,7 @@ CHECKSUMS
   debase-ruby_core_source (3.3.1) sha256=ed904cae290edf0cf274ad707f8981bf1cefad8081e78d4bb71be2a483bc2c08
   debug (1.9.2) sha256=48e026c0852c7a10c60263e2e527968308958e266231e36d64e3efcabec7e7fc
   debugbar (0.3.3) sha256=1b8ec67f2f6cb9971d1fdf2f2ab959f790c0bee9f914bb9a0b0581c89d1f49f6
-  diff-lcs (1.5.1) sha256=273223dfb40685548436d32b4733aa67351769c7dea621da7d9dd4813e63ddfe
+  diff-lcs (1.6.0) sha256=a1e7f7b272962f8fc769358ad00001b87cdcf32ba349d6c70c6b544613d2da2e
   docile (1.4.0) sha256=5f1734bde23721245c20c3d723e76c104208e1aa01277a69901ce770f0ebb8d3
   dockerfile-rails (1.6.17) sha256=cf1fe48edddf9feab26e62e3ab69dbb167e04a9962576ffe6329317e2f663ce8
   dotenv (3.1.2) sha256=08036c2aa1246590034a83df2adc85b72cb4944692c49da24d8e911f97924478
