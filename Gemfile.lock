@@ -174,22 +174,22 @@ GEM
       fugit (>= 1.1)
       railties (>= 6.0.0)
       thor (>= 0.14.1)
-    google-protobuf (4.27.1)
+    google-protobuf (4.29.0)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.27.1-aarch64-linux)
+    google-protobuf (4.29.0-aarch64-linux)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.27.1-arm64-darwin)
+    google-protobuf (4.29.0-arm64-darwin)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.27.1-x86-linux)
+    google-protobuf (4.29.0-x86-linux)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.27.1-x86_64-darwin)
+    google-protobuf (4.29.0-x86_64-darwin)
       bigdecimal
       rake (>= 13)
-    google-protobuf (4.27.1-x86_64-linux)
+    google-protobuf (4.29.0-x86_64-linux)
       bigdecimal
       rake (>= 13)
     hairtrigger (1.2.0)
@@ -308,8 +308,8 @@ GEM
     pagy (8.6.2)
     parallel (1.25.1)
     pg (1.5.7)
-    pg_query (5.1.0)
-      google-protobuf (>= 3.22.3)
+    pg_query (6.0.0)
+      google-protobuf (>= 3.25.3)
     pghero (3.6.0)
       activerecord (>= 6.1)
     phlex (1.10.3)
@@ -471,7 +471,7 @@ DEPENDENCIES
   pagy (~> 8.6)
   parallel (~> 1.25)
   pg (~> 1.5)
-  pg_query (~> 5.1)
+  pg_query (~> 6.0)
   pghero (~> 3.6)
   phlex-rails (~> 1.1)
   prosopite (~> 1.4)
@@ -542,12 +542,12 @@ CHECKSUMS
   fugit (1.11.0) sha256=addc9cd3031611921d1dbac094de3a645bc8858828639fd035c9cedd3b460bb9
   globalid (1.2.1) sha256=70bf76711871f843dbba72beb8613229a49429d1866828476f9c9d6ccc327ce9
   good_job (3.29.5) sha256=3d71236c7e89b9678ba0cf16d6a93b9ee2ff12795959a0c10f77fd52f6479a13
-  google-protobuf (4.27.1) sha256=a988ba32cbb4a85c2340e4840dd3e88874225b54f23f7432dedea6ae25695578
-  google-protobuf (4.27.1-aarch64-linux) sha256=44b499a33a45943813e9e8f8de58b26a68a72ce1c244e9b9029c8b4878373f6a
-  google-protobuf (4.27.1-arm64-darwin) sha256=cf4dc1cfc8b5c170a834f259a011c070f45e8250406a22a81f9bb709b8dc0c0d
-  google-protobuf (4.27.1-x86-linux) sha256=9aec62787ac1add1f8499f04a9d6069519aefd5669fd194c223901e46fd080d3
-  google-protobuf (4.27.1-x86_64-darwin) sha256=efe981cffd811b3b815db7f20fae5e926acb9b3b7624f8dce4be753f0ceeb6ec
-  google-protobuf (4.27.1-x86_64-linux) sha256=9df0c88277f5d142b99c079d9a03ecd0b9c4261d6844bc0b66006d128ce30b57
+  google-protobuf (4.29.0) sha256=2ff7dad8803dab85f6e2e3d953c7831fa1c3ea0d91b68adf71acd21c28aa6fd4
+  google-protobuf (4.29.0-aarch64-linux) sha256=503912ebd9e2569c0bb602cb8a1a3eaa70bac44481f01dd77de58f6d834a0b90
+  google-protobuf (4.29.0-arm64-darwin) sha256=ca6dc74c781e7edc16e68812591225c7d1bf08d75c670c0c42154371f2afddc1
+  google-protobuf (4.29.0-x86-linux) sha256=aabfcb42dcc9ebb6d1da50172e02f311259fc11646175334a31167e9ef43c242
+  google-protobuf (4.29.0-x86_64-darwin) sha256=9406d19f7119b762022bd59ff9a0e6f780c530152007f892eba95767b166d504
+  google-protobuf (4.29.0-x86_64-linux) sha256=2e13afd53ed52c32b68a08344e8f4b1486d64a2e9c117e301c39b2020608947a
   hairtrigger (1.2.0) sha256=3b127197ba3717cce0c39f2a5ffacfc81c2ef84bb21c932d3abad44a82b9baad
   httparty (0.21.0) sha256=00ef7bf9a71f30a3bff88edeb5b16a34bea883ab67c246b3f0db2d6794fe1214
   i18n (1.14.7) sha256=ceba573f8138ff2c0915427f1fc5bdf4aa3ab8ae88c8ce255eb3ecf0a11a5d0f
@@ -604,7 +604,7 @@ CHECKSUMS
   pagy (8.6.2) sha256=d21c9129b0b77145bf89a33a85ec421f7266ec852542a1887b0118da388d1ef4
   parallel (1.25.1) sha256=12e089b9aa36ea2343f6e93f18cfcebd031798253db8260590d26a7f70b1ab90
   pg (1.5.7) sha256=07a7d86e5aac8b964a0288076a7a7c699c27b25c9b40b001726f6eb03ed13427
-  pg_query (5.1.0) sha256=b7f7f47c864f08ccbed46a8244906fb6ee77ee344fd27250717963928c93145d
+  pg_query (6.0.0) sha256=fbf09a4e900cee1d61e2bbfda1fefdbc35bc83c5f1c7ae1be1c6ffc5ae0f5c04
   pghero (3.6.0) sha256=cad9cb865f99ff40bb5ba47d3dae20d06be06ac8ea6b01172f6a8ccc85671109
   phlex (1.10.3) sha256=f2c0ff4524a8989c5b0ec8fa2085d9a15314542cde281c00ff9201c8fb16fe46
   phlex-rails (1.2.1) sha256=1d80709c02114cda869951d22bfca189b5f208d1eb89f2e6fafbe3c0240a822f
