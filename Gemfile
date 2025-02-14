@@ -62,7 +62,7 @@ gem "avo", ">= 3.2"
 gem "datadog", "~> 2.2", require: "datadog/auto_instrument"
 gem "debugbar", "~> 0.3.3", group: :development
 gem "diff-lcs", "~> 1.5"
-gem "dockerfile-rails", "~> 1.6", group: :development
+gem "dockerfile-rails", "~> 1.7", group: :development
 gem "dotenv-rails", "~> 3.1"
 gem "faraday", "~> 2.10"
 gem "good_job", "~> 3.29"
