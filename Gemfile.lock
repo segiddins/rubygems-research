@@ -305,7 +305,7 @@ GEM
     nokogiri (1.18.2-x86_64-linux-gnu)
       racc (~> 1.4)
     packable (1.3.18)
-    pagy (8.6.2)
+    pagy (9.3.3)
     parallel (1.25.1)
     pg (1.5.7)
     pg_query (5.1.0)
@@ -468,7 +468,7 @@ DEPENDENCIES
   maintenance_tasks (~> 2.11)
   matrix
   meilisearch-rails (~> 0.13.1)
-  pagy (~> 8.6)
+  pagy (~> 9.3)
   parallel (~> 1.25)
   pg (~> 1.5)
   pg_query (~> 5.1)
@@ -601,7 +601,7 @@ CHECKSUMS
   nokogiri (1.18.2-x86_64-darwin) sha256=7fca165e5ee87e9b6b3f1377180376afc0c8652ed2a3d761f472f0e3d3a1c651
   nokogiri (1.18.2-x86_64-linux-gnu) sha256=9330ced4a976604865c2a76ce158e2bc608fa83999552e85a32ec06f85f427db
   packable (1.3.18) sha256=9b5d6588ef6f5eaf02c2e44b4f9b9d6cbd672896eb13e3ac9fbfe7a827d1607f
-  pagy (8.6.2) sha256=d21c9129b0b77145bf89a33a85ec421f7266ec852542a1887b0118da388d1ef4
+  pagy (9.3.3) sha256=4831418eb4ec7cc5658ea57de559cc3a960286db36f98d4c1c65e19db0e2bb60
   parallel (1.25.1) sha256=12e089b9aa36ea2343f6e93f18cfcebd031798253db8260590d26a7f70b1ab90
   pg (1.5.7) sha256=07a7d86e5aac8b964a0288076a7a7c699c27b25c9b40b001726f6eb03ed13427
   pg_query (5.1.0) sha256=b7f7f47c864f08ccbed46a8244906fb6ee77ee344fd27250717963928c93145d
