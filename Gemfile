@@ -77,7 +77,7 @@ gem "pg_query", "~> 5.1"
 gem "pg", "~> 1.5"
 gem "pghero", "~> 3.6"
 gem "phlex-rails", "~> 1.1"
-gem "prosopite", "~> 1.4"
+gem "prosopite", "~> 2.0"
 gem "rails_semantic_logger", "~> 4.17"
 gem "ruby-progressbar", "~> 1.13"
 
