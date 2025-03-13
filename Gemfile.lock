@@ -1,10 +1,10 @@
 GIT
   remote: https://github.com/Shopify/job-iteration.git
-  revision: ae5828f1ecfaa45555593b4694dffb699629e7fd
+  revision: 3237efed0b55ce476faed9a803b06538866502a6
   branch: main
   specs:
-    job-iteration (1.5.1)
-      activejob (>= 5.2)
+    job-iteration (1.9.0)
+      activejob (>= 6.1)
 
 GEM
   remote: https://rubygems.org/
@@ -272,7 +272,7 @@ GEM
     mime-types-data (3.2024.0604)
     mini_mime (1.1.5)
     mini_portile2 (2.8.8)
-    minitest (5.25.4)
+    minitest (5.25.5)
     msgpack (1.7.2)
     multi_json (1.15.0)
     multi_xml (0.7.1)
@@ -557,7 +557,7 @@ CHECKSUMS
   irb (1.15.1) sha256=d9bca745ac4207a8b728a52b98b766ca909b86ff1a504bcde3d6f8c84faae890
   iruby (0.7.4) sha256=cc219e2ac797c3fbf8c2b937ee7d26547723c8ae0e5ad65f2975aa3325b3a620
   jbuilder (2.12.0) sha256=47e9be3240b8901cabbbfa2191a2a87fcab01630816fb8b979e787cf268726d2
-  job-iteration (1.5.1)
+  job-iteration (1.9.0)
   jupyter_on_rails (0.13.0) sha256=0268483c8473537451f4a989a65500e6774d5cc9ebf342156ef9d3205a3c1c60
   libdatadog (10.0.0.1.0) sha256=2e2c2000f1250cd3bb3721bdd0672dcdb584e60eee13d4a4089fbce1cf40dafc
   libdatadog (10.0.0.1.0-aarch64-linux) sha256=fe86c03f33eb0f98a3d250cf7cbaed805f94c095e2acca45bcc1396b1458ab79
@@ -582,7 +582,7 @@ CHECKSUMS
   mime-types-data (3.2024.0604) sha256=c538378ff7036755f8009d246eb5c2b6dbdc0365fd624f9e5e63fa4669213167
   mini_mime (1.1.5) sha256=8681b7e2e4215f2a159f9400b5816d85e9d8c6c6b491e96a12797e798f8bccef
   mini_portile2 (2.8.8) sha256=8e47136cdac04ce81750bb6c09733b37895bf06962554e4b4056d78168d70a75
-  minitest (5.25.4) sha256=9cf2cae25ac4dfc90c988ebc3b917f53c054978b673273da1bd20bcb0778f947
+  minitest (5.25.5) sha256=391b6c6cb43a4802bfb7c93af1ebe2ac66a210293f4a3fb7db36f2fc7dc2c756
   msgpack (1.7.2) sha256=59ab62fd8a4d0dfbde45009f87eb6f158ab2628a7c48886b0256f175166baaa8
   multi_json (1.15.0) sha256=1fd04138b6e4a90017e8d1b804c039031399866ff3fbabb7822aea367c78615d
   multi_xml (0.7.1) sha256=4fce100c68af588ff91b8ba90a0bb3f0466f06c909f21a32f4962059140ba61b
