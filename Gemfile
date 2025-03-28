@@ -56,7 +56,7 @@ group :development do
   gem 'matrix'
 end
 
-gem "activerecord-import", "~> 1.7"
+gem "activerecord-import", "~> 2.1"
 gem "annotate", "~> 3.2"
 gem "avo", ">= 3.2"
 gem "datadog", "~> 2.2", require: "datadog/auto_instrument"
