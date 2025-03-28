@@ -127,7 +127,7 @@ GEM
       libdatadog (~> 10.0.0.1.0)
       libddwaf (~> 1.14.0.0.0)
       msgpack
-    date (3.3.4)
+    date (3.4.1)
     debase-ruby_core_source (3.3.1)
     debug (1.9.2)
       irb (~> 1.10)
@@ -201,7 +201,7 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
-    importmap-rails (2.0.1)
+    importmap-rails (2.1.0)
       actionpack (>= 6.0.0)
       activesupport (>= 6.0.0)
       railties (>= 6.0.0)
@@ -517,7 +517,7 @@ CHECKSUMS
   daru (0.3) sha256=46443fb21b63cf30e3e45aee37b93f9e45206fdcccb7c6d683a7224c849154e3
   data_uri (0.1.0) sha256=7eb2f63487ccb943fae0eca561729c48d4d5654d76f8330aa16ed1dcdbebf33b
   datadog (2.2.0) sha256=fa96d565e055593294706d7767c4d3213b5250f0ddd2b8697b868ae60dbdda4a
-  date (3.3.4) sha256=971f2cb66b945bcbea4ddd9c7908c9400b31a71bc316833cb42fa584b59d3291
+  date (3.4.1) sha256=bf268e14ef7158009bfeaec40b5fa3c7271906e88b196d958a89d4b408abe64f
   debase-ruby_core_source (3.3.1) sha256=ed904cae290edf0cf274ad707f8981bf1cefad8081e78d4bb71be2a483bc2c08
   debug (1.9.2) sha256=48e026c0852c7a10c60263e2e527968308958e266231e36d64e3efcabec7e7fc
   debugbar (0.3.3) sha256=1b8ec67f2f6cb9971d1fdf2f2ab959f790c0bee9f914bb9a0b0581c89d1f49f6
@@ -551,7 +551,7 @@ CHECKSUMS
   hairtrigger (1.2.0) sha256=3b127197ba3717cce0c39f2a5ffacfc81c2ef84bb21c932d3abad44a82b9baad
   httparty (0.21.0) sha256=00ef7bf9a71f30a3bff88edeb5b16a34bea883ab67c246b3f0db2d6794fe1214
   i18n (1.14.7) sha256=ceba573f8138ff2c0915427f1fc5bdf4aa3ab8ae88c8ce255eb3ecf0a11a5d0f
-  importmap-rails (2.0.1) sha256=e739a6e70c09f797688c6983fa79567ec1edc9becc30d55b3f7cc897b1825586
+  importmap-rails (2.1.0) sha256=9f10c67d60651a547579f448100d033df311c5d5db578301374aeb774faae741
   inline_svg (1.9.0) sha256=f44c5e3d2e401fd619ad3047b7c8cee384517d855edb1d1fb1a248d3cae535d6
   io-console (0.8.0) sha256=cd6a9facbc69871d69b2cb8b926fc6ea7ef06f06e505e81a64f14a470fddefa2
   irb (1.15.1) sha256=d9bca745ac4207a8b728a52b98b766ca909b86ff1a504bcde3d6f8c84faae890
