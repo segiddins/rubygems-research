@@ -81,5 +81,5 @@ gem "prosopite", "~> 1.4"
 gem "rails_semantic_logger", "~> 4.17"
 gem "ruby-progressbar", "~> 1.13"
 
-gem "ransack", "~> 4.2"
+gem "ransack", "~> 4.3"
 gem "tailwindcss-rails", "~> 2.6"
